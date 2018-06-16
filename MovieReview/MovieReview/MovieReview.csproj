@@ -106,8 +106,23 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="scripts\ai.0.15.0-build58334.js" />
-    <Content Include="scripts\ai.0.15.0-build58334.min.js" />
+    <Content Include="scripts\bootstrap.js" />
+    <Content Include="scripts\bootstrap.min.js" />
+    <Content Include="scripts\Chosen\chosen-sprite%402x.png" />
+    <Content Include="scripts\Chosen\chosen-sprite.png" />
+    <Content Include="scripts\Chosen\chosen.css" />
+    <Content Include="scripts\Chosen\chosen.jquery.js" />
+    <Content Include="scripts\Chosen\chosen.proto.js" />
+    <Content Include="scripts\jQuery_3.3.1.js" />
+    <Content Include="scripts\mdb.js" />
+    <Content Include="Styles\bootstrap-grid.css" />
+    <Content Include="Styles\bootstrap-grid.min.css" />
+    <Content Include="Styles\bootstrap-reboot.css" />
+    <Content Include="Styles\bootstrap-reboot.min.css" />
+    <Content Include="Styles\bootstrap.css" />
+    <Content Include="Styles\bootstrap.min.css" />
+    <Content Include="Styles\Glyphicon.css" />
+    <Content Include="Styles\mdb.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
