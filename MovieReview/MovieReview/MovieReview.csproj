@@ -84,6 +84,9 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -102,10 +105,27 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="API\MovieDb.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MovieDb.edmx</DependentUpon>
+      <LastGenOutput>MovieDb.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="API\MovieDb.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MovieDb.edmx</DependentUpon>
+      <LastGenOutput>MovieDb.cs</LastGenOutput>
+    </Content>
     <Content Include="Default.html" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <EntityDeploy Include="API\MovieDb.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MovieDb.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="API\MovieDb.edmx.diagram">
+      <DependentUpon>MovieDb.edmx</DependentUpon>
     </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -135,10 +155,33 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\Controller\MovieController.cs" />
+    <Compile Include="API\Movie.cs">
+      <DependentUpon>MovieDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="API\MovieDb.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MovieDb.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="API\MovieDb.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MovieDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="API\MovieDb.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MovieDb.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="API\spTest_Result.cs">
+      <DependentUpon>MovieDb.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="API\" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
