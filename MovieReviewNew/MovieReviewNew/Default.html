@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <script src="Scripts/jQuery/jquery-3.1.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#btnTestDb").click(function () {
+                CheckDb();
+            });
+        });
+
+        function CheckDb() {
+            $.ajax({
+                url: "api/Data/TestStp",
+                cache: false,
+                success: function (data) {
+                    $.toast().reset('all')
+                    $.toast({
+                        heading: 'Test Result',
+                        text: 'Successful Test!',
+                        showHideTransition: 'slide',
+                        position: 'bottom-right',
+                        hideAfter: 'false',
+                        icon: 'warning'
+                    });
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert("Status: " + textStatus);
+                    alert("Error: " + errorThrown);
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+
+    <input id="btnTestDb" type="button" value="Test" />
+
+</body>
+</html>
+<!------------------------------------------------------------------------------------->
+<!----------------------------Additional Scripts--------------------------------------->
+<!-------------------------------------CSS--------------------------------------------->
+<!--Bootstrap CSS-->
+<link href="Content/bootstrap/bootstrap.css" rel="stylesheet" />
+<link href="Content/bootstrap/bootstrap-theme.min.css" rel="stylesheet" />
+<link href="Content/DatePicker/css/bootstrap-datepicker.min.css" rel="stylesheet" />
+
+<!--DevExpress CSS-->
+<link href="Content/devExpress 16.2.4/dx.common.css" rel="stylesheet" />
+<link href="Content/devExpress 16.2.4/dx.light.compact.css" rel="stylesheet" />
+
+<!--Toast CSS-->
+<link href="Content/toastr/jquery.toast.min.css" rel="stylesheet" />
+
+<!-------------------------------------JS--------------------------------------------->
+<!--Bootstrap JS-->
+<script src="Scripts/Bootstrap/bootstrap.js"></script>
+<script src="Content/DatePicker/js/bootstrap-datepicker.min.js"></script>
+
+<!--Chosen JS-->
+<script src="Content/Chosen/Chosen.min.js"></script>
+<script type="text/javascript">
+    var config = {
+        '.chosen-select': {},
+        '.chosen-select-deselect': { allow_single_deselect: true },
+        '.chosen-select-no-single': { disable_search_threshold: 15 },
+        '.chosen-select-no-results': { no_results_text: 'No results found' }
+    }
+    for (var selector in config) {
+        $(selector).chosen(config[selector]);
+    }
+
+</script>
+
+
+
+
+
+
+
+
+

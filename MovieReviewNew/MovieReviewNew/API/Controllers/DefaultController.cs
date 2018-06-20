@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Net;
-    using System.Net.Http;
     using System.Web.Http;
     using MovieReviewNew.API.Models;
     using Newtonsoft.Json;
@@ -13,7 +12,7 @@
     public class DefaultController : ApiController
     {
         [HttpPost]
-        [Route("TestSp")]
+        [Route("TestStp")]
         public IHttpActionResult TestStp()
         {
             List<spTest_Result> results = null;
@@ -22,7 +21,7 @@
                 using (EFTestdbEntities dbContext = new EFTestdbEntities())
                 {
                     results = new List<spTest_Result>();
-                    results = dbContext.spTest();
+                    results = dbContext.spTest().ToList();
                 }
 
                 return Ok(JsonConvert.SerializeObject(results, Formatting.Indented));
