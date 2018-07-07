@@ -11,7 +11,7 @@
     [RoutePrefix("api/Data")]
     public class DefaultController : ApiController
     {
-        [HttpPost]
+        [HttpGet]
         [Route("TestStp")]
         public IHttpActionResult TestStp()
         {
