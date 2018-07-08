@@ -1,10 +1,9 @@
 ﻿body {
     padding: 0;
     margin:0px;
-    font-family:montserrat, sans-serif;
 }
 .site-header {
-    background-color:#004395;
+    background-color:#443742;
     height: 50px;
 }
 .site-header a {
@@ -14,7 +13,7 @@
   -webkit-text-decoration-skip: objects;
 }
 .site-header a:hover {
-  color: #F9C322;
+  color: #235789;
   text-decoration: none;
   background-color: transparent;
   -webkit-text-decoration-skip: objects;
@@ -65,7 +64,7 @@ ul.breadcrumbs li a:hover {
 }
 
 h1 {
-    color:#004395;
+    color:#443742;
     margin-bottom:20px;
 }
 /*Hide the headertext on mobile*/
@@ -91,11 +90,11 @@ h1 {
     height: 375px;
     width: 300px;
     padding: 20px;
-    background-color: rgba(00, 67, 149, 0.8);
-    border-bottom: solid 5px #F9C322;
+    background-color: rgba(241,211,2, 0.8);
+    border-bottom: solid 5px #235789;
 }
 #searchBox .form-control {
-    background-color: rgba(00, 67, 149, 0.1);
+    background-color: rgba(241,211,2, 0.1);
     color: white;
     border: solid 1px white;
 }
@@ -142,7 +141,7 @@ h1 {
 }
 
 .propDetails1 {
-    background-color:#004395;
+    background-color:#443742;
     color: white;
     padding: 5px 10px;
     margin-left:-20px;
@@ -152,7 +151,7 @@ h1 {
     font-family: Verdana, sans-serif;
 }
 .propDetails2 {
-    background-color:#004395;
+    background-color:#443742;
     color: white;
     padding: 5px 10px;
     margin-left:-20px;
@@ -162,7 +161,7 @@ h1 {
     font-family: Verdana, sans-serif;
 }
 .propDetails3 {
-    background-color:#004395;
+    background-color:#443742;
     color: white;
     padding: 2px 5px;
     margin-left:-20px;
@@ -173,7 +172,7 @@ h1 {
     font-size: 10px;
 }
 .propDetails4 {
-    background-color:#004395;
+    background-color:#443742;
     color: white;
     padding: 2px 5px;
     margin-left:-20px;
@@ -186,13 +185,13 @@ h1 {
 }
 
 h2 {
-    color: #004395;
+    color: #443742;
 }
 .yellowText {
-    color:#F9C322;
+    color:#235789;
 }
 .blueText {
-    color:#004395;
+    color:#443742;
 }
 
 h5 {
@@ -200,11 +199,11 @@ h5 {
 }
 
 .fa-bed , .fa-bathtub, .fa-cube, .fa-location-arrow, .fa-euro, .fa-facebook, .fa-facebook, .fa-twitter, .fa-google-plus, .fa-linkedin {
-  color: #F9C322;
+  color: #235789;
 }
 
 .page-footer a:hover {
-    color: #F9C322;
+    color: #235789;
 }
 .carousel-item img:hover {
     opacity: 0.8;
@@ -224,7 +223,7 @@ h3 {
     font-weight:bold;
 }
 #adminMenu {
-    background-color: #004395;
+    background-color: #443742;
     padding-top: 10px;
     padding-bottom: 10px;
 }
@@ -232,7 +231,7 @@ h3 {
     margin: 0px 0;
     padding:10px 20px;
     font-family:montserrat;
-    border-bottom: solid 5px #F9C322;
+    border-bottom: solid 5px #235789;
     font-weight:700;
 }
 .adminMenuItem a {
@@ -241,7 +240,7 @@ h3 {
 }
 .adminMenuItem a:hover {
     text-decoration:none;
-    color: #F9C322;
+    color: #235789;
 }
 h6 {
     font-weight:bold;

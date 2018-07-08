@@ -1105,7 +1105,7 @@
   background-color: #0d47a1 !important; }
 
 .secondary-color {
-  background-color: #f9c322 !important; }
+  background-color: #235789 !important; }
 
 .secondary-color-dark {
   background-color: #9933cc !important; }
@@ -1150,7 +1150,7 @@
   background-color: #4b515d !important; }
 
 .stylish-color-dark {
-  background-color: #004395 !important; }
+  background-color: #443742!important; }
 
 .unique-color {
   background-color: #3f729b !important; }
@@ -1268,7 +1268,7 @@ a:not([href]):not([tabindex]), a:not([href]):not([tabindex]):focus, a:not([href]
   border-color: #2bbbad !important; }
 
 .border-secondary {
-  border-color: #f9c322 !important; }
+  border-color: #235789 !important; }
 
 .border-dark {
   border-color: #212121 !important; }
@@ -1467,7 +1467,7 @@ h1, h2, h3, h4, h5, h6 {
   color: #2bbbad !important; }
 
 .text-secondary {
-  color: #f9c322 !important; }
+  color: #235789 !important; }
 
 .text-dark {
   color: #212121 !important; }
@@ -4246,9 +4246,9 @@ a.waves-effect, a.waves-light {
 
 
 .secondary-ic {
-  color: #f9c322 !important; }
+  color: #235789 !important; }
   .secondary-ic:hover, .secondary-ic:focus {
-    color: #f9c322; }
+    color: #235789; }
 .btn-elegant {
   background-color: #2e2e2e !important;
   color: #ffffff !important; }
@@ -5270,7 +5270,7 @@ a.waves-effect, a.waves-light {
     .card .card-body .card-text {
       font-size: 0.9rem;
       color: #747373;
-      height: 75px;
+      height: 30px;
       font-weight: 400; }
 
 .dropdown .dropdown-menu .dropdown-item:active {
@@ -5539,7 +5539,7 @@ a.waves-effect, a.waves-light {
   color: #ffffff !important; }
 
 .badge-secondary {
-  background-color: #f9c322 !important;
+  background-color: #235789 !important;
   color: #ffffff !important; }
 
 .badge-dark {
@@ -6208,7 +6208,7 @@ footer.page-footer {
 table th {
   font-size: 0.9rem;
   font-weight: 700; 
-  color:#004395;
+  color:#443742;
 }
 
 table td {
