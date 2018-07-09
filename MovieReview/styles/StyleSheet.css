@@ -13,7 +13,7 @@
   -webkit-text-decoration-skip: objects;
 }
 .site-header a:hover {
-  color: #235789;
+  color: #D75813;
   text-decoration: none;
   background-color: transparent;
   -webkit-text-decoration-skip: objects;
@@ -91,7 +91,7 @@ h1 {
     width: 300px;
     padding: 20px;
     background-color: rgba(241,211,2, 0.8);
-    border-bottom: solid 5px #235789;
+    border-bottom: solid 5px #D75813;
 }
 #searchBox .form-control {
     background-color: rgba(241,211,2, 0.1);
@@ -188,7 +188,7 @@ h2 {
     color: #443742;
 }
 .yellowText {
-    color:#235789;
+    color:#D75813;
 }
 .blueText {
     color:#443742;
@@ -199,11 +199,11 @@ h5 {
 }
 
 .fa-bed , .fa-bathtub, .fa-cube, .fa-location-arrow, .fa-euro, .fa-facebook, .fa-facebook, .fa-twitter, .fa-google-plus, .fa-linkedin {
-  color: #235789;
+  color: #D75813;
 }
 
 .page-footer a:hover {
-    color: #235789;
+    color: #D75813;
 }
 .carousel-item img:hover {
     opacity: 0.8;
@@ -231,7 +231,7 @@ h3 {
     margin: 0px 0;
     padding:10px 20px;
     font-family:montserrat;
-    border-bottom: solid 5px #235789;
+    border-bottom: solid 5px #D75813;
     font-weight:700;
 }
 .adminMenuItem a {
@@ -240,7 +240,7 @@ h3 {
 }
 .adminMenuItem a:hover {
     text-decoration:none;
-    color: #235789;
+    color: #D75813;
 }
 h6 {
     font-weight:bold;

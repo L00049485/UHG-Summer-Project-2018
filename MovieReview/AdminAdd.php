@@ -14,7 +14,7 @@
                 var files = $('#images').fileinput('getFileStack');
                 var imagesString = "";
                 for (i = 0; i < files.length; ++i) {
-                    imagesString += 'images/houses/' + files[i].name + ',';
+                    imagesString += 'images/posters/' + files[i].name + ',';
                 }
 
                 //remove the last comma
@@ -92,7 +92,7 @@
 
                         <!-- Release Date -->
                         <div class='col-sm-3'>                            
-                            <label for="Release Date" class="grey-text">Release Date:</label>
+                            <label for="Release Date" class="grey-text">Release Date:</label><br />
                             <input type="date" name="txtReleaseDate">
                         </div>
                     </div>
@@ -129,6 +129,12 @@
                                     mysqli_close($link);
                                 ?>
                             </select>
+                        </div>
+
+                        <!-- Trailer -->
+                        <div class='col-sm-3'>                            
+                            <label for="Trailer" class="grey-text">Trailer:</label><br />
+                            <input type="text" name="txtTrailer">
                         </div>
                     </div> 
                     <br />

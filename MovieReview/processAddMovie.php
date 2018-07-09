@@ -70,10 +70,11 @@
                     $genre=$_POST["genre"];
                     $desc=$_POST["txtDesc"];
                     $image=$_POST["txtImages"];
+                    $trailer=$_POST["txtTrailer"];
 
                     $sql_insert="INSERT INTO movie(
-                    Title, ReleaseDate, Genre_ID, Description, Image) VALUES (
-                    '$movieTitle', '$releaseDate', '$genre', '$desc', '$image')";
+                    Title, ReleaseDate, Genre_ID, Description, Image, Trailer) VALUES (
+                    '$movieTitle', '$releaseDate', '$genre', '$desc', '$image', '$trailer')";
 
                     //echo $image;
 
