@@ -12,7 +12,6 @@
         $(document).ready(function () {
             $("#btnSubmitAddMovie").click(function () {
                 var files = $('#images').fileinput('getFileStack');
-                var actors = $('#Actors').val();
                 var imagesString = "";
                 for (i = 0; i < files.length; ++i) {
                     imagesString += 'images/posters/' + files[i].name + ',';
@@ -23,9 +22,6 @@
 
                 //send the text to a hidden text box to be picked up by the php
                 $('#txtImages').val(imagesString);
-
-                //Send the list of actors to a hidden text box to be picked up by the php
-                $('#txtActors').val(actors);
             });
         });
     </script>
@@ -140,34 +136,6 @@
                             <label for="Trailer" class="grey-text">Trailer:</label><br />
                             <input type="text" name="txtTrailer">
                         </div>
-
-                        <!-- Actors -->
-                        <div class='col-sm-6'>                            
-                            <label for="Type" class="grey-text">Actors</label><br />
-                            <select data-placeholder="Select actors" class="chosen-container chosen-container-multi" name="Actors" id="Actors" multiple="multiple">
-                                <?php
-                                    $server="localhost";
-	                                $dbuser="root";
-	                                $password="";
-	                                $link=mysqli_connect($server, $dbuser, $password);
-	                                mysqli_select_db($link, "moviereview");
-
-                                    $sql="SELECT actor_ID, actor_name FROM actor order by actor_name";
-                                    $result=mysqli_query($link, $sql);
-
-                                    if(mysqli_num_rows($result) > 0)
-                                    {
-                                        while($row=mysqli_fetch_array($result)) {                                          
-                                            $id=$row["actor_ID"];
-                                            $actor=$row["actor_name"];
-                                            echo "<option value='$id'>$actor</option>";
-                                        }
-                                    }
-                                    mysqli_close($link);
-                                ?>
-                            </select>
-                            <input type="text" id="txtActors" name="txtActors" class="form-control" style="display:none" >
-                        </div>
                     </div> 
                     <br />
                     <br />
@@ -220,7 +188,6 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="https://fonts.googleapis.com/css?family=Montserrat:100,500,600,700" rel="stylesheet">
 <script src="scripts/mdb.js"></script>
-
 <!--Chosen-->
 <link href="scripts/Chosen/chosen.css" rel="stylesheet" />
 <script src="scripts/Chosen/chosen.jquery.js"></script>
@@ -229,12 +196,3 @@
 <!--Fileuploader-->
 <script src="scripts/Fileuploader/js/fileinput.js"></script>
 <link href="scripts/Fileuploader/css/fileinput.css" rel="stylesheet" />
-
-<script>
-
-    //Set up the multi-select for the actors
-    $(document).ready(function () {
-        $(".chosen-container").chosen({ no_results_text: "Oops, nothing found!", width: "400px" });
-    });
-
-</script>
