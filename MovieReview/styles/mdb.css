@@ -1105,7 +1105,7 @@
   background-color: #0d47a1 !important; }
 
 .secondary-color {
-  background-color: #D75813 !important; }
+  background-color: #fff !important; }
 
 .secondary-color-dark {
   background-color: #9933cc !important; }
@@ -1268,7 +1268,7 @@ a:not([href]):not([tabindex]), a:not([href]):not([tabindex]):focus, a:not([href]
   border-color: #2bbbad !important; }
 
 .border-secondary {
-  border-color: #D75813 !important; }
+  border-color: #fff !important; }
 
 .border-dark {
   border-color: #212121 !important; }
@@ -1467,7 +1467,7 @@ h1, h2, h3, h4, h5, h6 {
   color: #2bbbad !important; }
 
 .text-secondary {
-  color: #D75813 !important; }
+  color: #fff !important; }
 
 .text-dark {
   color: #212121 !important; }
@@ -4046,21 +4046,6 @@ a.waves-effect, a.waves-light {
 .btn-group .btn {
   margin: 0; }
 
-.btn-primary {
-  background-color: #4285f4 !important;
-  color: #ffffff !important; }
-  .btn-primary:hover {
-    background-color: #5a95f5; }
-  .btn-primary:focus, .btn-primary:active, .btn-primary.active {
-    background-color: #0b51c5; }
-  .btn-primary.dropdown-toggle {
-    background-color: #4285f4 !important; }
-    .btn-primary.dropdown-toggle:hover, .btn-primary.dropdown-toggle:focus {
-      background-color: #5a95f5 !important; }
-  .btn-primary:not([disabled]):not(.disabled):active, .btn-primary:not([disabled]):not(.disabled).active,
-  .show > .btn-primary.dropdown-toggle {
-    background-color: #0b51c5 !important; }
-
 .primary-ic {
   color: #4285f4 !important; }
   .primary-ic:hover, .primary-ic:focus {
@@ -4246,9 +4231,9 @@ a.waves-effect, a.waves-light {
 
 
 .secondary-ic {
-  color: #D75813 !important; }
+  color: #fff !important; }
   .secondary-ic:hover, .secondary-ic:focus {
-    color: #D75813; }
+    color: #fff; }
 .btn-elegant {
   background-color: #2e2e2e !important;
   color: #ffffff !important; }
@@ -5539,7 +5524,7 @@ a.waves-effect, a.waves-light {
   color: #ffffff !important; }
 
 .badge-secondary {
-  background-color: #D75813 !important;
+  background-color: #fff !important;
   color: #ffffff !important; }
 
 .badge-dark {

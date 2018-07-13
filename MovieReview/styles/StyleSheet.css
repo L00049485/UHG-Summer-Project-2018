@@ -13,7 +13,7 @@
   -webkit-text-decoration-skip: objects;
 }
 .site-header a:hover {
-  color: #D75813;
+  color: #fff;
   text-decoration: none;
   background-color: transparent;
   -webkit-text-decoration-skip: objects;
@@ -64,7 +64,8 @@ ul.breadcrumbs li a:hover {
 }
 
 h1 {
-    color:#443742;
+    color:#D0CFCF;
+    font-size: 80px;
     margin-bottom:20px;
 }
 /*Hide the headertext on mobile*/
@@ -91,7 +92,7 @@ h1 {
     width: 300px;
     padding: 20px;
     background-color: rgba(241,211,2, 0.8);
-    border-bottom: solid 5px #D75813;
+    border-bottom: solid 5px #fff;
 }
 #searchBox .form-control {
     background-color: rgba(241,211,2, 0.1);
@@ -188,7 +189,7 @@ h2 {
     color: #443742;
 }
 .yellowText {
-    color:#D75813;
+    color:#fff;
 }
 .blueText {
     color:#443742;
@@ -199,11 +200,11 @@ h5 {
 }
 
 .fa-bed , .fa-bathtub, .fa-cube, .fa-location-arrow, .fa-euro, .fa-facebook, .fa-facebook, .fa-twitter, .fa-google-plus, .fa-linkedin {
-  color: #D75813;
+  color: #fff;
 }
 
 .page-footer a:hover {
-    color: #D75813;
+    color: #fff;
 }
 .carousel-item img:hover {
     opacity: 0.8;
@@ -231,7 +232,7 @@ h3 {
     margin: 0px 0;
     padding:10px 20px;
     font-family:montserrat;
-    border-bottom: solid 5px #D75813;
+    border-bottom: solid 5px #fff;
     font-weight:700;
 }
 .adminMenuItem a {
@@ -240,7 +241,7 @@ h3 {
 }
 .adminMenuItem a:hover {
     text-decoration:none;
-    color: #D75813;
+    color: #fff;
 }
 h6 {
     font-weight:bold;

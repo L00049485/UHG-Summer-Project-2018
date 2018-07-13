@@ -49,6 +49,7 @@
                                     <div class='btn-group'>
                                         <button type='button' class='btn btn-sm btn-outline-secondary' title='Like movie'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i></button>
                                         <button type='button' class='btn btn-sm btn-outline-secondary'>Rate</button>
+                                        <button type='button' class='btn btn-sm btn-outline-secondary'>Edit</button>
                                     </div>
                                 </div>
                             </div>
