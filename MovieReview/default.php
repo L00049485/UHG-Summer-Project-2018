@@ -40,16 +40,16 @@
                     $releaseDate=$row["releasedate"];
                     $releaseDate=substr($releaseDate, 0,4);   
 
-                    echo "<div class='col-md-2'>
-                        <div class='card mb-2 box-shadow'>
-                            <img class='card-img-top' src='$image' alt='Card image cap'>
+                    echo "<div class='col-md-3'>
+                        <div class='card mb-3 box-shadow'>
+                            <a href='MovieDetails.php?movieId=$movieId'><img class='card-img-top' src='$image' alt='Card image cap'></a>
                             <div class='card-body'>
                                 <p class='card-text'>$title ($releaseDate)</p>
                                 <div class='d-flex justify-content-between align-items-center'>
                                     <div class='btn-group'>
                                         <button type='button' class='btn btn-sm btn-outline-secondary' title='Like movie'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i></button>
                                         <button type='button' class='btn btn-sm btn-outline-secondary'>Rate</button>
-                                        <button type='button' class='btn btn-sm btn-outline-secondary'>Edit</button>
+                                        <a href='AdminEdit.php?movieid=$movieId'><div class='btn btn-sm btn-outline-secondary' >Edit</div></a>
                                     </div>
                                 </div>
                             </div>

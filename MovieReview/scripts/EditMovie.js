@@ -23,12 +23,14 @@ function populateFields() {
     $('#txtReleaseDate').val($('#txtReleaseDateHidden').val());
     $('#txtDesc').val($('#txtDescriptionHidden').val());
     $('#txtTrailer').val($('#txtTrailerHidden').val());
-
-    //txtActorsHidden
-
+    $('#txtMovieId').val($('#txtMovieIdHidden').val());
+    
     $('#genre').val($('#txtGenreIdHidden').val()).trigger('chosen:updated');
 
-    $('#type').val($('#txtTypeHidden').val()).trigger('chosen:updated');
+    //Actors
+    var actors = $('#txtActorsHidden').val().split(',');
+    $('#Actors').val(actors).trigger('chosen:updated');
+
 }
 
 function getUrlVars() {

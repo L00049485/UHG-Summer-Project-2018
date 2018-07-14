@@ -7,11 +7,11 @@
     <!-- Scripts -->
     <script src="scripts/jQuery_3.3.1.js"></script>
     <script src="scripts/bootstrap.js"></script>
-    <script src="scripts/EditMovie.js"></script>
+
 
     <script>
         $(document).ready(function () {
-            $("#btnSubmitAddMovie").click(function () {
+            $("#btnSubmitUpdateMovie").click(function () {
                 var files = $('#images').fileinput('getFileStack');
                 var actors = $('#Actors').val();
                 var imagesString = "";
@@ -32,73 +32,35 @@
     </script>
 </head>
 <body>
-    <header>
-        <div class="collapse bg-dark" id="navbarHeader">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-8 col-md-7 py-4">
-                        <h4 class="text-white">About</h4>
-                        <p class="text-muted">Add some information about the album below, the author, or any other background context. Make it a few sentences long so folks can pick up some informative tidbits. Then, link them off to some social networking sites or contact information.</p>
-                    </div>
-                    <div class="col-sm-4 offset-md-1 py-4">
-                        <h4 class="text-white">Contact</h4>
-                        <ul class="list-unstyled">
-                            <li><a href="#" class="text-white">Follow on Twitter</a></li>
-                            <li><a href="#" class="text-white">Like on Facebook</a></li>
-                            <li><a href="#" class="text-white">Email me</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="navbar navbar-dark bg-dark box-shadow">
-            <div class="container d-flex justify-content-between">
-                <a href="#" class="navbar-brand d-flex align-items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2">
-                        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
-                    <strong>Movie Review</strong>
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-            </div>
-        </div>
-    </header>
-
-    <main role="main">
-
-        <section class="jumbotron text-center">
-            <div class="container">
-                <h1 class="jumbotron-heading">Movie Review</h1>
-                <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.</p>
-                <p>
-                    <a href="#" class="btn btn-primary my-2">Main call to action</a>
-                    <a href="#" class="btn btn-secondary my-2">Secondary action</a>
-                </p>
-            </div>
-        </section>
-        <div class="album py-5 bg-light">
+    <?php include("includes/header.html");?>
+    <div class="container">
+    <div class="album py-5 bg-light">
         <!-- Right column form -->
-            <form action="processAddMovie.php" method="post">
+            <form action="processUpdateMovie.php" method="post">
                 <div class='col-lg-12'>
                     <br />
-                    <h2>Add Movie</h2>
+                    <h2>Update Movie</h2>
                     <h6>
                         Basic Information
                     </h6>
 
                     <div class="row">
+                        <!-- Movie ID -->
+                        <div class='col-sm-4'>                            
+                            <label for="Movie Title" class="grey-text">Movie ID</label>
+                            <input type="text" id="txtMovieId" name="txtMovieId" class="form-control">
+                        </div>
 
                         <!-- Movie Title -->
-                        <div class='col-sm-3'>                            
+                        <div class='col-sm-4'>                            
                             <label for="Movie Title" class="grey-text">Movie Title</label>
                             <input type="text" id="txtMovieTitle" name="txtMovieTitle" class="form-control">
                         </div>
 
                         <!-- Release Date -->
-                        <div class='col-sm-3'>                            
+                        <div class='col-sm-4'>                            
                             <label for="Release Date" class="grey-text">Release Date:</label><br />
-                            <input type="date" name="txtReleaseDate">
+                            <input type="date" name="txtReleaseDate" id="txtReleaseDate" class="form-control">
                         </div>
                     </div>
                     <br />
@@ -106,11 +68,9 @@
                     <h6>
                         Descriptive Information
                     </h6>
-                    <br />
                     <div class="row">
-
                         <!-- Genre -->
-                        <div class='col-sm-3'>                            
+                        <div class='col-sm-4'>                            
                             <label for="Type" class="grey-text">Genre</label><br />
                             <select data-placeholder="Genre" class="simple-select" name="genre" id="genre">
                                 <?php
@@ -137,13 +97,13 @@
                         </div>
 
                         <!-- Trailer -->
-                        <div class='col-sm-3'>                            
+                        <div class='col-sm-4'>                            
                             <label for="Trailer" class="grey-text">Trailer:</label><br />
-                            <input type="text" name="txtTrailer">
+                            <input type="text" name="txtTrailer" id="txtTrailer" class="form-control">
                         </div>
 
                         <!-- Actors -->
-                        <div class='col-sm-6'>                            
+                        <div class='col-sm-4'>                            
                             <label for="Type" class="grey-text">Actors</label><br />
                             <select data-placeholder="Select actors" class="chosen-container chosen-container-multi" name="Actors" id="Actors" multiple="multiple">
                                 <?php
@@ -170,8 +130,6 @@
                             <input type="text" id="txtActors" name="txtActors" class="form-control" style="display:none" >
                         </div>
                     </div> 
-                    <br />
-                    <br />
 
                     <div class="row">
 
@@ -201,15 +159,15 @@
 
                     <div class="row">
                         <div class='col-sm-4'>
-                            <button type="submit" class="btn btn-secondary" id="btnSubmitAddMovie">Submit</button>
+                            <button type="submit" class="btn btn-secondary" id="btnSubmitUpdateMovie">Submit</button>
                             <a href="admin.php"><div class="btn btn-primary" id="btnCancel">Cancel</div></a>
                         </div>
                     </div>
                 </div>
             </form>
         </div>
-    </main>
-    <div id="hiddenFields2">
+    </div>
+    <div id="hiddenFields">
         <?php
             $server="localhost";
 	        $dbuser="root";
@@ -266,12 +224,19 @@
 <!--Fileuploader-->
 <script src="scripts/Fileuploader/js/fileinput.js"></script>
 <link href="scripts/Fileuploader/css/fileinput.css" rel="stylesheet" />
+<!--TinyMce-->
+<script src="scripts/tinymce/js/tinymce/tinymce.min.js"></script>
+<script src="scripts/tinymce/js/tinymce/jquery.tinymce.min.js"></script>
+<script src="scripts/Custom.js"></script>
+
+<script src="scripts/EditMovie.js"></script>
 
 <script>
 
     //Set up the multi-select for the actors
     $(document).ready(function () {
-        $(".chosen-container").chosen({ no_results_text: "Oops, nothing found!", width: "400px" });
+        $(".chosen-container").chosen({ no_results_text: "Oops, nothing found!", width: "300px" });
+        $(".simple-select").chosen({ no_results_text: "Oops, nothing found!", width: "200px" });
     });
 
 </script>
