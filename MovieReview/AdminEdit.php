@@ -203,7 +203,7 @@
         ?>
         
     </div>
-
+    <?php include("includes/footer.html");?>
 </body>
 </html>
 
@@ -229,6 +229,8 @@
 <script src="scripts/tinymce/js/tinymce/jquery.tinymce.min.js"></script>
 <script src="scripts/Custom.js"></script>
 
+<!--Custom JS functions-->
+<script src="scripts/Custom.js"></script>
 <script src="scripts/EditMovie.js"></script>
 
 <script>

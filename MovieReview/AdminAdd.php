@@ -164,7 +164,7 @@
             </div>
         </form>
     </div>
-
+    <?php include("includes/footer.html");?>
 </body>
 </html>
 
@@ -188,6 +188,9 @@
 <!--TinyMce-->
 <script src="scripts/tinymce/js/tinymce/tinymce.min.js"></script>
 <script src="scripts/tinymce/js/tinymce/jquery.tinymce.min.js"></script>
+<script src="scripts/Custom.js"></script>
+
+<!--Custom JS functions-->
 <script src="scripts/Custom.js"></script>
 
 <script>

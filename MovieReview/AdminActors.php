@@ -176,7 +176,7 @@
             </form>
         </div>
     </main>
-
+    <?php include("includes/footer.html");?>
 </body>
 </html>
 
@@ -196,3 +196,6 @@
 <!--Fileuploader-->
 <script src="scripts/Fileuploader/js/fileinput.js"></script>
 <link href="scripts/Fileuploader/css/fileinput.css" rel="stylesheet" />
+
+<!--Custom JS functions-->
+<script src="scripts/Custom.js"></script>

@@ -19,11 +19,9 @@
         </div>
 
         <div class="container">
-            <h2>Movie Details</h2>
-            <br />
+            
             <form action="processViewRequest.php" method="post">
-    
-                <div class="row">
+                
                 <?php
                     $server="localhost";
 	                $dbuser="root";
@@ -45,33 +43,46 @@
                     $trailer=$row["Trailer"];
                     //$actors=$row["actors"];
 
+                    echo "<h2>Movie Details</h2>
+                        <br />
+                        <div class='row'>";
+
+
                     echo "
                     <input type='text' id='txtId' name='txtId' class='hiddenFields' value='$movieId'>
                     <div class='col-sm-8'>
-                        <div id='mainImage'>
-                            <img id='main' class='img-fluid' src='$image' />
-                        </div>
-                        <br />
-                    
-                        <h2>Synopsis</h2>
+                        
+                        <img id='main' class='img-fluid detailsImg' src='$image' align='Left' />
+                        <h3>Synopsis</h3>
                         <p>$description</p>
                     </div>
 
                     <div class='col-sm-4'>
                         <div id='rightColumn'>
                             <h3>$title</h3>
-                            <div class='row'>
-                                <div class='col-sm-12'>
-                                    <div id='priceDetails'>Released: $releaseDate</div>
-                                </div>
-                            </div>
-                        
                             <br />
+                            <h4>Released: </h4>$releaseDate
+                            <br /><br />";
+                            
+                    $sql="call sp_GetMovieActors($movieId)";
+                    $result=mysqli_query($link, $sql);
+                    
+                    echo "<h4>Starring</h4>";
+                            
+                    if(mysqli_num_rows($result) > 0)
+                    {
+                        while($row=mysqli_fetch_array($result)) {   
+                            $actor=$row["Actor_Name"];
+                            echo "$actor <br />";
+                        }
+                    }             
+                            
+                    echo "<br />
                             
                             <br />
                             <div class='row'>
                                 <div class='col-sm-12'>
-                                    <h4>Trailer</h4>
+                                    <h3>Trailer</h3>
                                     $trailer
                                 </div>
                             </div>
@@ -87,7 +98,7 @@
         </div>
         <br />
     </div>
-    
+    <?php include("includes/footer.html");?>
 </body>
 </html>
 
@@ -103,3 +114,6 @@
 <link href="scripts/Chosen/chosen.css" rel="stylesheet" />
 <script src="scripts/Chosen/chosen.jquery.js"></script>
 <script src="scripts/Chosen/chosen.proto.js"></script>
+
+<!--Custom JS functions-->
+<script src="scripts/Custom.js"></script>

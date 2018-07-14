@@ -11,6 +11,8 @@
 <body>
     <?php include("includes/header.html");?>
 
+
+    <?php include("includes/footer.html");?>
 </body>
 </html>
 
@@ -26,3 +28,6 @@
 <link href="scripts/Chosen/chosen.css" rel="stylesheet" />
 <script src="scripts/Chosen/chosen.jquery.js"></script>
 <script src="scripts/Chosen/chosen.proto.js"></script>
+
+<!--Custom JS functions-->
+<script src="scripts/Custom.js"></script>

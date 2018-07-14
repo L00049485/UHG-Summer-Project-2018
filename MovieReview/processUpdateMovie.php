@@ -40,7 +40,7 @@
                     if(mysqli_query($link, $sql_update)) {
                         insertActors($link, $movieId, $actors);
                         echo "<br /><h3>Movie Successfully Updated</h3>";
-                        echo "Click <a href='AdminAdd.php'>here </a>to return to Admin page, or <a href='movieDetails.php?id=$movieId' target='_blank'>here </a>to preview the new movie.";
+                        echo "Click <a href='default.php'>here </a>to return to Main page, or <a href='movieDetails.php?movieId=$movieId' target='_blank'>here </a>to preview the new movie.";
                     }
                     else {
                         echo "<br /><h3>Something went wrong!</h3>";
@@ -67,7 +67,7 @@
                 
         </div>
     </div>
-
+    <?php include("includes/footer.html");?>
 </body>
 </html>
 
@@ -84,4 +84,5 @@
 <script src="scripts/Chosen/chosen.jquery.js"></script>
 <script src="scripts/Chosen/chosen.proto.js"></script>
 
-
+<!--Custom JS functions-->
+<script src="scripts/Custom.js"></script>

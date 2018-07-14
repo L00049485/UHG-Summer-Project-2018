@@ -2849,7 +2849,7 @@ fieldset:disabled a.btn {
 
 .btn-outline-secondary:hover {
   color: #fff;
-  background-color: #fff;
+  background-color: #343a40;
   border-color: #fff;
 }
 .btn-outline-secondaryImages:hover {
@@ -4984,8 +4984,11 @@ tbody.collapse.show {
 .jumbotron {
   padding: 2rem 1rem;
   margin-bottom: 2rem;
-  background: url(../images/background5.jpg) no-repeat center fixed;
+  /*background: url(../images/background14.jpg) no-repeat center fixed;*/
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   background-size: cover;
+  background-position: center; 
   border-radius: 0.3rem;
 }
 

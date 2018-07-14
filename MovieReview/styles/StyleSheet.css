@@ -18,6 +18,16 @@
   background-color: transparent;
   -webkit-text-decoration-skip: objects;
 }
+.containerHeader {
+    background-color: rgba(52,58,64, 0.8);
+    width:800px;
+    margin: auto;
+    padding: 10px 40px;
+}
+.detailsImg {
+    padding: 10px 10px 10px 0px;
+}
+
 #header {
     margin: 0;
     padding: 0px;
