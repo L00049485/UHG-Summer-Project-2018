@@ -27,3 +27,23 @@
         $('.jumbotron').css({ 'background-image': 'url(./images/' + images[Math.floor(Math.random() * images.length)] + ')' });
     });
 });
+
+
+function trackLike(movieId, memberId) {
+    if (movieId == null) {
+        alert("You must login to Like a movie");
+    }
+    else {
+        xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                alert(this.responseText);
+                var buttonId = "#" + movieId;
+                $(buttonId).addClass('btn-outline-success').removeClass('btn-outline-primary');
+                $(buttonId).fadeIn(1000).fadeOut(1000).fadeIn(1000).fadeOut(1000).fadeIn(1000);
+            }
+        };
+        xmlhttp.open("GET", "processLike.php?movieId=" + movieId + "&memberId=" + memberId, true);
+        xmlhttp.send();
+    }
+}

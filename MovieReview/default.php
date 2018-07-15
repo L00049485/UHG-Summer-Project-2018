@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿<?php
+   session_start();
+?>
+
+<!DOCTYPE html>
 <html>
 <head>
     <title>Movie Review</title>
@@ -8,24 +12,6 @@
     <script src="scripts/jQuery_3.3.1.js"></script>
     <script src="scripts/bootstrap.js"></script>
 
-    <script>
-        function trackLike(movieId) {
-            if (window.XMLHttpRequest) {
-                // code for IE7+, Firefox, Chrome, Opera, Safari
-                xmlhttp = new XMLHttpRequest();
-            } else {
-                // code for IE6, IE5
-                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-            }
-            xmlhttp.onreadystatechange = function () {
-                if (this.readyState == 4 && this.status == 200) {
-                    alert(this.responseText);
-                }
-            };
-            xmlhttp.open("GET", "processLike.php?movieId=" + movieId, true);
-            xmlhttp.send();
-        }
-    </script>
 </head>
 <body>
     <?php include("includes/header.html");?>
@@ -40,13 +26,19 @@
                 $password="";
                 $link=mysqli_connect($server, $dbuser, $password);
                 mysqli_select_db($link, "moviereview");
-                
+                $memberId=0;
+                if(isset($_SESSION['username'])) {
+                    $memberId=$_SESSION['memberID'];
+                }
                 $sql="SELECT 
-                    movie_id,
-                    title,
+	                m.movie_id,
+	                title,
                     image,
-                    releasedate
-                    FROM movie order by releasedate desc";
+                    releasedate,
+                    l.Like_ID
+                 FROM `movie` as m left outer join `likes` as l  on 
+	                m.Movie_ID = l.Movie_ID AND
+                    l.Member_ID = $memberId order by releasedate desc";
 
                 $result=mysqli_query($link, $sql);
 
@@ -57,6 +49,7 @@
                     $title=$row["title"];
                     $image=$row["image"];
                     $releaseDate=$row["releasedate"];
+                    $LikeID=$row["Like_ID"];
                     $releaseDate=substr($releaseDate, 0,4);   
 
                     echo "<div class='col-md-3'>
@@ -65,17 +58,26 @@
                             <div class='card-body'>
                                 <p class='card-text'>$title ($releaseDate)</p>
                                 <div class='d-flex justify-content-between align-items-center'>
-                                    <div class='btn-group'>
-                                        <button type='button' class='btn btn-sm btn-outline-secondary' title='Like movie' onclick='trackLike(this.value)' value='$movieId'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i></button>
-                                        <button type='button' class='btn btn-sm btn-outline-secondary'>Rate</button>
+                                    <div class='btn-group'>";
+
+                    //Check if the user is logged in or not.
+                    if($memberId > 0 && $LikeID == null) {
+                        echo "<button type='button' class='btn btn-sm btn-outline-primary' id='$movieId' title='Like movie' onclick='trackLike(this.value, $memberId)' value='$movieId'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i></button>"; 
+                    }
+                    else if($memberId > 0 && $LikeID != null) {
+                        echo "<button type='button' class='btn btn-sm btn-outline-success' title='Your already like this movie' value='$movieId' ><i class='fa fa-thumbs-o-up' aria-hidden='true'></i></button>"; 
+                    }
+                    else {
+                        echo "<button type='button' class='btn btn-sm btn-outline-secondary' title='You must login' onclick='trackLike()'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i></button>";      
+                    }                                                                          
+                                        
+                    echo "<button type='button' class='btn btn-sm btn-outline-secondary'>Rate</button>
                                         <a href='AdminEdit.php?movieid=$movieId'><div class='btn btn-sm btn-outline-secondary' >Edit</div></a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>";
-                        
-                          
                 }
             }
             else

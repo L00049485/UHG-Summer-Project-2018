@@ -1,22 +1,26 @@
 ﻿
 <?php
-    header('X-XSS-Protection:0');
-    $server="localhost";
-    $dbuser="root";
-    $password="";
-    $link=mysqli_connect($server,$dbuser,$password);
-    mysqli_select_db($link, "moviereview");
-    $movieId=$_GET["movieId"];
+    session_start();
+    if(isset($_SESSION['username'])) {
+        header('X-XSS-Protection:0');
+        $server="localhost";
+        $dbuser="root";
+        $password="";
+        $link=mysqli_connect($server,$dbuser,$password);
+        mysqli_select_db($link, "moviereview");
+        $movieId=$_GET["movieId"];
+        $memberId=$_GET["memberId"];
 
-    $sql_insert="call sp_TrackLike($movieId)";
+        $sql_insert="call sp_TrackLike($movieId, $memberId)";
 
-    if(mysqli_query($link, $sql_insert)) {
-        echo "Like Successfully Added";
+        if(mysqli_query($link, $sql_insert)) {
+            echo "Like Successfully Added";
+        }
+
+        mysqli_close($link);
     }
     else {
-        echo "Something went wrong!";
+        echo "You must login to Like a movie";
     }
-
-    mysqli_close($link);
 ?>
                 

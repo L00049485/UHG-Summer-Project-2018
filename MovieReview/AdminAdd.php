@@ -1,4 +1,12 @@
-﻿<!DOCTYPE html>
+﻿<!-- Check that the user came here from the login screen -->
+<?php
+    session_start();
+
+    if(!isset($_SESSION['username']))
+        header("Location:login.php");
+?>
+
+<!DOCTYPE html>
 <html>
 <head>
     <title>Movie Review</title>
@@ -32,137 +40,139 @@
 </head>
 <body>
     <?php include("includes/header.html");?>
-    <div class="album py-5 bg-light">
-    <!-- Right column form -->
-        <form action="processAddMovie.php" method="post">
-            <div class='col-lg-12'>
-                <br />
-                <h2>Add Movie</h2>
-                <h6>
-                    Basic Information
-                </h6>
+    <div class="container">
+        <div class="album py-5 bg-light">
+        <!-- Right column form -->
+            <form action="processAddMovie.php" method="post">
+                <div class='col-lg-12'>
+                    <br />
+                    <h2>Add Movie</h2>
+                    <h6>
+                        Basic Information
+                    </h6>
 
-                <div class="row">
+                    <div class="row">
 
-                    <!-- Movie Title -->
-                    <div class='col-sm-3'>                            
-                        <label for="Movie Title" class="grey-text">Movie Title</label>
-                        <input type="text" id="txtMovieTitle" name="txtMovieTitle" class="form-control">
+                        <!-- Movie Title -->
+                        <div class='col-sm-4'>                            
+                            <label for="Movie Title" class="grey-text">Movie Title</label>
+                            <input type="text" id="txtMovieTitle" name="txtMovieTitle" class="form-control">
+                        </div>
+
+                        <!-- Release Date -->
+                        <div class='col-sm-4'>                            
+                            <label for="Release Date" class="grey-text">Release Date:</label><br />
+                            <input type="date" name="txtReleaseDate" class="form-control">
+                        </div>
                     </div>
+                    <br />
+                    <br />
+                    <h6>
+                        Descriptive Information
+                    </h6>
+                    <br />
+                    <div class="row">
 
-                    <!-- Release Date -->
-                    <div class='col-sm-3'>                            
-                        <label for="Release Date" class="grey-text">Release Date:</label><br />
-                        <input type="date" name="txtReleaseDate" class="form-control">
-                    </div>
-                </div>
-                <br />
-                <br />
-                <h6>
-                    Descriptive Information
-                </h6>
-                <br />
-                <div class="row">
+                        <!-- Genre -->
+                        <div class='col-sm-4'>                            
+                            <label for="Type" class="grey-text">Genre</label><br />
+                            <select data-placeholder="Genre" class="simple-select" name="genre" id="genre">
+                                <?php
+                                    $server="localhost";
+	                                $dbuser="root";
+	                                $password="";
+	                                $link=mysqli_connect($server, $dbuser, $password);
+	                                mysqli_select_db($link, "moviereview");
 
-                    <!-- Genre -->
-                    <div class='col-sm-3'>                            
-                        <label for="Type" class="grey-text">Genre</label><br />
-                        <select data-placeholder="Genre" class="simple-select" name="genre" id="genre">
-                            <?php
-                                $server="localhost";
-	                            $dbuser="root";
-	                            $password="";
-	                            $link=mysqli_connect($server, $dbuser, $password);
-	                            mysqli_select_db($link, "moviereview");
+                                    $sql="SELECT genre_ID, genre FROM genre order by genre";
+                                    $result=mysqli_query($link, $sql);
 
-                                $sql="SELECT genre_ID, genre FROM genre order by genre";
-                                $result=mysqli_query($link, $sql);
-
-                                if(mysqli_num_rows($result) > 0)
-                                {
-                                    while($row=mysqli_fetch_array($result)) {                                          
-                                        $id=$row["genre_ID"];
-                                        $genre=$row["genre"];
-                                        echo "<option value='$id'>$genre</option>";
+                                    if(mysqli_num_rows($result) > 0)
+                                    {
+                                        while($row=mysqli_fetch_array($result)) {                                          
+                                            $id=$row["genre_ID"];
+                                            $genre=$row["genre"];
+                                            echo "<option value='$id'>$genre</option>";
+                                        }
                                     }
-                                }
-                                mysqli_close($link);
-                            ?>
-                        </select>
-                    </div>
+                                    mysqli_close($link);
+                                ?>
+                            </select>
+                        </div>
 
-                    <!-- Trailer -->
-                    <div class='col-sm-3'>                            
-                        <label for="Trailer" class="grey-text">Trailer:</label><br />
-                        <input type="text" name="txtTrailer" class="form-control">
-                    </div>
+                        <!-- Trailer -->
+                        <div class='col-sm-4'>                            
+                            <label for="Trailer" class="grey-text">Trailer:</label><br />
+                            <input type="text" name="txtTrailer" class="form-control">
+                        </div>
 
-                    <!-- Actors -->
-                    <div class='col-sm-6'>                            
-                        <label for="Type" class="grey-text">Actors</label><br />
-                        <select data-placeholder="Select actors" class="chosen-container chosen-container-multi" name="Actors" id="Actors" multiple="multiple">
-                            <?php
-                                $server="localhost";
-	                            $dbuser="root";
-	                            $password="";
-	                            $link=mysqli_connect($server, $dbuser, $password);
-	                            mysqli_select_db($link, "moviereview");
+                        <!-- Actors -->
+                        <div class='col-sm-4'>                            
+                            <label for="Type" class="grey-text">Actors</label><br />
+                            <select data-placeholder="Select actors" class="chosen-container chosen-container-multi" name="Actors" id="Actors" multiple="multiple">
+                                <?php
+                                    $server="localhost";
+	                                $dbuser="root";
+	                                $password="";
+	                                $link=mysqli_connect($server, $dbuser, $password);
+	                                mysqli_select_db($link, "moviereview");
 
-                                $sql="SELECT actor_ID, actor_name FROM actor order by actor_name";
-                                $result=mysqli_query($link, $sql);
+                                    $sql="SELECT actor_ID, actor_name FROM actor order by actor_name";
+                                    $result=mysqli_query($link, $sql);
 
-                                if(mysqli_num_rows($result) > 0)
-                                {
-                                    while($row=mysqli_fetch_array($result)) {                                          
-                                        $id=$row["actor_ID"];
-                                        $actor=$row["actor_name"];
-                                        echo "<option value='$id'>$actor</option>";
+                                    if(mysqli_num_rows($result) > 0)
+                                    {
+                                        while($row=mysqli_fetch_array($result)) {                                          
+                                            $id=$row["actor_ID"];
+                                            $actor=$row["actor_name"];
+                                            echo "<option value='$id'>$actor</option>";
+                                        }
                                     }
-                                }
-                                mysqli_close($link);
-                            ?>
-                        </select>
-                        <input type="text" id="txtActors" name="txtActors" class="form-control" style="display:none" >
+                                    mysqli_close($link);
+                                ?>
+                            </select>
+                            <input type="text" id="txtActors" name="txtActors" class="form-control" style="display:none" >
+                        </div>
+                    </div> 
+                    <br />
+                    <br />
+
+                    <div class="row">
+
+                        <!-- Description -->
+                        <div class='col-sm-12'>                            
+                            <label for="Description" class="grey-text">Description</label>
+                            <textarea id="txtDesc" name="txtDesc" class="form-control" rows="3"></textarea>
+                            <!--<textarea id="txtDesc" name="txtDesc" class="form-control" rows="3"></textarea>-->
+                        </div>
+
                     </div>
-                </div> 
-                <br />
-                <br />
 
-                <div class="row">
+                    <br />
 
-                    <!-- Description -->
-                    <div class='col-sm-12'>                            
-                        <label for="Description" class="grey-text">Description</label>
-                        <textarea id="txtDesc" name="txtDesc" class="form-control" rows="3"></textarea>
-                        <!--<textarea id="txtDesc" name="txtDesc" class="form-control" rows="3"></textarea>-->
+                    <div class="row">
+
+                        <!-- Image -->
+                        <div class='col-sm-12'>                            
+                            <label for="Images" class="grey-text">Images</label><br />
+                                <input id="images" name="input-b3[]" type="file" class="file" multiple 
+                                    data-show-upload="false" data-show-caption="true" data-msg-placeholder="Select {files} for upload...">
+                                <input type="text" id="txtImages" name="txtImages" class="form-control" >
+                        </div>
+
                     </div>
 
+                    <br />
+
+                    <div class="row">
+                        <div class='col-sm-4'>
+                            <button type="submit" class="btn btn-secondary" id="btnSubmitAddMovie">Submit</button>
+                            <a href="admin.php"><div class="btn btn-primary" id="btnCancel">Cancel</div></a>
+                        </div>
+                    </div>
                 </div>
-
-                <br />
-
-                <div class="row">
-
-                    <!-- Image -->
-                    <div class='col-sm-12'>                            
-                        <label for="Images" class="grey-text">Images</label><br />
-                            <input id="images" name="input-b3[]" type="file" class="file" multiple 
-                                data-show-upload="false" data-show-caption="true" data-msg-placeholder="Select {files} for upload...">
-                            <input type="text" id="txtImages" name="txtImages" class="form-control" >
-                    </div>
-
-                </div>
-
-                <br />
-
-                <div class="row">
-                    <div class='col-sm-4'>
-                        <button type="submit" class="btn btn-secondary" id="btnSubmitAddMovie">Submit</button>
-                        <a href="admin.php"><div class="btn btn-primary" id="btnCancel">Cancel</div></a>
-                    </div>
-                </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
     <?php include("includes/footer.html");?>
 </body>
@@ -197,8 +207,8 @@
 
     //Set up the multi-select for the actors
     $(document).ready(function () {
-        $(".chosen-container").chosen({ no_results_text: "Oops, nothing found!", width: "400px" });
-        $(".simple-select").chosen({ no_results_text: "Oops, nothing found!", width: "400px" });
+        $(".chosen-container").chosen({ no_results_text: "Oops, nothing found!", width: "300px" });
+        $(".simple-select").chosen({ no_results_text: "Oops, nothing found!", width: "200px" });
     });
 
 </script>
