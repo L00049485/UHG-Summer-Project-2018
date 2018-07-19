@@ -59,15 +59,20 @@
                                 <p class='card-text'>$title ($releaseDate)</p>
                                 <div class='d-flex justify-content-between align-items-center'>
                                     <div class='btn-group'>";
-
+                    
+                    //***********************************************
                     //Check if the user is logged in or not.
+                    //***********************************************
+                    //User is logged in and hasnt previously liked this movie
                     if($memberId > 0 && $LikeID == null) {
-                        echo "<button type='button' class='btn btn-sm btn-outline-primary' id='$movieId' title='Like movie' onclick='trackLike(this.value, $memberId)' value='$movieId'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i></button>"; 
+                        echo "<button type='button' class='btn btn-sm btn-outline-secondary' id='$movieId' title='Click here to like this movie' onclick='trackLike(this.value)' value='$movieId'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i></button>"; 
                     }
+                    //User has logged in and has already liked this movie
                     else if($memberId > 0 && $LikeID != null) {
-                        echo "<button type='button' class='btn btn-sm btn-outline-success' title='Your already like this movie' value='$movieId' ><i class='fa fa-thumbs-o-up' aria-hidden='true'></i></button>"; 
+                        echo "<button type='button' class='btn btn-sm btn-outline-success' id='$movieId' title='You already like this movie' onclick='trackUnLike(this.value)' value='$movieId' ><i class='fa fa-thumbs-o-up' aria-hidden='true'></i></button>"; 
                     }
-                    else {
+                    //User has not logged in
+                    else {                        
                         echo "<button type='button' class='btn btn-sm btn-outline-secondary' title='You must login' onclick='trackLike()'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i></button>";      
                     }                                                                          
                                         

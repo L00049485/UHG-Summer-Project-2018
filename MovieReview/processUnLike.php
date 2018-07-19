@@ -11,17 +11,16 @@
         $movieId=$_GET["movieId"];
         $memberId=$_SESSION['memberID'];
 
-        $sql_insert="call sp_TrackLike($movieId, $memberId)";
-        
-        if(mysqli_query($link, $sql_insert)) {
-            echo "Like Successfully Added";
-            //echo $sql_insert;
+        $sql_delete="call sp_TrackUnLike($movieId, $memberId)";
+
+        if(mysqli_query($link, $sql_delete)) {
+            echo "Like Successfully Removed";
         }
 
         mysqli_close($link);
     }
     else {
-        echo "You must login to Like a movie";
+        echo "You must login to Unlike a movie";
     }
 ?>
                 

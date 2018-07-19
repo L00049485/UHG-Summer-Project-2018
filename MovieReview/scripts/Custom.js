@@ -29,7 +29,7 @@
 });
 
 
-function trackLike(movieId, memberId) {
+function trackLike(movieId) {
     if (movieId == null) {
         alert("You must login to Like a movie");
     }
@@ -37,13 +37,35 @@ function trackLike(movieId, memberId) {
         xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
-                alert(this.responseText);
                 var buttonId = "#" + movieId;
-                $(buttonId).addClass('btn-outline-success').removeClass('btn-outline-primary');
-                $(buttonId).fadeIn(1000).fadeOut(1000).fadeIn(1000).fadeOut(1000).fadeIn(1000);
+                $(buttonId).addClass('btn-outline-success').removeClass('btn-outline-secondary');
+                document.getElementById(movieId).setAttribute("onclick", "javascript: trackUnLike(this.value);");
+                document.getElementById(movieId).setAttribute("Title", "You already like this movie");
+                
+                $(buttonId).fadeIn(1000).fadeOut(1000).fadeIn(1000);
             }
         };
-        xmlhttp.open("GET", "processLike.php?movieId=" + movieId + "&memberId=" + memberId, true);
+        xmlhttp.open("GET", "processLike.php?movieId=" + movieId, true);
+        xmlhttp.send();
+    }
+}
+function trackUnLike(movieId) {
+    if (movieId == null) {
+        alert("You must login to Un-Like a movie");
+    }
+    else {
+        xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {                
+                var buttonId = "#" + movieId;
+                $(buttonId).addClass('btn-outline-secondary').removeClass('btn-outline-success');
+                document.getElementById(movieId).setAttribute("onclick", "javascript: trackLike(this.value);");
+                document.getElementById(movieId).setAttribute("Title", "Click here to like this movie");
+
+                $(buttonId).fadeIn(1000).fadeOut(1000).fadeIn(1000);
+            }
+        };
+        xmlhttp.open("GET", "processUnLike.php?movieId=" + movieId, true);
         xmlhttp.send();
     }
 }
