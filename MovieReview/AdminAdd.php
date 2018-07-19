@@ -39,7 +39,7 @@
     </script>
 </head>
 <body>
-    <?php include("includes/header.html");?>
+    <?php include("includes/header.php");?>
     <div class="container">
         <div class="album py-5 bg-light">
         <!-- Right column form -->

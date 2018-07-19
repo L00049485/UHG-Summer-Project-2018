@@ -1,4 +1,12 @@
-﻿<!DOCTYPE html>
+﻿<!-- Check that the user came here from the login screen -->
+<?php
+    session_start();
+
+    if(!isset($_SESSION['username']))
+        header("Location:login.php");
+?>
+
+<!DOCTYPE html>
 <html>
 <head>
     <title>Movie Review</title>
@@ -32,7 +40,7 @@
     </script>
 </head>
 <body>
-    <?php include("includes/header.html");?>
+    <?php include("includes/header.php");?>
     <div class="container">
     <div class="album py-5 bg-light">
         <!-- Right column form -->

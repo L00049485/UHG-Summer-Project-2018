@@ -12,7 +12,14 @@
                         <li><a href="#" class="text-white">Follow on Twitter</a></li>
                         <li><a href="#" class="text-white">Like on Facebook</a></li>
                         <li><a href="#" class="text-white">Email me</a></li>
-                        <li><a href="Logout.php" class="text-white">Logout</a></li>
+                        <!-- If the user is logged in, display the logout link, and vice versa -->
+                        <?php
+                            if(isset($_SESSION['username']))
+                                echo "<li><a href='Logout.php' class='text-white'>Logout</a></li>";
+                            else
+                                echo "<li><a href='Login.php' class='text-white'>Login</a></li>";
+                        ?>
+                        
                     </ul>
                 </div>
             </div>
@@ -27,6 +34,33 @@
                 </svg>
                 <strong>Movie Review</strong>
             </a>
+            <?php
+                if(isset($_SESSION['username']))
+                {
+                    $server="localhost";
+                    $dbuser="root";
+                    $password="";
+                    $link=mysqli_connect($server, $dbuser, $password);
+                    mysqli_select_db($link, "moviereview");
+                    $memberId = $_SESSION['memberID'];
+                    $sql="SELECT 
+	                    FirstName,
+                        LastName
+                        FROM member WHERE Member_Id = $memberId";
+                    $result=mysqli_query($link, $sql);
+
+                    if(mysqli_num_rows($result) > 0)
+                    {
+                        while($row=mysqli_fetch_array($result)) {
+                            $firstName=$row["FirstName"];
+                            $lastName=$row["LastName"];
+                        }   
+                
+                        echo "<p class='text-white'>Welcome back $firstName!</p>";
+                    }
+                    mysqli_close($link);
+                }                    
+            ?>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>

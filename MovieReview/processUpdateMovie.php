@@ -9,7 +9,7 @@
     <script src="scripts/bootstrap.js"></script>
 </head>
 <body>
-    <?php include("includes/header.html");?>
+    <?php include("includes/header.php");?>
 
     <div class="album py-5 bg-light">
         <div class="container">

@@ -12,10 +12,12 @@
     <script src="scripts/jQuery_3.3.1.js"></script>
     <script src="scripts/bootstrap.js"></script>
 
+    
+
 </head>
 <body>
-    <?php include("includes/header.html");?>
-
+    <?php include("includes/header.php");?>
+    <button class="btn btn-primary" id="linkButton">Try Me</button>   
     <div class="album py-5 bg-light">
         <div class="container">
             <div class="row">
@@ -113,3 +115,34 @@
 
 <!--Custom JS functions-->
 <script src="scripts/Custom.js"></script>
+
+<!-- Toastr -->
+    <script src="scripts/toastr/toastr.min.js"></script>
+    <link href="styles/toastr.css" rel="stylesheet" />
+
+    <script>
+        $(document).ready(function () {
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": false,
+                "positionClass": "toast-bottom-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            };
+
+            $('#linkButton').click(function () {
+                // show when the button is clicked
+                toastr.success('Click Button');
+            });
+        });
+    </script>
