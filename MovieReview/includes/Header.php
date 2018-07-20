@@ -17,7 +17,7 @@
                             if(isset($_SESSION['username']))
                                 echo "<li><a href='Logout.php' class='text-white'>Logout</a></li>";
                             else
-                                echo "<li><a href='Login.php' class='text-white'>Login</a></li>";
+                                echo "<li><a href='#' class='text-white' data-toggle='modal' data-target='#login-modal'>Login</a></li>";
                         ?>
                         
                     </ul>
@@ -84,9 +84,10 @@
                     echo "<a href='logout.php' class='btn btn-primary my-2'>Logout</a>";
                 else {
                     echo "<a href='Register.php' class='btn btn-primary my-2'>Register</a>";
-                    echo "  <a href='login.php' class='btn btn-secondary my-2'>Login</a>";
+                    echo "  <a href='#' class='btn btn-secondary my-2' data-toggle='modal' data-target='#login-modal'>Login</a>";
                 }
             ?>
         </p>
     </div>
 </section>
+<?php include("includes/loginModal.html");?>
