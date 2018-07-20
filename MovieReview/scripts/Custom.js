@@ -69,3 +69,41 @@ function trackUnLike(movieId) {
         xmlhttp.send();
     }
 }
+function displayLoginToast() {
+    tutorial();
+
+    // show when the button is clicked
+    $.toast({
+        heading: 'Success',
+        text: 'You have been logged in.',
+        showHideTransition: 'slide',
+        position: 'bottom-right',
+        icon: 'success'
+    });
+}
+
+//Driver tutorial - kicks off the first time someone logs in
+function tutorial() {
+    const driver = new Driver();
+    // Define the steps for introduction
+    driver.defineSteps([
+      {
+          element: '#movieCard1',
+          popover: {
+              title: 'Tutorial',
+              description: 'Each movie has its own card',
+              position: 'top'
+          }
+      },
+      {
+          element: '#movieBtnGroup1',
+          popover: {
+              title: 'Tutorial',
+              description: 'For each card, you have various options depending on whether or not you are logged in',
+              position: 'top', // can be `top`, `left`, `right`, `bottom`
+          }
+      },
+    ]);
+    // Start the introduction
+    driver.start();
+}

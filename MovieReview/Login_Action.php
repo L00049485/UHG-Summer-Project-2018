@@ -26,7 +26,7 @@
             $memberIdNew=$_SESSION['memberID'];
 
 			echo "Successful Login";
-            header("Location:adminAdd.php");
+            header("Location:default.php");
 			exit;
 		}
 		else {

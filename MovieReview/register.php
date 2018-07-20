@@ -1,12 +1,4 @@
-﻿<!-- Check that the user came here from the login screen -->
-<?php
-    session_start();
-
-    if(!isset($_SESSION['username']))
-        header("Location:login.php");
-?>
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <title>Movie Review</title>
@@ -15,35 +7,12 @@
     <!-- Scripts -->
     <script src="scripts/jQuery_3.3.1.js"></script>
     <script src="scripts/bootstrap.js"></script>
-
-    <script>
-        $(document).ready(function () {
-            $("#btnSubmitAddMovie").click(function () {
-                var files = $('#images').fileinput('getFileStack');
-                var actors = $('#Actors').val();
-                var imagesString = "";
-                for (i = 0; i < files.length; ++i) {
-                    imagesString += 'images/posters/' + files[i].name + ',';
-                }
-
-                //remove the last comma
-                imagesString = imagesString.substring(0, imagesString.length - 1);
-
-                //send the text to a hidden text box to be picked up by the php
-                $('#txtImages').val(imagesString);
-
-                //Send the list of actors to a hidden text box to be picked up by the php
-                $('#txtActors').val(actors);
-            });
-        });
-    </script>
 </head>
 <body>
     <?php include("includes/header.php");?>
+    
     <div class="container">
-        <div class="album py-5 bg-light">
-        <!-- Right column form -->
-            <form action="processAddMovie.php" method="post">
+        <form action="processAddMovie.php" method="post">
                 <div class='col-lg-12'>
                     <br />
                     <h2>Add Movie</h2>
@@ -172,11 +141,13 @@
                     </div>
                 </div>
             </form>
-        </div>
+
     </div>
+
     <?php include("includes/footer.html");?>
 </body>
 </html>
+
 
 <!-- Styles -->
 <link href="styles/mdb.css" rel="stylesheet" />
@@ -186,12 +157,10 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="https://fonts.googleapis.com/css?family=Montserrat:100,500,600,700" rel="stylesheet">
 <script src="scripts/mdb.js"></script>
-
 <!--Chosen-->
 <link href="scripts/Chosen/chosen.css" rel="stylesheet" />
 <script src="scripts/Chosen/chosen.jquery.js"></script>
 <script src="scripts/Chosen/chosen.proto.js"></script>
-
 <!--Fileuploader-->
 <script src="scripts/Fileuploader/js/fileinput.js"></script>
 <link href="scripts/Fileuploader/css/fileinput.css" rel="stylesheet" />
@@ -203,6 +172,13 @@
 <!--Custom JS functions-->
 <script src="scripts/Custom.js"></script>
 
+<!-- Toastr -->
+<script src="scripts/toast/jquery.toast.js"></script>
+<link href="styles/jquery.toast.css" rel="stylesheet" />
+
+<!-- Driver -->
+<link href="styles/Driver.min.css" rel="stylesheet" />
+<script src="scripts/Driver/Driver.min.js"></script>
 <script>
     //Set up the multi-select for the actors
     $(document).ready(function () {

@@ -59,6 +59,12 @@
                         echo "<p class='text-white'>Welcome back $firstName!</p>";
                     }
                     mysqli_close($link);
+
+                    echo "<script type='text/javascript'>
+                              $(document).ready(function () {
+                                  displayLoginToast();
+                              });
+                         </script>";
                 }                    
             ?>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,12 +75,18 @@
 </header>
 
 <section class="jumbotron text-center">
-    <div class="containerHeader">
+    <div class="containerHeader" id="driverTest">
         <h1 class="jumbotron-heading">Movie Review</h1>
         <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.</p>
         <p>
-            <a href="#" class="btn btn-primary my-2">Register</a>
-            <a href="login.php" class="btn btn-secondary my-2">Login</a>
+            <?php
+                if(isset($_SESSION['username']))
+                    echo "<a href='logout.php' class='btn btn-primary my-2'>Logout</a>";
+                else {
+                    echo "<a href='Register.php' class='btn btn-primary my-2'>Register</a>";
+                    echo "  <a href='login.php' class='btn btn-secondary my-2'>Login</a>";
+                }
+            ?>
         </p>
     </div>
 </section>

@@ -12,12 +12,10 @@
     <script src="scripts/jQuery_3.3.1.js"></script>
     <script src="scripts/bootstrap.js"></script>
 
-    
-
 </head>
 <body>
     <?php include("includes/header.php");?>
-    <button class="btn btn-primary" id="linkButton">Try Me</button>   
+
     <div class="album py-5 bg-light">
         <div class="container">
             <div class="row">
@@ -43,6 +41,7 @@
                     l.Member_ID = $memberId order by releasedate desc";
 
                 $result=mysqli_query($link, $sql);
+                $elementID = 0;
 
                 if(mysqli_num_rows($result) > 0)
                 {
@@ -53,14 +52,15 @@
                     $releaseDate=$row["releasedate"];
                     $LikeID=$row["Like_ID"];
                     $releaseDate=substr($releaseDate, 0,4);   
+                    $elementID = $elementID + 1;
 
                     echo "<div class='col-md-3'>
-                        <div class='card mb-3 box-shadow'>
+                        <div class='card mb-3 box-shadow' id='movieCard$elementID'>
                             <a href='MovieDetails.php?movieId=$movieId'><img class='card-img-top' src='$image' alt='Card image cap'></a>
                             <div class='card-body'>
                                 <p class='card-text'>$title ($releaseDate)</p>
                                 <div class='d-flex justify-content-between align-items-center'>
-                                    <div class='btn-group'>";
+                                    <div class='btn-group' id='movieBtnGroup$elementID'>";
                     
                     //***********************************************
                     //Check if the user is logged in or not.
@@ -117,32 +117,10 @@
 <script src="scripts/Custom.js"></script>
 
 <!-- Toastr -->
-    <script src="scripts/toastr/toastr.min.js"></script>
-    <link href="styles/toastr.css" rel="stylesheet" />
+<script src="scripts/toast/jquery.toast.js"></script>
+<link href="styles/jquery.toast.css" rel="stylesheet" />
 
-    <script>
-        $(document).ready(function () {
-            toastr.options = {
-                "closeButton": true,
-                "debug": false,
-                "newestOnTop": false,
-                "progressBar": false,
-                "positionClass": "toast-bottom-right",
-                "preventDuplicates": false,
-                "onclick": null,
-                "showDuration": "300",
-                "hideDuration": "1000",
-                "timeOut": "5000",
-                "extendedTimeOut": "1000",
-                "showEasing": "swing",
-                "hideEasing": "linear",
-                "showMethod": "fadeIn",
-                "hideMethod": "fadeOut"
-            };
+<!-- Driver -->
+<link href="styles/Driver.min.css" rel="stylesheet" />
+<script src="scripts/Driver/Driver.min.js"></script>
 
-            $('#linkButton').click(function () {
-                // show when the button is clicked
-                toastr.success('Click Button');
-            });
-        });
-    </script>
