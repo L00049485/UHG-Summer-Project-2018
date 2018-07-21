@@ -12,37 +12,105 @@
     <?php include("includes/header.php");?>
     
     <div class="container">
-        <a href="#" data-toggle="modal" data-target="#login-modal">Login</a>
+        
+        <div class="album py-5 bg-light">
+        <!-- Right column form -->
+            <form action="processRegistration.php" method="post">
+                <div class='col-lg-12'>
+                    <br />
+                    <h2>New Member Registration</h2>
+                    <br />
 
-        <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-            <div class="modal-dialog">
-                <div class="loginmodal-container modal-content">
-                    <h4>Login to Your Account</h4>
-                    <br>
-                    <form>
-                        <!-- Material input email -->
-                        <div class="md-form">
-                            <i class="fa fa-envelope prefix grey-text"></i>
-                            <input type="email" id="materialFormLoginEmailEx" name="admin_name" class="form-control">
-                            <label for="materialFormLoginEmailEx">Your email</label>
+                    <div class="row">
+                        <!-- First Name -->
+                        <div class='col-sm-4'>                            
+                            <label for="firstName" class="grey-text bold">First Name:</label>
+                            <input type="text" id="txtFirstName" name="txtFirstName" class="form-control">
                         </div>
 
-                        <!-- Material input password -->
-                        <div class="md-form">
-                            <i class="fa fa-lock prefix grey-text"></i>
-                            <input type="password" id="materialFormLoginPasswordEx" name="password" class="form-control">
-                            <label for="materialFormLoginPasswordEx">Your password</label>
+                        <!-- Last Name -->
+                        <div class='col-sm-4'>                            
+                            <label for="lastName" class="grey-text bold">Last Name:</label>
+                            <input type="text" id="txtLastName" name="txtLastName" class="form-control">
                         </div>
 
-                        <input type="submit" name="login" class="login loginmodal-submit" value="Login">
-                    </form>
+                        <!-- DOB -->
+                        <div class='col-sm-4'>                            
+                            <label for="dob" class="grey-text bold">Date of Birth:</label><br />
+                            <input type="date" name="txtDOB" class="form-control">
+                        </div>
+                    </div>
+                    <br />
+                    <hr />
+                    <div class="row">
 
-                    <div class="login-help">
-                        <a href="#">Register</a> - <a href="#">Forgot Password</a>
+                        <!-- Phone No -->
+                        <div class='col-sm-4'>                            
+                            <label for="phoneNo" class="grey-text bold">Phone No:</label>
+                            <input type="text" id="txtPhoneNo" name="txtPhoneNo" class="form-control">
+                        </div>
+
+                        <!-- Address 1 -->
+                        <div class='col-sm-4'>                            
+                            <label for="Address1" class="grey-text bold">Address 1:</label><br />
+                            <input type="text" name="txtAddress1" class="form-control">
+                        </div>
+
+                        <!-- Address 1 -->
+                        <div class='col-sm-4'>                            
+                            <label for="Address2" class="grey-text bold">Address 2:</label><br />
+                            <input type="text" name="txtAddress2" class="form-control">
+                        </div>
+                    </div>
+                    <br />
+
+                    <div class="row">
+
+                        <!-- City -->
+                        <div class='col-sm-4'>                            
+                            <label for="city" class="grey-text bold">City:</label>
+                            <input type="text" id="txtCity" name="txtCity" class="form-control">
+                        </div>
+
+                        <!-- State -->
+                        <div class='col-sm-4'>                            
+                            <label for="State" class="grey-text bold">State</label><br />
+                            <input type="text" name="txtState" class="form-control">
+                        </div>
+
+                        <!-- Country -->
+                        <div class='col-sm-4'>                            
+                            <label for="Country" class="grey-text bold">Country:</label><br />
+                            <input type="text" name="txtCountry" class="form-control">
+                        </div>
+                    </div>
+                    <br />
+                    <hr />
+                    <div class="row">
+
+                        <!-- Password -->
+                        <div class='col-sm-4'>                            
+                            <label for="password" class="grey-text bold">Password:</label>
+                            <input type="password" id="txtPassword" name="txtPassword" class="form-control">
+                        </div>
+
+                        <!-- Password Confirm -->
+                        <div class='col-sm-4'>                            
+                            <label for="passwordCheck" class="grey-text bold">Confirm Password:</label><br />
+                            <input type="password" name="txtPasswordCheck" class="form-control">
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class='col-sm-4'>
+                            <button type="submit" class="btn btn-primary" id="btnSubmitAddMovie">Submit</button>
+                            <a href="admin.php"><div class="btn btn-secondary" id="btnCancel">Cancel</div></a>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
+       
     </div>
 
     <?php include("includes/footer.html");?>
@@ -56,8 +124,7 @@
 <link href="styles/StyleSheet.css" rel="stylesheet" />
 
 <!-- Font Awesome -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link href="https://fonts.googleapis.com/css?family=Montserrat:100,500,600,700" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="scripts/mdb.js"></script>
 
 <!--Chosen-->

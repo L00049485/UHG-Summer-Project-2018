@@ -26,6 +26,25 @@
         var images = ['Background1.jpg', 'Background2.jpg', 'Background3.png', 'Background4.jpg', 'Background5.jpg', 'Background7.jpg', 'Background8.jpg', 'Background9.jpg', 'Background10.jpg', 'Background11.jpg', 'Background12.jpg', 'Background13.png', 'Background14.jpg', 'Background15.jpeg', 'Background16.jpg', 'Background17.jpg', 'Background18.jpg', 'Background19.jpg', 'Background20.png'];
         $('.jumbotron').css({ 'background-image': 'url(./images/' + images[Math.floor(Math.random() * images.length)] + ')' });
     });
+
+    //Actions for adding a new movie
+    $("#btnSubmitAddMovie").click(function () {
+        var files = $('#images').fileinput('getFileStack');
+        var actors = $('#Actors').val();
+        var imagesString = "";
+        for (i = 0; i < files.length; ++i) {
+            imagesString += 'images/posters/' + files[i].name + ',';
+        }
+
+        //remove the last comma
+        imagesString = imagesString.substring(0, imagesString.length - 1);
+
+        //send the text to a hidden text box to be picked up by the php
+        $('#txtImages').val(imagesString);
+
+        //Send the list of actors to a hidden text box to be picked up by the php
+        $('#txtActors').val(actors);
+    });
 });
 
 

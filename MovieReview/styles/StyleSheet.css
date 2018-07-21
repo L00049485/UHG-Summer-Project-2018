@@ -27,6 +27,17 @@
 .detailsImg {
     padding: 10px 10px 10px 0px;
 }
+.bold {
+    font-weight:bold;
+}
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #007bff;
+    margin: 1em 0;
+    padding: 0; 
+}
 
 #header {
     margin: 0;

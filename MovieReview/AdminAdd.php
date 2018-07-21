@@ -18,23 +18,7 @@
 
     <script>
         $(document).ready(function () {
-            $("#btnSubmitAddMovie").click(function () {
-                var files = $('#images').fileinput('getFileStack');
-                var actors = $('#Actors').val();
-                var imagesString = "";
-                for (i = 0; i < files.length; ++i) {
-                    imagesString += 'images/posters/' + files[i].name + ',';
-                }
-
-                //remove the last comma
-                imagesString = imagesString.substring(0, imagesString.length - 1);
-
-                //send the text to a hidden text box to be picked up by the php
-                $('#txtImages').val(imagesString);
-
-                //Send the list of actors to a hidden text box to be picked up by the php
-                $('#txtActors').val(actors);
-            });
+            
         });
     </script>
 </head>

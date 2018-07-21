@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿<?php
+   session_start();
+?>
+
+<!DOCTYPE html>
 <html>
 <head>
     <title>Movie Review</title>
@@ -16,8 +20,9 @@
            unset($_SESSION["username"]);
            unset($_SESSION["password"]);
    
-           echo 'You have successfully logged out.';
-           header('Refresh: 2; URL = Default.php');
+           echo '<h2>You have successfully logged out.</h2><br /><br /><br />';
+           //Below not working.
+           //header('Refresh: 2; URL = Default.php');
         ?>
     </div>
 
