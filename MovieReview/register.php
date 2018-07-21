@@ -23,15 +23,21 @@
 
                     <div class="row">
                         <!-- First Name -->
-                        <div class='col-sm-4'>                            
+                        <div class='col-sm-2'>                            
                             <label for="firstName" class="grey-text bold">First Name:</label>
                             <input type="text" id="txtFirstName" name="txtFirstName" class="form-control">
                         </div>
 
                         <!-- Last Name -->
-                        <div class='col-sm-4'>                            
+                        <div class='col-sm-2'>                            
                             <label for="lastName" class="grey-text bold">Last Name:</label>
                             <input type="text" id="txtLastName" name="txtLastName" class="form-control">
+                        </div>
+
+                        <!-- Email -->
+                        <div class='col-sm-4'>                            
+                            <label for="email" class="grey-text bold">Email Address:</label>
+                            <input type="text" id="txtemailAddress" name="txtemailAddress" class="form-control">
                         </div>
 
                         <!-- DOB -->
