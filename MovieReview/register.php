@@ -17,7 +17,6 @@
         <!-- Right column form -->
             <form action="processRegistration.php" method="post">
                 <div class='col-lg-12'>
-                    <br />
                     <h2>New Member Registration</h2>
                     <br />
 

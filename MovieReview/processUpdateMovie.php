@@ -14,7 +14,6 @@
     <div class="album py-5 bg-light">
         <div class="container">
             <?php
-                header('X-XSS-Protection:0');
                 $server="localhost";
                 $dbuser="root";
                 $password="";

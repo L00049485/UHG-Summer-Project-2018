@@ -62,6 +62,15 @@ function trackLike(movieId) {
                 document.getElementById(movieId).setAttribute("Title", "You already like this movie");
                 
                 $(buttonId).fadeIn(1000).fadeOut(1000).fadeIn(1000);
+
+                // show when the button is clicked
+                $.toast({
+                    heading: 'Confirmed',
+                    text: 'Movie Liked!',
+                    showHideTransition: 'slide',
+                    position: 'bottom-right',
+                    icon: 'success'
+                });
             }
         };
         xmlhttp.open("GET", "processLike.php?movieId=" + movieId, true);
@@ -82,6 +91,15 @@ function trackUnLike(movieId) {
                 document.getElementById(movieId).setAttribute("Title", "Click here to like this movie");
 
                 $(buttonId).fadeIn(1000).fadeOut(1000).fadeIn(1000);
+
+                // show when the button is clicked
+                $.toast({
+                    heading: 'Confirmed',
+                    text: 'Movie Un-Liked!',
+                    showHideTransition: 'slide',
+                    position: 'bottom-right',
+                    icon: 'warning'
+                });
             }
         };
         xmlhttp.open("GET", "processUnLike.php?movieId=" + movieId, true);
