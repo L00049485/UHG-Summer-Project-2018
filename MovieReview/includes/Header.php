@@ -19,7 +19,6 @@
                             else
                                 echo "<li><a href='#' class='text-white' data-toggle='modal' data-target='#login-modal'>Login</a></li>";
                         ?>
-                        
                     </ul>
                 </div>
             </div>
