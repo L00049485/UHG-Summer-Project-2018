@@ -1,8 +1,6 @@
 ﻿//Global variables
 var ratingStars = 0;
 
-
-
 $(document).ready(function () {
     var tinymceExists = document.getElementById("txtDesc");
     //Text editor for the forms
@@ -54,7 +52,7 @@ $(document).ready(function () {
 
 function trackLike(movieId) {
     if (movieId == null) {
-        alert("You must login to Like a movie");
+        $("#login-modal").modal();
     }
     else {
         xmlhttp = new XMLHttpRequest();
@@ -77,13 +75,13 @@ function trackLike(movieId) {
                 });
             }
         };
-        xmlhttp.open("GET", "processLike.php?movieId=" + movieId, true);
+        xmlhttp.open("GET", "api/processLike.php?movieId=" + movieId, true);
         xmlhttp.send();
     }
 }
 function trackUnLike(movieId) {
     if (movieId == null) {
-        alert("You must login to Un-Like a movie");
+        $("#login-modal").modal();
     }
     else {
         xmlhttp = new XMLHttpRequest();
@@ -106,7 +104,7 @@ function trackUnLike(movieId) {
                 });
             }
         };
-        xmlhttp.open("GET", "processUnLike.php?movieId=" + movieId, true);
+        xmlhttp.open("GET", "api/processUnLike.php?movieId=" + movieId, true);
         xmlhttp.send();
     }
 }
@@ -151,7 +149,7 @@ function tutorial() {
 
 function rateMovie(movieId) {
     if (movieId == null) {
-        alert("You must login to Rate a movie");
+        $("#login-modal").modal();
     }
     else {
         var movieDetails;
@@ -199,7 +197,7 @@ function starRatings(rating) {
 
 function submitRating(movieId) {
     if (movieId == null) {
-        alert("You must login to Like a movie");
+        $("#login-modal").modal();
     }
     else {
         var comments = $('#txtComments').val();
@@ -218,7 +216,7 @@ function submitRating(movieId) {
                 });
             }
         };
-        var url = "http://localhost:8080/moviereviewRepo/MovieReview/processRating.php?movieId=" + movieId + "&comments=" + comments + "&ratingStars=" + ratingStars;
+        var url = "http://localhost:8080/moviereviewRepo/MovieReview/api/processRating.php?movieId=" + movieId + "&comments=" + comments + "&ratingStars=" + ratingStars;
         xmlhttp.open("GET", url, true);
         xmlhttp.send();
     }

@@ -33,15 +33,7 @@
                 if(isset($_SESSION['username'])) {
                     $memberId=$_SESSION['memberID'];
                 }
-                $sql="SELECT 
-	                m.movie_id,
-	                title,
-                    image,
-                    releasedate,
-                    l.Like_ID
-                 FROM `movie` as m left outer join `likes` as l  on 
-	                m.Movie_ID = l.Movie_ID AND
-                    l.Member_ID = $memberId order by releasedate desc";
+                $sql="call sp_GetInitialMovieInfo($memberId)";
 
                 $result=mysqli_query($link, $sql);
                 $elementID = 0;
@@ -54,20 +46,23 @@
                     $image=$row["image"];
                     $releaseDate=$row["releasedate"];
                     $LikeID=$row["Like_ID"];
+                    $RatingID=$row["Rating_ID"];
                     $releaseDate=substr($releaseDate, 0,4);   
                     $elementID = $elementID + 1;
 
                     echo "<div class='col-md-3'>
                         <div class='card mb-3 box-shadow' id='movieCard$elementID'>
-                            <a href='MovieDetails.php?movieId=$movieId'><img class='card-img-top' src='$image' alt='Card image cap'></a>
-                            <div class='card-body'>
-                                <p class='card-text'>$title ($releaseDate)</p>
-                                <div class='d-flex justify-content-between align-items-center'>
-                                    <div class='btn-group' id='movieBtnGroup$elementID'>";
+                        <a href='MovieDetails.php?movieId=$movieId'><img class='card-img-top' src='$image' alt='Card image cap'></a>
+                        <div class='card-body'>
+                        <p class='card-text'>$title ($releaseDate)</p>
+                        <div class='d-flex justify-content-between align-items-center'>
+                        <div class='btn-group' id='movieBtnGroup$elementID'>";
                     
                     //***********************************************
-                    //Check if the user is logged in or not.
+                    //Check if the user is logged in or not. If they are, display like and rating buttons differently
                     //***********************************************
+                    
+                    //*****************Like Button*****************                    
                     //User is logged in and hasnt previously liked this movie
                     if($memberId > 0 && $LikeID == null) {
                         echo "<button type='button' class='btn btn-sm btn-outline-secondary' id='$movieId' title='Click here to like this movie' onclick='trackLike(this.value)' value='$movieId'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i></button>"; 
@@ -78,19 +73,30 @@
                     }
                     //User has not logged in
                     else {                        
-                        echo "<button type='button' class='btn btn-sm btn-outline-secondary' title='You must login' onclick='trackLike()'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i></button>";      
+                        echo "<button type='button' class='btn btn-sm btn-outline-secondary' title='You must login' onclick='trackLike()'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i></button>
+                            <button type='button' class='btn btn-sm btn-outline-secondary rateBtn' onclick='rateMovie()' id='movieID$movieId' value='$movieId'>Rate</button> ";      
                     }                                                                          
-                    
-                    //Rating Button
-                    if($memberId > 0) {
-                        echo "<button type='button' class='btn btn-sm btn-outline-secondary rateBtn' onclick='rateMovie(this.value)' id='movieID$movieId' value='$movieId'>Rate</button>                      
-                                        <a href='AdminEdit.php?movieid=$movieId'><div class='btn btn-sm btn-outline-secondary' >Edit</div></a>";
+                    //*****************END Like Button***************** 
+                                        
+                                          
+                    //*****************Rating Button*****************
+                    //User is logged in and hasnt previously rated this movie
+                    if($memberId > 0 && $RatingID == null) {
+                        echo "<button type='button' class='btn btn-sm btn-outline-secondary rateBtn' onclick='rateMovie(this.value)' id='movieID$movieId' value='$movieId'>Rate</button>";
                     }
-                                    echo "</div>
-                                </div>
-                            </div>
+                    else if($memberId > 0 && $RatingID != null) {
+                        echo "<button type='button' class='btn btn-sm btn-outline-success rateBtn' onclick='rateMovie(this.value)' id='movieID$movieId' value='$movieId' title='You already rated this movie'>Rate</button>";
+                    }
+
+                    //*****************END Rating Button*****************
+
+
+                    echo "<a href='AdminEdit.php?movieid=$movieId'><div class='btn btn-sm btn-outline-secondary'>Edit</div></a>
                         </div>
-                    </div>";
+                        </div>
+                        </div>
+                        </div>
+                        </div>";
                 }
             }
             else

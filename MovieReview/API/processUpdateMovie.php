@@ -46,8 +46,7 @@
                         echo "<a href='adminadd.php'>Return to Admin page</a>";
                     }
                 }
-                
-
+               
 
                 //Splits the comma seperated list of actors and inserts each one into the actor_movie table
                 function insertActors($link, $movieId, $actors) {
