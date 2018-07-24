@@ -12,7 +12,7 @@
     <script src="scripts/jQuery_3.3.1.js"></script>
     <script src="scripts/jQuery-UI.js"></script>
 
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
     <script src="scripts/bootstrap.js"></script>
 
 </head>
@@ -80,10 +80,13 @@
                     else {                        
                         echo "<button type='button' class='btn btn-sm btn-outline-secondary' title='You must login' onclick='trackLike()'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i></button>";      
                     }                                                                          
-                                        
-                    echo "<button type='button' class='btn btn-sm btn-outline-secondary rateBtn' onclick='rateMovie(this.value)' id='movieID$movieId' value='$movieId'>Rate</button>
-                                        <a href='AdminEdit.php?movieid=$movieId'><div class='btn btn-sm btn-outline-secondary' >Edit</div></a>
-                                    </div>
+                    
+                    //Rating Button
+                    if($memberId > 0) {
+                        echo "<button type='button' class='btn btn-sm btn-outline-secondary rateBtn' onclick='rateMovie(this.value)' id='movieID$movieId' value='$movieId'>Rate</button>                      
+                                        <a href='AdminEdit.php?movieid=$movieId'><div class='btn btn-sm btn-outline-secondary' >Edit</div></a>";
+                    }
+                                    echo "</div>
                                 </div>
                             </div>
                         </div>
@@ -101,14 +104,25 @@
     </div>
     <?php include("includes/footer.html");?>
 
-    <div id="modalTest">
-        <div class='col-sm-12'>
+    <div id="ratingDiv">
+        <div class='col-sm-4'>
             <img class='img-fluid detailsImg' src='' align='Left' id="ratingImage" />
-            <h3 id="movieTitle">Synopsis</h3>
+        </div>    
+        <div class='col-sm-12'>
+            <h3 id="movieTitle"></h3>
             Your overall rating:
             <div class="rating">
-                <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+                <input name="myrating" type="radio" value="5" class="ratingBtns" onclick='starRatings(this.value)'/><span>☆</span>
+                <input name="myrating" type="radio" value="4" class="ratingBtns" onclick='starRatings(this.value)'/><span>☆</span>
+                <input name="myrating" type="radio" value="3" class="ratingBtns" onclick='starRatings(this.value)'/><span>☆</span>
+                <input name="myrating" type="radio" value="2" class="ratingBtns" onclick='starRatings(this.value)'/><span>☆</span>
+                <input name="myrating" type="radio" value="1" class="ratingBtns" onclick='starRatings(this.value)'/><span>☆</span>                              
             </div>
+            <br />
+            Your comments:
+            <br />
+            <textarea rows="4" cols="40" name="txtComments" id="txtComments"></textarea>
+            <button type='button' class='btn btn-primary' onclick='submitRating(this.value)' value='' id="btnRatingSubmit">Submit</button>
         </div>
     </div>
 </body>

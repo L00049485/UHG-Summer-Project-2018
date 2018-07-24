@@ -1,4 +1,9 @@
-﻿$(document).ready(function () {
+﻿//Global variables
+var ratingStars = 0;
+
+
+
+$(document).ready(function () {
     var tinymceExists = document.getElementById("txtDesc");
     //Text editor for the forms
     if (tinymceExists) {
@@ -150,7 +155,7 @@ function rateMovie(movieId) {
     }
     else {
         var movieDetails;
-        $("#modalTest").load('Test').dialog({ modal: true }).dialog('open').dialog("option", "width", 800);
+        $("#ratingDiv").dialog({ modal: true }).dialog('open').dialog("option", "width", 800);
 
         $.ajax({
             async: false,
@@ -172,8 +177,12 @@ function openRateModal(movieDetails) {
     var Trailer = movieDetails[0].Trailer;
     var BoxOffice = parseInt(movieDetails[0].BoxOffice);
 
+    //Reset all fields
     $('#ratingImage').attr('src', Image);
+    $('#btnRatingSubmit').attr('value', id);
     $('#movieTitle').html(title);
+    $('#txtComments').val('');
+    $('.ratingBtns').prop('checked', false);
 
     $.toast({
         heading: 'Success',
@@ -182,4 +191,35 @@ function openRateModal(movieDetails) {
         position: 'bottom-right',
         icon: 'success'
     });
+}
+
+function starRatings(rating) {
+    ratingStars = rating;
+}
+
+function submitRating(movieId) {
+    if (movieId == null) {
+        alert("You must login to Like a movie");
+    }
+    else {
+        var comments = $('#txtComments').val();
+        xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                var buttonId = "#" + movieId;
+
+                // show when the button is clicked
+                $.toast({
+                    heading: 'Confirmed',
+                    text: 'Movie Rated!',
+                    showHideTransition: 'slide',
+                    position: 'bottom-right',
+                    icon: 'success'
+                });
+            }
+        };
+        var url = "http://localhost:8080/moviereviewRepo/MovieReview/processRating.php?movieId=" + movieId + "&comments=" + comments + "&ratingStars=" + ratingStars;
+        xmlhttp.open("GET", url, true);
+        xmlhttp.send();
+    }
 }
