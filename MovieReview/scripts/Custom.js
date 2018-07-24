@@ -1,5 +1,4 @@
 ﻿$(document).ready(function () {
-
     var tinymceExists = document.getElementById("txtDesc");
     //Text editor for the forms
     if (tinymceExists) {
@@ -143,4 +142,44 @@ function tutorial() {
     ]);
     // Start the introduction
     driver.start();
+}
+
+function rateMovie(movieId) {
+    if (movieId == null) {
+        alert("You must login to Rate a movie");
+    }
+    else {
+        var movieDetails;
+        $("#modalTest").load('Test').dialog({ modal: true }).dialog('open').dialog("option", "width", 800);
+
+        $.ajax({
+            async: false,
+            type: 'GET',
+            url: 'http://localhost:8080/moviereviewRepo/MovieReview/api/getMovieDetails.php?movieId=' + movieId,
+            success: function (data) {
+                openRateModal(JSON.parse(data));
+            }
+        });
+    }
+}
+
+function openRateModal(movieDetails) {
+    var title = movieDetails[0].Title;
+    var id = movieDetails[0].id;
+    var ReleaseDate = movieDetails[0].ReleaseDate;
+    var Genre = movieDetails[0].Genre;
+    var Image = movieDetails[0].Image;
+    var Trailer = movieDetails[0].Trailer;
+    var BoxOffice = parseInt(movieDetails[0].BoxOffice);
+
+    $('#ratingImage').attr('src', Image);
+    $('#movieTitle').html(title);
+
+    $.toast({
+        heading: 'Success',
+        text: title + '<br />' + ReleaseDate + '<br />' + Genre + '<br />' + Image + '<br />$' + BoxOffice.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"),
+        showHideTransition: 'slide',
+        position: 'bottom-right',
+        icon: 'success'
+    });
 }

@@ -10,62 +10,14 @@
 
     <!-- Scripts -->
     <script src="scripts/jQuery_3.3.1.js"></script>
+    <script src="scripts/jQuery-UI.js"></script>
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
     <script src="scripts/bootstrap.js"></script>
 
 </head>
 <body>
     <?php include("includes/header.php");?>
-    <?php
-        $server="localhost";
-        $dbuser="root";
-        $password="";
-        $link=mysqli_connect($server, $dbuser, $password);
-        mysqli_select_db($link, "moviereview");
-        $return_arr = array();
-
-        $sql="SELECT m.Movie_ID, Title, ReleaseDate, Genre, Image, Trailer, BoxOffice FROM `movie` as m left join `Genre` as g on m.Genre_ID = g.Genre_ID order by releasedate desc";
-
-        $result=mysqli_query($link, $sql);
-        if (!$result) 
-            die('Invalid query: ' . mysql_error());
-
-        while ($row = mysqli_fetch_array($result)) {
-            $row_array['id'] = $row['Movie_ID'];
-            $row_array['Title'] = $row['Title'];
-            $row_array['ReleaseDate'] = $row['ReleaseDate'];
-            $row_array['Genre'] = $row['Genre'];
-            $row_array['Image'] = $row['Image'];
-            $row_array['Trailer'] = $row['Trailer'];
-            $row_array['BoxOffice'] = $row['BoxOffice'];
-
-            array_push($return_arr,$row_array);
-        }
-
-        $jsonNew = json_encode(utf8ize($return_arr));
-
-        function utf8ize($d) {
-            if (is_array($d)) {
-                foreach ($d as $k => $v) {
-                    $d[$k] = utf8ize($v);
-                }
-            } else if (is_string ($d)) {
-                return utf8_encode($d);
-            }
-            return $d;
-        }
-    ?>
-    <script type="text/javascript">
-        var movies = <?php echo $jsonNew ?>;
-        console.log(movies);
-
-        $('.rateBtn').each(function(i, obj) {
-            $id = this.id;
-            
-        });
-
-    </script>
-
-
 
     <div class="album py-5 bg-light">
         <div class="container">
@@ -129,7 +81,7 @@
                         echo "<button type='button' class='btn btn-sm btn-outline-secondary' title='You must login' onclick='trackLike()'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i></button>";      
                     }                                                                          
                                         
-                    echo "<button type='button' class='btn btn-sm btn-outline-secondary rateBtn' id='movieID$movieId'>Rate</button>
+                    echo "<button type='button' class='btn btn-sm btn-outline-secondary rateBtn' onclick='rateMovie(this.value)' id='movieID$movieId' value='$movieId'>Rate</button>
                                         <a href='AdminEdit.php?movieid=$movieId'><div class='btn btn-sm btn-outline-secondary' >Edit</div></a>
                                     </div>
                                 </div>
@@ -148,6 +100,17 @@
         </div>
     </div>
     <?php include("includes/footer.html");?>
+
+    <div id="modalTest">
+        <div class='col-sm-12'>
+            <img class='img-fluid detailsImg' src='' align='Left' id="ratingImage" />
+            <h3 id="movieTitle">Synopsis</h3>
+            Your overall rating:
+            <div class="rating">
+                <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
 
@@ -174,4 +137,5 @@
 <!-- Driver -->
 <link href="styles/Driver.min.css" rel="stylesheet" />
 <script src="scripts/Driver/Driver.min.js"></script>
+
 
