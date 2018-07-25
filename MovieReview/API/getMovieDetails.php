@@ -8,7 +8,7 @@
     $movieId=$_GET["movieId"];
 
 
-    $sql="SELECT m.Movie_ID, Title, ReleaseDate, Genre, Image, Trailer, BoxOffice FROM `movie` as m left join `Genre` as g on m.Genre_ID = g.Genre_ID where m.Movie_ID = $movieId order by releasedate desc";
+    $sql="call sp_GetMovieDetails($movieId)";
 
     $result=mysqli_query($link, $sql);
     if (!$result) 
@@ -19,8 +19,12 @@
         $row_array['Title'] = $row['Title'];
         $row_array['ReleaseDate'] = $row['ReleaseDate'];
         $row_array['Genre'] = $row['Genre'];
+        $row_array['Genre_ID'] = $row['Genre_ID'];
+        $row_array['Description'] = $row['Description'];
         $row_array['Image'] = $row['Image'];
         $row_array['Trailer'] = $row['Trailer'];
+        $row_array['Actors'] = $row['Actors'];
+        $row_array['Actor_IDs'] = $row['Actor_IDs'];
         $row_array['BoxOffice'] = $row['BoxOffice'];
 
         array_push($return_arr,$row_array);

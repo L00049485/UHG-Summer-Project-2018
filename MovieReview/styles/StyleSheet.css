@@ -54,6 +54,10 @@ hr {
 #headerText h1 {
     color: white;
 }
+.greenText {
+    color: #28a745;
+    font-weight: bold;
+}
 
 #header-bread {
     position: absolute;

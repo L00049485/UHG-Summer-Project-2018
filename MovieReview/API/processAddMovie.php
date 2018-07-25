@@ -9,7 +9,7 @@
     <script src="scripts/bootstrap.js"></script>
 </head>
 <body>
-    <?php include("includes/header.php");?>
+    <?php include("http://localhost:8080/moviereviewRepo/MovieReview/includes/header.php");?>
 
     <div class="album py-5 bg-light">
         <div class="container">
@@ -70,7 +70,7 @@
                 
         </div>
     </div>
-    <?php include("includes/footer.html");?>
+    <?php include("http://localhost:8080/moviereviewRepo/MovieReview/includes/footer.html");?>
 </body>
 </html>
 

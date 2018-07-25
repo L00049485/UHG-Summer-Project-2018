@@ -44,7 +44,7 @@
     <div class="container">
     <div class="album py-5 bg-light">
         <!-- Right column form -->
-            <form action="processUpdateMovie.php" method="post">
+            <form action="api/processUpdateMovie.php" method="post">
                 <div class='col-lg-12'>
                     <br />
                     <h2>Update Movie</h2>

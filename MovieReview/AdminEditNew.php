@@ -16,9 +16,26 @@
     <script src="scripts/jQuery_3.3.1.js"></script>
     <script src="scripts/bootstrap.js"></script>
 
+
     <script>
         $(document).ready(function () {
-            
+            $("#btnSubmitUpdateMovie").click(function () {
+                var files = $('#images').fileinput('getFileStack');
+                var actors = $('#Actors').val();
+                var imagesString = "";
+                for (i = 0; i < files.length; ++i) {
+                    imagesString += 'images/posters/' + files[i].name + ',';
+                }
+
+                //remove the last comma
+                imagesString = imagesString.substring(0, imagesString.length - 1);
+
+                //send the text to a hidden text box to be picked up by the php
+                $('#txtImages').val(imagesString);
+
+                //Send the list of actors to a hidden text box to be picked up by the php
+                $('#txtActors').val(actors);
+            });
         });
     </script>
 </head>
@@ -27,15 +44,20 @@
     <div class="container">
         <div class="album py-5 bg-light">
         <!-- Right column form -->
-            <form action="api/processAddMovie.php" method="post">
+            <form id="editForm">
                 <div class='col-lg-12'>
                     <br />
-                    <h2>Add Movie</h2>
+                    <h2>Update Movie</h2>
                     <h6>
                         Basic Information
                     </h6>
 
                     <div class="row">
+                        <!-- Movie ID -->
+                        <div class='col-sm-4'>                            
+                            <label for="Movie Title" class="grey-text">Movie ID</label>
+                            <input type="text" id="txtMovieId" name="txtMovieId" class="form-control">
+                        </div>
 
                         <!-- Movie Title -->
                         <div class='col-sm-4'>                            
@@ -46,7 +68,7 @@
                         <!-- Release Date -->
                         <div class='col-sm-4'>                            
                             <label for="Release Date" class="grey-text">Release Date:</label><br />
-                            <input type="date" name="txtReleaseDate" class="form-control">
+                            <input type="date" name="txtReleaseDate" id="txtReleaseDate" class="form-control">
                         </div>
                     </div>
                     <br />
@@ -54,9 +76,7 @@
                     <h6>
                         Descriptive Information
                     </h6>
-                    <br />
                     <div class="row">
-
                         <!-- Genre -->
                         <div class='col-sm-4'>                            
                             <label for="Type" class="grey-text">Genre</label><br />
@@ -87,7 +107,7 @@
                         <!-- Trailer -->
                         <div class='col-sm-4'>                            
                             <label for="Trailer" class="grey-text">Trailer:</label><br />
-                            <input type="text" name="txtTrailer" class="form-control">
+                            <input type="text" name="txtTrailer" id="txtTrailer" class="form-control">
                         </div>
 
                         <!-- Actors -->
@@ -101,7 +121,7 @@
 	                                $link=mysqli_connect($server, $dbuser, $password);
 	                                mysqli_select_db($link, "moviereview");
 
-                                    $sql="SELECT actor_ID, actor_name FROM actor order by actor_name";
+                                    $sql="SELECT actor_ID, actor_name FROM actor order by actor_name limit 100000";
                                     $result=mysqli_query($link, $sql);
 
                                     if(mysqli_num_rows($result) > 0)
@@ -118,8 +138,6 @@
                             <input type="text" id="txtActors" name="txtActors" class="form-control" style="display:none" >
                         </div>
                     </div> 
-                    <br />
-                    <br />
 
                     <div class="row">
 
@@ -127,7 +145,6 @@
                         <div class='col-sm-12'>                            
                             <label for="Description" class="grey-text">Description</label>
                             <textarea id="txtDesc" name="txtDesc" class="form-control" rows="3"></textarea>
-                            <!--<textarea id="txtDesc" name="txtDesc" class="form-control" rows="3"></textarea>-->
                         </div>
 
                     </div>
@@ -141,7 +158,7 @@
                             <label for="Images" class="grey-text">Images</label><br />
                                 <input id="images" name="input-b3[]" type="file" class="file" multiple 
                                     data-show-upload="false" data-show-caption="true" data-msg-placeholder="Select {files} for upload...">
-                                <input type="text" id="txtImages" name="txtImages" class="form-control" >
+                            <input type="text" id="txtImages" name="txtImages" class="form-control" >
                         </div>
 
                     </div>
@@ -150,14 +167,15 @@
 
                     <div class="row">
                         <div class='col-sm-4'>
-                            <button type="submit" class="btn btn-secondary" id="btnSubmitAddMovie">Submit</button>
-                            <a href="admin.php"><div class="btn btn-primary" id="btnCancel">Cancel</div></a>
+                            <button type="submit" class="btn btn-secondary" id="btnSubmitUpdateMovie">Submit</button>
+                            <a href="./default.php"><div class="btn btn-primary" id="btnCancel">Cancel</div></a>
                         </div>
                     </div>
                 </div>
             </form>
         </div>
     </div>
+    
     <?php include("includes/footer.html");?>
 </body>
 </html>
@@ -184,13 +202,25 @@
 <script src="scripts/tinymce/js/tinymce/jquery.tinymce.min.js"></script>
 <script src="scripts/Custom.js"></script>
 
+
+<!-- Toastr -->
+<script src="scripts/toast/jquery.toast.js"></script>
+<link href="styles/jquery.toast.css" rel="stylesheet" />
+
 <!--Custom JS functions-->
 <script src="scripts/Custom.js"></script>
+<script src="scripts/EditMovie.js"></script>
+
+<!-- Driver -->
+<link href="styles/Driver.min.css" rel="stylesheet" />
+<script src="scripts/Driver/Driver.min.js"></script>
 
 <script>
+
     //Set up the multi-select for the actors
     $(document).ready(function () {
         $(".chosen-container").chosen({ no_results_text: "Oops, nothing found!", width: "300px" });
         $(".simple-select").chosen({ no_results_text: "Oops, nothing found!", width: "200px" });
     });
+
 </script>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 24, 2018 at 05:30 PM
+-- Generation Time: Jul 25, 2018 at 09:33 AM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -28,12 +28,35 @@ BEGIN
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_ExistingMemberCheck` (IN `email_IN` VARCHAR(50))  NO SQL
 select EmailAddress from member where EmailAddress = email_IN$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_GetInitialMovieInfo` (IN `Member_ID_IN` INT)  NO SQL
+SELECT 
+m.movie_id,
+title,
+image,
+releasedate,
+l.Like_ID,
+r.Rating_ID
+FROM `movie` AS m LEFT OUTER JOIN `likes` AS l  ON 
+m.Movie_ID = l.Movie_ID AND
+l.Member_ID = Member_ID_IN 
+LEFT OUTER JOIN `rating` AS r ON
+m.Movie_ID = r.Movie_ID AND
+r.Member_ID = Member_ID_IN 
+ORDER BY releasedate DESC$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_GetMovieActors` (IN `movie_ID_IN` INT)  NO SQL
 SELECT a.Actor_Name FROM actor_movie am join actor a on am.Actor_ID = a.Actor_ID
 where am.Movie_ID = movie_ID_IN$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_GetMovieEditDetails` (IN `movie_ID` INT)  NO SQL
-SELECT m.*, GROUP_CONCAT(Actor_ID) as actors FROM movie m left join actor_movie am on m.movie_id = am.movie_id where m.movie_id = movie_ID$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_GetMovieDetails` (IN `movie_ID_IN` INT)  NO SQL
+SELECT m.Movie_ID, Title, ReleaseDate, Genre, m.Genre_ID, Image, Trailer, m.BoxOffice, Description, GROUP_CONCAT(am.Actor_ID) as Actor_IDs, GROUP_CONCAT(Actor_Name) as Actors 
+
+FROM movie m 
+LEFT JOIN `actor_movie` am on m.movie_id = am.movie_id 
+LEFT JOIN `actor` a ON a.Actor_ID = am.Actor_ID
+LEFT JOIN `Genre` as g on m.Genre_ID = g.Genre_ID 
+
+where m.movie_id = movie_ID_IN$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_InsertMovie` (IN `movie_Title` VARCHAR(200), IN `releaseDate` DATE, IN `genreId` INT, IN `description` VARCHAR(20000), IN `image` VARCHAR(100), IN `trailer` VARCHAR(200))  BEGIN
    INSERT INTO movie(
@@ -1315,7 +1338,11 @@ INSERT INTO `actor_movie` (`actor_movie_ID`, `Actor_ID`, `Movie_ID`) VALUES
 (258, 1906, 583),
 (259, 2101, 583),
 (260, 1797, 583),
-(261, 1179, 583);
+(261, 1179, 583),
+(262, 1328, 621),
+(263, 1433, 621),
+(264, 1738, 621),
+(265, 1112, 621);
 
 -- --------------------------------------------------------
 
@@ -1528,7 +1555,7 @@ INSERT INTO `movie` (`Movie_ID`, `Title`, `ReleaseDate`, `Genre_ID`, `Descriptio
 (618, 'Meet the Fockers', '2004-01-01', 0, '', '', '', 516567575),
 (619, 'The Hangover', '2009-01-01', 0, '', '', '', 465764086),
 (620, 'Gravity', '2013-01-01', 0, '', '', '', 695941797),
-(621, 'Sing', '2016-01-01', 0, '', '', '', 634953727),
+(621, 'Sing', '2016-12-21', 11, '<!DOCTYPE html><html><head></head><body>\r\n<p>In a world of anthropomorphic animals, koala Buster Moon owns a theater, having been interested in show business since his father took him to his first music show as a child. Following financial problems brought up by the bank representative Judith, he tells his wealthy friend Eddie that he will host a singing competition with a prize of $1,000. But Busters assistant, Miss Crawly, accidentally appends two extra zeroes, and the promotional fliers showing $100,000 are blown out of Busters office into the city streets.</p>\r\n<p>Animals from all around the city gather for auditions. Those selected include: housewife and mother of 25 piglets Rosita; street musician mouse Mike; mobsters son gorilla Johnny; and punk-rock porcupine Ash. Shy teenage elephant Meena fails her audition out of stage fright, while Ashs boyfriend Lance is dismissed from the contest. Rosita is paired with another contestant, an exuberant pig named Gunter, for a dance routine. Although Buster discovers the flyers show a prize of $100,000 (money he does not have), he remains optimistic. Buster convinces Eddie to arrange a visit with Eddies grandmother, former opera singer and theater actress Nana Noodleman, to persuade her to sponsor the prize money. She is hesitant to contribute, but agrees to see a private screening of the show.</p>\r\n<p>Encouraged by her grandfather, Meena tries to ask Buster for another chance, but becomes his stage hand instead. When one of the acts quits, and another is injured, Meena is added as an act. The performers individual problems begin to hinder rehearsals: Rosita flounders in her dance routine with Gunter, after having been distracted by her parenting duties that have fallen into disarray. After discovering Lance with a new girlfriend and evicting them from her apartment, Ash is devastated and breaks down while singing her assigned song, Carly Rae Jepsens \"Call Me Maybe.\" Johnny is torn between having to help his father as the driver of a getaway car in a heist and making the practices. When he tries to do both, he does not show up for the planned pickup in time, and his father and his gang are arrested. Meena does not get any help in overcoming her stage fright, and Mike, certain that the prize money is as good as his, buys a fancy car to impress a female mouse, and then swindles a group of bears in a card game at a nightclub.</p>\r\n<p>The day of the screening, the bears interrupt the show, demanding the money from Mike, who in turn, points to Buster. The bears open the chest containing the prize money, but it is nowhere near $100,000. The glass tank full of luminescent squids that Buster got to light up the theater breaks under all their weight, flooding the theater, which then comes crashing down. With the lot repossessed by Judith, Buster, who had been living in his theaters office desk, takes up residence at Eddies place (his parents pool house). Although the contestants (besides Mike, who saw Buster as a fraud) visit him and try to cheer him up, Buster is too despondent to listen to them. He tries to start over by opening a car wash, using the same bucket that his father had used to earn money for Busters theater.</p>\r\n<p>When Meena goes to the theaters rubble lot and sings Leonard Cohens \"Hallelujah,\" Buster hears her and is inspired to reinstate the show without the prize money. They perform on a makeshift stage on the lot in front of Rosita and Meenas family members. As Rosita and Gunter perform Taylor Swifts \"Shake It Off,\" more animals are attracted to the scene as the show is broadcast on the news. Johnnys rendition of Elton Johns \"Im Still Standing\" impresses his father, who then escapes from prison to reconcile with him. Despite an interruption by Judith, Ash sings her original rock song \"Set It All Free.\" Mike returns to the show and sings Frank Sinatras \"My Way.\" Meena finally overcomes her fears and sings Stevie Wonders \"Dont You Worry bout a Thing,\" which literally brings down the house. The show becomes a success and impresses Nana, who was in the audience. Nana buys the lot and the theater is rebuilt and reopened.</p>\r\n</body></html>', 'images/posters/Sing.jpg', '<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/OrWjjOOYxhI\" frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>', 634953727),
 (622, 'Monsters University', '2013-01-01', 0, '', '', '', 743588329);
 
 -- --------------------------------------------------------
@@ -1641,7 +1668,7 @@ ALTER TABLE `actor`
 -- AUTO_INCREMENT for table `actor_movie`
 --
 ALTER TABLE `actor_movie`
-  MODIFY `actor_movie_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=262;
+  MODIFY `actor_movie_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=270;
 --
 -- AUTO_INCREMENT for table `genre`
 --

@@ -26,7 +26,7 @@
             $memberIdNew=$_SESSION['memberID'];
 
 			echo "Successful Login";
-            header("Location:default.php");
+            header("Location:http://localhost:8080/moviereviewRepo/MovieReview/default.php");
 			exit;
 		}
 		else {
@@ -34,7 +34,7 @@
             unset($_SESSION["username"]);
             unset($_SESSION["password"]);
 			echo "Failed Login";
-            //header("Location:adminlogin.php");
+            //header("Location:http://localhost:8080/moviereviewRepo/MovieReview/adminlogin.php");
 		}
 	}
 ?>

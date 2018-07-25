@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <title>Movie Review</title>
@@ -15,7 +15,7 @@
         
         <div class="album py-5 bg-light">
         <!-- Right column form -->
-            <form action="processRegistration.php" method="post">
+            <form id="registrationForm">
                 <div class='col-lg-12'>
                     <h2>New Member Registration</h2>
                     <br />
@@ -108,14 +108,13 @@
                     <br />
                     <div class="row">
                         <div class='col-sm-4'>
-                            <button type="submit" class="btn btn-primary" id="btnSubmitAddMovie">Submit</button>
-                            <a href="admin.php"><div class="btn btn-secondary" id="btnCancel">Cancel</div></a>
+                            <button type="submit" class="btn btn-primary" id="btnSubmitRegister">Submit</button>
+                            <a href="default.php"><div class="btn btn-secondary" id="btnCancel">Cancel</div></a>
                         </div>
                     </div>
                 </div>
             </form>
         </div>
-       
     </div>
 
     <?php include("includes/footer.html");?>
@@ -148,14 +147,12 @@
 
 <!--Custom JS functions-->
 <script src="scripts/Custom.js"></script>
+<script src="scripts/registerSystem.js"></script>
 
 <!-- Toastr -->
 <script src="scripts/toast/jquery.toast.js"></script>
 <link href="styles/jquery.toast.css" rel="stylesheet" />
 
-<!-- Driver -->
-<link href="styles/Driver.min.css" rel="stylesheet" />
-<script src="scripts/Driver/Driver.min.js"></script>
 <script>
     //Set up the multi-select for the actors
     $(document).ready(function () {

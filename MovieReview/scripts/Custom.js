@@ -1,5 +1,4 @@
-﻿//Global variables
-var ratingStars = 0;
+﻿
 
 $(document).ready(function () {
     var tinymceExists = document.getElementById("txtDesc");
@@ -50,64 +49,6 @@ $(document).ready(function () {
 });
 
 
-function trackLike(movieId) {
-    if (movieId == null) {
-        $("#login-modal").modal();
-    }
-    else {
-        xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                var buttonId = "#" + movieId;
-                $(buttonId).addClass('btn-outline-success').removeClass('btn-outline-secondary');
-                document.getElementById(movieId).setAttribute("onclick", "javascript: trackUnLike(this.value);");
-                document.getElementById(movieId).setAttribute("Title", "You already like this movie");
-                
-                $(buttonId).fadeIn(1000).fadeOut(1000).fadeIn(1000);
-
-                // show when the button is clicked
-                $.toast({
-                    heading: 'Confirmed',
-                    text: 'Movie Liked!',
-                    showHideTransition: 'slide',
-                    position: 'bottom-right',
-                    icon: 'success'
-                });
-            }
-        };
-        xmlhttp.open("GET", "api/processLike.php?movieId=" + movieId, true);
-        xmlhttp.send();
-    }
-}
-function trackUnLike(movieId) {
-    if (movieId == null) {
-        $("#login-modal").modal();
-    }
-    else {
-        xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {                
-                var buttonId = "#" + movieId;
-                $(buttonId).addClass('btn-outline-secondary').removeClass('btn-outline-success');
-                document.getElementById(movieId).setAttribute("onclick", "javascript: trackLike(this.value);");
-                document.getElementById(movieId).setAttribute("Title", "Click here to like this movie");
-
-                $(buttonId).fadeIn(1000).fadeOut(1000).fadeIn(1000);
-
-                // show when the button is clicked
-                $.toast({
-                    heading: 'Confirmed',
-                    text: 'Movie Un-Liked!',
-                    showHideTransition: 'slide',
-                    position: 'bottom-right',
-                    icon: 'warning'
-                });
-            }
-        };
-        xmlhttp.open("GET", "api/processUnLike.php?movieId=" + movieId, true);
-        xmlhttp.send();
-    }
-}
 function displayLoginToast() {
     tutorial();
 
@@ -123,101 +64,37 @@ function displayLoginToast() {
 
 //Driver tutorial - kicks off the first time someone logs in
 function tutorial() {
-    const driver = new Driver();
-    // Define the steps for introduction
-    driver.defineSteps([
-      {
-          element: '#movieCard1',
-          popover: {
-              title: 'Tutorial',
-              description: 'Each movie has its own card',
-              position: 'top'
-          }
-      },
-      {
-          element: '#movieBtnGroup1',
-          popover: {
-              title: 'Tutorial',
-              description: 'For each card, you have various options depending on whether or not you are logged in',
-              position: 'top', // can be `top`, `left`, `right`, `bottom`
-          }
-      },
-    ]);
-    // Start the introduction
-    driver.start();
+    //const driver = new Driver();
+    //// Define the steps for introduction
+    //driver.defineSteps([
+    //  {
+    //      element: '#movieCard1',
+    //      popover: {
+    //          title: 'Tutorial',
+    //          description: 'Each movie has its own card',
+    //          position: 'top'
+    //      }
+    //  },
+    //  {
+    //      element: '#movieBtnGroup1',
+    //      popover: {
+    //          title: 'Tutorial',
+    //          description: 'For each card, you have various options depending on whether or not you are logged in. <span class="greenText">Green</span> colored buttons indicate that you have previously liked or rated that movie.',
+    //          position: 'top', // can be `top`, `left`, `right`, `bottom`
+    //      }
+    //  },
+    //]);
+    //// Start the introduction
+    //driver.start();
 }
 
-function rateMovie(movieId) {
+
+function editMovie(movieId) {
     if (movieId == null) {
         $("#login-modal").modal();
     }
     else {
-        var movieDetails;
-        $("#ratingDiv").dialog({ modal: true }).dialog('open').dialog("option", "width", 800);
-
-        $.ajax({
-            async: false,
-            type: 'GET',
-            url: 'http://localhost:8080/moviereviewRepo/MovieReview/api/getMovieDetails.php?movieId=' + movieId,
-            success: function (data) {
-                openRateModal(JSON.parse(data));
-            }
-        });
+        window.location.href = "http://localhost:8080/moviereviewRepo/MovieReview/AdminEditNew.php?movieid=" + movieId;
     }
 }
 
-function openRateModal(movieDetails) {
-    var title = movieDetails[0].Title;
-    var id = movieDetails[0].id;
-    var ReleaseDate = movieDetails[0].ReleaseDate;
-    var Genre = movieDetails[0].Genre;
-    var Image = movieDetails[0].Image;
-    var Trailer = movieDetails[0].Trailer;
-    var BoxOffice = parseInt(movieDetails[0].BoxOffice);
-
-    //Reset all fields
-    $('#ratingImage').attr('src', Image);
-    $('#btnRatingSubmit').attr('value', id);
-    $('#movieTitle').html(title);
-    $('#txtComments').val('');
-    $('.ratingBtns').prop('checked', false);
-
-    $.toast({
-        heading: 'Success',
-        text: title + '<br />' + ReleaseDate + '<br />' + Genre + '<br />' + Image + '<br />$' + BoxOffice.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"),
-        showHideTransition: 'slide',
-        position: 'bottom-right',
-        icon: 'success'
-    });
-}
-
-function starRatings(rating) {
-    ratingStars = rating;
-}
-
-function submitRating(movieId) {
-    if (movieId == null) {
-        $("#login-modal").modal();
-    }
-    else {
-        var comments = $('#txtComments').val();
-        xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                var buttonId = "#" + movieId;
-
-                // show when the button is clicked
-                $.toast({
-                    heading: 'Confirmed',
-                    text: 'Movie Rated!',
-                    showHideTransition: 'slide',
-                    position: 'bottom-right',
-                    icon: 'success'
-                });
-            }
-        };
-        var url = "http://localhost:8080/moviereviewRepo/MovieReview/api/processRating.php?movieId=" + movieId + "&comments=" + comments + "&ratingStars=" + ratingStars;
-        xmlhttp.open("GET", url, true);
-        xmlhttp.send();
-    }
-}

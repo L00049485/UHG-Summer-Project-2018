@@ -1,4 +1,4 @@
-﻿<?php
+<?php
    session_start();
 ?>
 
@@ -10,9 +10,11 @@
 
     <!-- Scripts -->
     <script src="scripts/jQuery_3.3.1.js"></script>
-    <script src="scripts/jQuery-UI.js"></script>
 
+	<!--2 links to the jquery-ui, the first is for offline situations-->
+    <link href="styles/jquery-ui.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
+
     <script src="scripts/bootstrap.js"></script>
 
 </head>
@@ -23,7 +25,7 @@
         <div class="container">
             <div class="row">
             <!-- Movie albums -->
-            <?php
+				<?php
                 $server="localhost";
                 $dbuser="root";
                 $password="";
@@ -46,8 +48,9 @@
                     $image=$row["image"];
                     $releaseDate=$row["releasedate"];
                     $LikeID=$row["Like_ID"];
-                    $RatingID=$row["Rating_ID"];
-                    $releaseDate=substr($releaseDate, 0,4);   
+					$RatingID=$row["Rating_ID"];
+                    $isAdmin=$row["IsAdmin"];
+                    $releaseDate=substr($releaseDate, 0,4);
                     $elementID = $elementID + 1;
 
                     echo "<div class='col-md-3'>
@@ -57,42 +60,45 @@
                         <p class='card-text'>$title ($releaseDate)</p>
                         <div class='d-flex justify-content-between align-items-center'>
                         <div class='btn-group' id='movieBtnGroup$elementID'>";
-                    
+
                     //***********************************************
                     //Check if the user is logged in or not. If they are, display like and rating buttons differently
                     //***********************************************
-                    
-                    //*****************Like Button*****************                    
+
+                    //*****************Like Button*****************
                     //User is logged in and hasnt previously liked this movie
                     if($memberId > 0 && $LikeID == null) {
-                        echo "<button type='button' class='btn btn-sm btn-outline-secondary' id='$movieId' title='Click here to like this movie' onclick='trackLike(this.value)' value='$movieId'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i></button>"; 
+                        echo "<button type='button' class='btn btn-sm btn-outline-secondary' id='$movieId' title='Click here to like this movie' onclick='trackLike(this.value)' value='$movieId'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i></button>";
                     }
                     //User has logged in and has already liked this movie
                     else if($memberId > 0 && $LikeID != null) {
-                        echo "<button type='button' class='btn btn-sm btn-outline-success' id='$movieId' title='You already like this movie' onclick='trackUnLike(this.value)' value='$movieId' ><i class='fa fa-thumbs-o-up' aria-hidden='true'></i></button>"; 
+                        echo "<button type='button' class='btn btn-sm btn-outline-success' id='$movieId' title='You already like this movie' onclick='trackUnLike(this.value)' value='$movieId' ><i class='fa fa-thumbs-o-up' aria-hidden='true'></i></button>";
                     }
                     //User has not logged in
-                    else {                        
-                        echo "<button type='button' class='btn btn-sm btn-outline-secondary' title='You must login' onclick='trackLike()'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i></button>
-                            <button type='button' class='btn btn-sm btn-outline-secondary rateBtn' onclick='rateMovie()' id='movieID$movieId' value='$movieId'>Rate</button> ";      
-                    }                                                                          
-                    //*****************END Like Button***************** 
-                                        
-                                          
+                    else {
+                        echo "<button type='button' class='btn btn-sm btn-outline-secondary' title='You must login' onclick='trackLike()' id='$movieId'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i></button>
+                            <button type='button' class='btn btn-sm btn-outline-secondary rateBtn' onclick='rateMovie()' id='movieID$movieId' value='$movieId'>Rate</button> ";
+                    }
+                    //*****************END Like Button*****************
+
+
                     //*****************Rating Button*****************
                     //User is logged in and hasnt previously rated this movie
                     if($memberId > 0 && $RatingID == null) {
                         echo "<button type='button' class='btn btn-sm btn-outline-secondary rateBtn' onclick='rateMovie(this.value)' id='movieID$movieId' value='$movieId'>Rate</button>";
                     }
                     else if($memberId > 0 && $RatingID != null) {
-                        echo "<button type='button' class='btn btn-sm btn-outline-success rateBtn' onclick='rateMovie(this.value)' id='movieID$movieId' value='$movieId' title='You already rated this movie'>Rate</button>";
+                        echo "<button type='button' class='btn btn-sm btn-outline-success rateBtn' onclick='rateMovie()' id='movieID$movieId' value='$movieId' title='You already rated this movie'>Rate</button>";
                     }
 
                     //*****************END Rating Button*****************
 
-
-                    echo "<a href='AdminEdit.php?movieid=$movieId'><div class='btn btn-sm btn-outline-secondary'>Edit</div></a>
-                        </div>
+					//*****************Rating Button*****************
+                    //User is logged in and is admin
+                    if($isAdmin > 0) {
+						echo "<button type='button' class='btn btn-sm btn-outline-info' onclick='editMovie(this.value)' value='$movieId'>Edit</button>";
+					}
+                        echo "</div>
                         </div>
                         </div>
                         </div>
@@ -104,32 +110,45 @@
                 echo "<h5>No results found</h5>";
             }
             mysqli_close($link);
-            ?>
+				?>
             </div>
         </div>
     </div>
     <?php include("includes/footer.html");?>
 
-    <div id="ratingDiv">
+    <div id="ratingDiv" title="Enter your rating/comments below">
         <div class='col-sm-4'>
             <img class='img-fluid detailsImg' src='' align='Left' id="ratingImage" />
         </div>    
         <div class='col-sm-12'>
-            <h3 id="movieTitle"></h3>
-            Your overall rating:
-            <div class="rating">
-                <input name="myrating" type="radio" value="5" class="ratingBtns" onclick='starRatings(this.value)'/><span>☆</span>
-                <input name="myrating" type="radio" value="4" class="ratingBtns" onclick='starRatings(this.value)'/><span>☆</span>
-                <input name="myrating" type="radio" value="3" class="ratingBtns" onclick='starRatings(this.value)'/><span>☆</span>
-                <input name="myrating" type="radio" value="2" class="ratingBtns" onclick='starRatings(this.value)'/><span>☆</span>
-                <input name="myrating" type="radio" value="1" class="ratingBtns" onclick='starRatings(this.value)'/><span>☆</span>                              
-            </div>
-            <br />
-            Your comments:
-            <br />
-            <textarea rows="4" cols="40" name="txtComments" id="txtComments"></textarea>
-            <button type='button' class='btn btn-primary' onclick='submitRating(this.value)' value='' id="btnRatingSubmit">Submit</button>
-        </div>
+			<form id="ratingForm">
+				<h3 id="movieTitle"></h3>
+				Your overall rating:
+				<div class="rating">
+					<input name="myrating" type="radio" value="5" class="ratingBtns" onclick='starRatings(this.value)' />
+					<span>☆</span>
+					<input name="myrating" type="radio" value="4" class="ratingBtns" onclick='starRatings(this.value)' />
+					<span>☆</span>
+					<input name="myrating" type="radio" value="3" class="ratingBtns" onclick='starRatings(this.value)' />
+					<span>☆</span>
+					<input name="myrating" type="radio" value="2" class="ratingBtns" onclick='starRatings(this.value)' />
+					<span>☆</span>
+					<input name="myrating" type="radio" value="1" class="ratingBtns" onclick='starRatings(this.value)' />
+					<span>☆</span>
+				</div>
+				<br />
+				Your comments:
+				<br />
+				<textarea rows="4" cols="40" name="txtComments" id="txtComments"></textarea>
+				
+				<!--Hidden text fields to be picked up by the form-->
+				<input type="text" id="txtMovieId" name="txtMovieId" style="display:none" />
+				<input type="text" id="txtMovieTitle" name="txtMovieTitle" style="display:none" />
+				<input type="text" id="txtRatingStars" name="txtRatingStars" style="display:none" />
+
+				<button type='button' class='btn btn-primary' id="btnRatingSubmit">Submit</button>
+			</form>  
+		</div>
     </div>
 </body>
 </html>
@@ -138,6 +157,7 @@
 <link href="styles/mdb.css" rel="stylesheet" />
 <link href="styles/bootstrap.css" rel="stylesheet" />
 <link href="styles/StyleSheet.css" rel="stylesheet" />
+<script src="scripts/jQuery-UI.js"></script>
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="https://fonts.googleapis.com/css?family=Montserrat:100,500,600,700" rel="stylesheet">
@@ -149,6 +169,8 @@
 
 <!--Custom JS functions-->
 <script src="scripts/Custom.js"></script>
+<script src="scripts/likeSystem.js"></script>
+<script src="scripts/ratingSystem.js"></script>
 
 <!-- Toastr -->
 <script src="scripts/toast/jquery.toast.js"></script>
