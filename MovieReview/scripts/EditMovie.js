@@ -61,6 +61,9 @@ function updateMovie() {
     //remove the last comma
     imagesString = imagesString.substring(0, imagesString.length - 1);
 
+    //Make the tinyMCE plugin save the content of the text field
+    tinyMCE.triggerSave();
+
     var datastring = $("#editForm").serialize();
 
     $.ajax({
