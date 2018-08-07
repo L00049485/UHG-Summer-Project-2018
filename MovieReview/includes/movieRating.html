@@ -1,1 +1,34 @@
-﻿
+<div id="ratingDiv" title="Enter your rating/comments below">
+    <div class='col-sm-4'>
+        <img class='img-fluid detailsImg' src='' align='Left' id="ratingImage" />
+    </div>    
+    <div class='col-sm-12'>
+        <form id="ratingForm">
+            <h3 id="movieTitle"></h3>
+            Your overall rating:
+            <div class="rating">
+                    <input name="myrating" type="radio" value="5" class="ratingBtns" onclick='starRatings(this.value)' />
+                    <span>☆</span>
+                    <input name="myrating" type="radio" value="4" class="ratingBtns" onclick='starRatings(this.value)' />
+                    <span>☆</span>
+                    <input name="myrating" type="radio" value="3" class="ratingBtns" onclick='starRatings(this.value)' />
+                    <span>☆</span>
+                    <input name="myrating" type="radio" value="2" class="ratingBtns" onclick='starRatings(this.value)' />
+                    <span>☆</span>
+                    <input name="myrating" type="radio" value="1" class="ratingBtns" onclick='starRatings(this.value)' />
+                    <span>☆</span>
+            </div>
+            <br />
+            Your comments:
+            <br />
+            <textarea rows="4" cols="40" name="txtComments" id="txtComments"></textarea>
+
+            <!--Hidden text fields to be picked up by the form-->
+            <input type="text" id="txtMovieId" name="txtMovieId" style="display:none" />
+            <input type="text" id="txtMovieTitle" name="txtMovieTitle" style="display:none" />
+            <input type="text" id="txtRatingStars" name="txtRatingStars" style="display:none" />
+
+            <button type='button' class='btn btn-primary' id="btnRatingSubmit">Submit</button>
+        </form>  
+    </div>
+</div>

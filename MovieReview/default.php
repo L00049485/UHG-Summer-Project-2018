@@ -11,7 +11,7 @@
     <!-- Scripts -->
     <script src="scripts/jQuery_3.3.1.js"></script>
 
-	<!--2 links to the jquery-ui, the first is for offline situations-->
+    <!--2 links to the jquery-ui, the first is for offline situations-->
     <link href="styles/jquery-ui.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
 
@@ -22,10 +22,29 @@
     <?php include("includes/header.php");?>
 
     <div class="album py-5 bg-light">
+        
         <div class="container">
-            <div class="row">
+            <!--*****************Search Function*****************-->
+            <div class="row">   
+                <div class='col-sm-8'>
+                    <input type="text" id="txtSearch" name="txtSearch" class="form-control-searchbar" placeholder="Search..">
+                    
+                </div>
+                <div class='col-sm-4'>
+                    Sort By: 
+                        <fieldset id="sortOptions">
+                            <input type="radio" id="btnAlpha" name="sortOptions"> Alphabetical   </input>
+                            <input type="radio" id="btnBoxOffice" name="sortOptions"> Box Office    </input>
+                            <input type="radio" id="btnReleaseDate" name="sortOptions"> Release Date    </input>
+                        </fieldset>
+                </div>
+            </div>
+            <hr />
+            <!--*****************Seach Function*****************-->
+            
+            <div class="row" id="movieRow">
             <!-- Movie albums -->
-				<?php
+            <?php
                 $server="localhost";
                 $dbuser="root";
                 $password="";
@@ -48,16 +67,17 @@
                     $image=$row["image"];
                     $releaseDate=$row["releasedate"];
                     $LikeID=$row["Like_ID"];
-					$RatingID=$row["Rating_ID"];
+                    $RatingID=$row["Rating_ID"];
                     $isAdmin=$row["IsAdmin"];
-                    $releaseDate=substr($releaseDate, 0,4);
+                    $boxOffice=$row["BoxOffice"];
+                    $releaseDateYear=substr($releaseDate, 0,4);
                     $elementID = $elementID + 1;
 
-                    echo "<div class='col-md-3'>
+                    echo "<div class='col-md-3 movieCards' data-boxOffice=$boxOffice data-releaseDate='$releaseDate' data-title='$title'>
                         <div class='card mb-3 box-shadow' id='movieCard$elementID'>
                         <a href='MovieDetails.php?movieId=$movieId'><img class='card-img-top' src='$image' alt='Card image cap'></a>
                         <div class='card-body'>
-                        <p class='card-text'>$title ($releaseDate)</p>
+                        <p class='card-text'>$title ($releaseDateYear $boxOffice)</p>
                         <div class='d-flex justify-content-between align-items-center'>
                         <div class='btn-group' id='movieBtnGroup$elementID'>";
 
@@ -115,41 +135,8 @@
         </div>
     </div>
     <?php include("includes/footer.html");?>
-
-    <div id="ratingDiv" title="Enter your rating/comments below">
-        <div class='col-sm-4'>
-            <img class='img-fluid detailsImg' src='' align='Left' id="ratingImage" />
-        </div>    
-        <div class='col-sm-12'>
-			<form id="ratingForm">
-				<h3 id="movieTitle"></h3>
-				Your overall rating:
-				<div class="rating">
-					<input name="myrating" type="radio" value="5" class="ratingBtns" onclick='starRatings(this.value)' />
-					<span>☆</span>
-					<input name="myrating" type="radio" value="4" class="ratingBtns" onclick='starRatings(this.value)' />
-					<span>☆</span>
-					<input name="myrating" type="radio" value="3" class="ratingBtns" onclick='starRatings(this.value)' />
-					<span>☆</span>
-					<input name="myrating" type="radio" value="2" class="ratingBtns" onclick='starRatings(this.value)' />
-					<span>☆</span>
-					<input name="myrating" type="radio" value="1" class="ratingBtns" onclick='starRatings(this.value)' />
-					<span>☆</span>
-				</div>
-				<br />
-				Your comments:
-				<br />
-				<textarea rows="4" cols="40" name="txtComments" id="txtComments"></textarea>
-				
-				<!--Hidden text fields to be picked up by the form-->
-				<input type="text" id="txtMovieId" name="txtMovieId" style="display:none" />
-				<input type="text" id="txtMovieTitle" name="txtMovieTitle" style="display:none" />
-				<input type="text" id="txtRatingStars" name="txtRatingStars" style="display:none" />
-
-				<button type='button' class='btn btn-primary' id="btnRatingSubmit">Submit</button>
-			</form>  
-		</div>
-    </div>
+    <?php include("includes/movieRating.html");?>
+    
 </body>
 </html>
 
@@ -171,13 +158,15 @@
 <script src="scripts/Custom.js"></script>
 <script src="scripts/likeSystem.js"></script>
 <script src="scripts/ratingSystem.js"></script>
+<script src="scripts/searchAndSort.js" type="text/javascript"></script>
 
-<!-- Toastr -->
+<!-- Toast -->
 <script src="scripts/toast/jquery.toast.js"></script>
 <link href="styles/jquery.toast.css" rel="stylesheet" />
 
 <!-- Driver -->
 <link href="styles/Driver.min.css" rel="stylesheet" />
 <script src="scripts/Driver/Driver.min.js"></script>
+
 
 

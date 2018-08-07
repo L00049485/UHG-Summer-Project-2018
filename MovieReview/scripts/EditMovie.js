@@ -31,7 +31,7 @@ function populateFields(movieDetails) {
     $('#genre').val(genre).trigger('chosen:updated');
 
     //Actors
-    var actorsAr = actors.split(',');
+    var actorsAr = (actors != null) ? actors.split(',') : null;
     $('#Actors').val(actorsAr).trigger('chosen:updated');
 
 }
@@ -68,6 +68,7 @@ function updateMovie() {
         url: "http://localhost:8080/moviereviewRepo/MovieReview/api/processUpdateMovie.php",
         data: datastring,
         dataType: "json",
+        async: false,
         success: function (data) {
             // show when the button is clicked
             $.toast({
@@ -75,12 +76,13 @@ function updateMovie() {
                 text: data,
                 showHideTransition: 'slide',
                 position: 'bottom-right',
-                icon: 'success'
+                icon: 'success',
+                hideAfter: false
             });
 
             var delay = 3000;
-            $('#editForm').hide(1000);
-            setTimeout(function () { window.location = "./default.php"; }, delay);
+            //$('#editForm').hide(1000);
+            //setTimeout(function () { window.location = "./default.php"; }, delay);
         },
         error: function (xhr, ajaxOptions, thrownError) {
             $.toast({

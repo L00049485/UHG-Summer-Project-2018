@@ -9,9 +9,9 @@
         $link=mysqli_connect($server,$dbuser,$password);
         mysqli_select_db($link, "moviereview");
 
-		$postForm = $_POST;
+        $postForm = $_POST;
 
-		$movieTitle=$_POST["txtMovieTitle"];
+        $movieTitle=$_POST["txtMovieTitle"];
         $movieId=$_POST["txtMovieId"];
         $comments=$_POST["txtComments"];
         $ratingStars=$_POST["txtRatingStars"];

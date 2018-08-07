@@ -9,19 +9,6 @@ function starRatings(rating) {
     ratingStars = rating;
 }
 
-//Listener for when the rating submit button is clicked
-$(document).ready(function () {
-    $("#btnRatingSubmit").click(function (e) {
-        e.preventDefault();
-        var movieId = $(this).val();
-
-        //send the movieID and number of stars to a hidden text field
-        $('#txtRatingStars').val(ratingStars);
-        $('#txtMovieId').val(movieId);
-        submitRating(movieId);
-    });
-});
-
 //Triggers when the "Rate" button is click for a particular movie
 function rateMovie(movieId) {
     if (movieId == null) {
@@ -49,6 +36,20 @@ function rateMovie(movieId) {
         });
     }
 }
+
+//Listener for when the rating submit button is clicked
+$(document).ready(function () {
+    $("#btnRatingSubmit").click(function (e) {
+        e.preventDefault();
+        var movieId = $(this).val();
+
+        //send the movieID and number of stars to a hidden text field
+        $('#txtRatingStars').val(ratingStars);
+        $('#txtMovieId').val(movieId);
+        submitRating(movieId);
+    });
+});
+
 function openRateModal(movieDetails) {
 
     //Set variables for the various required fields
@@ -99,11 +100,13 @@ function submitRating(movieId) {
                     icon: 'success',
                     hideAfter: 5000
                 });
-                var buttonId = "movieId" + movieId;
+                var buttonId = "movieID" + movieId;
 
                 $("#ratingDiv").dialog('close');
-                $(buttonId).addClass('btn-outline-success rateBtn').removeClass('btn-outline-secondary rateBtn');
-                document.getElementById(movieId).setAttribute("Title", "You already rated this movie");
+                $("#" + buttonId).addClass('btn-outline-success').removeClass('btn-outline-secondary');
+                //document.getElementById(buttonID).setAttribute("Title", "You already rated this movie");
+                
+                $("#" + buttonId).fadeIn(1000).fadeOut(1000).fadeIn(1000);
             },
             error: function (xhr, ajaxOptions, thrownError) {
                 $.toast({

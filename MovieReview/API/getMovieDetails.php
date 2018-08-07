@@ -7,8 +7,7 @@
     $return_arr = array();
     $movieId=$_GET["movieId"];
 
-
-    $sql="call sp_GetMovieDetails($movieId)";
+    $sql="call sp_GetMovieDetails($movieId, 0)";
 
     $result=mysqli_query($link, $sql);
     if (!$result) 
