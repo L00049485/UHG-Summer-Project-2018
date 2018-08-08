@@ -11,7 +11,10 @@ function starRatings(rating) {
 
 //Triggers when the "Rate" button is click for a particular movie
 function rateMovie(movieId) {
-    if (movieId == null) {
+    if (movieId == 1) {
+        $("#login-modal").modal();
+    }
+    else if (movieId == null) {        
         $.toast({
             heading: 'Movie rated',
             text: "You have previously rated this movie",

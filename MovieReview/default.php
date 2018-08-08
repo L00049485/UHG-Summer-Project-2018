@@ -97,7 +97,7 @@
                     //User has not logged in
                     else {
                         echo "<button type='button' class='btn btn-sm btn-outline-secondary' title='You must login' onclick='trackLike()' id='$movieId'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i></button>
-                            <button type='button' class='btn btn-sm btn-outline-secondary rateBtn' onclick='rateMovie()' id='movieID$movieId' value='$movieId'>Rate</button> ";
+                            <button type='button' class='btn btn-sm btn-outline-secondary rateBtn' onclick='rateMovie(1)' id='movieID$movieId' value='$movieId'>Rate</button> ";
                     }
                     //*****************END Like Button*****************
 
@@ -113,7 +113,7 @@
 
                     //*****************END Rating Button*****************
 
-					//*****************Rating Button*****************
+					//*****************Edit Button*****************
                     //User is logged in and is admin
                     if($isAdmin > 0) {
 						echo "<button type='button' class='btn btn-sm btn-outline-info' onclick='editMovie(this.value)' value='$movieId'>Edit</button>";
