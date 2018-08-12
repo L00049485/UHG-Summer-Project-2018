@@ -107,13 +107,58 @@ function submitRating(movieId) {
 
                 $("#ratingDiv").dialog('close');
                 $("#" + buttonId).addClass('btn-outline-success').removeClass('btn-outline-secondary');
-                //document.getElementById(buttonID).setAttribute("Title", "You already rated this movie");
+                $("#" + buttonId).attr("Title", "You already rated this movie");
+                $("#" + buttonId).attr("onclick", "javascript: rateMovie();");
                 
                 $("#" + buttonId).fadeIn(1000).fadeOut(1000).fadeIn(1000);
             },
             error: function (xhr, ajaxOptions, thrownError) {
                 $.toast({
                     heading: 'Rating Failed',
+                    text: xhr.responseText,
+                    showHideTransition: 'slide',
+                    position: 'bottom-right',
+                    icon: 'error',
+                    hideAfter: false
+                });
+            }
+        });
+    }
+}
+
+//When the user clicks the delete button next to any rating, it triggers this function
+function deleteRating(ratingId, buttonId) {
+    if (confirm('Are you sure you want to delete this rating?')) {
+        $.ajax({
+            async: false,
+            type: 'GET',
+            url: "http://localhost:8080/moviereviewRepo/MovieReview/api/deleteRating.php?ratingId=" + ratingId,
+            success: function (data) {
+                if (data == 1) {
+                    $.toast({
+                        heading: 'Success',
+                        text: "Rating deleted",
+                        showHideTransition: 'slide',
+                        position: 'bottom-right',
+                        icon: 'success'
+                    });
+                    //Hide the row from the page when deleted
+                    $("#ratingRow" + buttonId).hide();
+                }
+                else {
+                    $.toast({
+                        heading: 'Failed',
+                        text: data,
+                        showHideTransition: 'slide',
+                        position: 'bottom-right',
+                        icon: 'error',
+                        hideAfter: false
+                    });
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                $.toast({
+                    heading: 'Failed',
                     text: xhr.responseText,
                     showHideTransition: 'slide',
                     position: 'bottom-right',

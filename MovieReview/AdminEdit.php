@@ -1,4 +1,4 @@
-﻿<!-- Check that the user came here from the login screen -->
+<!-- Check that the user came here from the login screen -->
 <?php
     session_start();
 
@@ -42,9 +42,9 @@
 <body>
     <?php include("includes/header.php");?>
     <div class="container">
-    <div class="album py-5 bg-light">
+        <div class="album py-5 bg-light">
         <!-- Right column form -->
-            <form action="api/processUpdateMovie.php" method="post">
+            <form id="editForm">
                 <div class='col-lg-12'>
                     <br />
                     <h2>Update Movie</h2>
@@ -55,19 +55,19 @@
                     <div class="row">
                         <!-- Movie ID -->
                         <div class='col-sm-4'>                            
-                            <label for="Movie Title" class="grey-text">Movie ID</label>
+                            <label for="Movie Title" class="grey-text bold bold">Movie ID</label>
                             <input type="text" id="txtMovieId" name="txtMovieId" class="form-control">
                         </div>
 
                         <!-- Movie Title -->
                         <div class='col-sm-4'>                            
-                            <label for="Movie Title" class="grey-text">Movie Title</label>
+                            <label for="Movie Title" class="grey-text bold">Movie Title</label>
                             <input type="text" id="txtMovieTitle" name="txtMovieTitle" class="form-control">
                         </div>
 
                         <!-- Release Date -->
                         <div class='col-sm-4'>                            
-                            <label for="Release Date" class="grey-text">Release Date:</label><br />
+                            <label for="Release Date" class="grey-text bold">Release Date:</label><br />
                             <input type="date" name="txtReleaseDate" id="txtReleaseDate" class="form-control">
                         </div>
                     </div>
@@ -79,7 +79,7 @@
                     <div class="row">
                         <!-- Genre -->
                         <div class='col-sm-4'>                            
-                            <label for="Type" class="grey-text">Genre</label><br />
+                            <label for="Type" class="grey-text bold">Genre</label><br />
                             <select data-placeholder="Genre" class="simple-select" name="genre" id="genre">
                                 <?php
                                     $server="localhost";
@@ -106,13 +106,13 @@
 
                         <!-- Trailer -->
                         <div class='col-sm-4'>                            
-                            <label for="Trailer" class="grey-text">Trailer:</label><br />
+                            <label for="Trailer" class="grey-text bold">Trailer:</label><br />
                             <input type="text" name="txtTrailer" id="txtTrailer" class="form-control">
                         </div>
 
                         <!-- Actors -->
                         <div class='col-sm-4'>                            
-                            <label for="Type" class="grey-text">Actors</label><br />
+                            <label for="Type" class="grey-text bold">Actors</label><br />
                             <select data-placeholder="Select actors" class="chosen-container chosen-container-multi" name="Actors" id="Actors" multiple="multiple">
                                 <?php
                                     $server="localhost";
@@ -143,7 +143,7 @@
 
                         <!-- Description -->
                         <div class='col-sm-12'>                            
-                            <label for="Description" class="grey-text">Description</label>
+                            <label for="Description" class="grey-text bold">Description</label>
                             <textarea id="txtDesc" name="txtDesc" class="form-control" rows="3"></textarea>
                         </div>
 
@@ -155,7 +155,7 @@
 
                         <!-- Image -->
                         <div class='col-sm-12'>                            
-                            <label for="Images" class="grey-text">Images</label><br />
+                            <label for="Images" class="grey-text bold">Images</label><br />
                                 <input id="images" name="input-b3[]" type="file" class="file" multiple 
                                     data-show-upload="false" data-show-caption="true" data-msg-placeholder="Select {files} for upload...">
                             <input type="text" id="txtImages" name="txtImages" class="form-control" >
@@ -168,49 +168,14 @@
                     <div class="row">
                         <div class='col-sm-4'>
                             <button type="submit" class="btn btn-secondary" id="btnSubmitUpdateMovie">Submit</button>
-                            <a href="admin.php"><div class="btn btn-primary" id="btnCancel">Cancel</div></a>
+                            <a href="./default.php"><div class="btn btn-primary" id="btnCancel">Cancel</div></a>
                         </div>
                     </div>
                 </div>
             </form>
         </div>
     </div>
-    <div id="hiddenFields">
-        <?php
-            $server="localhost";
-	        $dbuser="root";
-	        $password="";
-	        $link=mysqli_connect($server, $dbuser, $password);
-	        mysqli_select_db($link, "moviereview");
-
-            $movieId=$_GET["movieid"];
-            $sql="call sp_getMovieEditDetails($movieId)";
-            $result=mysqli_query($link, $sql);
-            $row=mysqli_fetch_array($result);
-
-            $movieId=$row["Movie_ID"];
-            $title=$row["Title"];
-            $releaseDate=$row["ReleaseDate"];
-            $genreId=$row["Genre_ID"];
-            $description=$row["Description"];
-            $image=$row["Image"];
-            $trailer=$row["Trailer"];
-            $actors=$row["actors"];
-                
-            
-            echo "<input id='txtMovieIdHidden' type='text' value='$movieId' />";
-            echo "<input id='txtTitleHidden' type='text' value='$title' />";
-            echo "<input id='txtReleaseDateHidden' type='text' value='$releaseDate' />";
-            echo "<input id='txtGenreIdHidden' type='text' value='$genreId' />";
-            echo "<input id='txtDescriptionHidden' type='text' value='$description' />";
-            echo "<input id='txtImageHidden' type='text' value='$image' />";
-            echo "<input id='txtTrailerHidden' type='text' value='$trailer' />";
-            echo "<input id='txtActorsHidden' type='text' value='$actors' />";
-        
-            mysqli_close($link);
-        ?>
-        
-    </div>
+    
     <?php include("includes/footer.html");?>
 </body>
 </html>
@@ -237,9 +202,18 @@
 <script src="scripts/tinymce/js/tinymce/jquery.tinymce.min.js"></script>
 <script src="scripts/Custom.js"></script>
 
+
+<!-- Toastr -->
+<script src="scripts/toast/jquery.toast.js"></script>
+<link href="styles/jquery.toast.css" rel="stylesheet" />
+
 <!--Custom JS functions-->
 <script src="scripts/Custom.js"></script>
 <script src="scripts/EditMovie.js"></script>
+
+<!-- Driver -->
+<link href="styles/Driver.min.css" rel="stylesheet" />
+<script src="scripts/Driver/Driver.min.js"></script>
 
 <script>
 

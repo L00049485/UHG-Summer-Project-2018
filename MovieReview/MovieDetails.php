@@ -26,9 +26,7 @@
             </ul>
         </div>
 
-        <div class="container">
-            <form action="processViewRequest.php" method="post">
-                
+        <div class="container">                
                 <?php
                     $server="localhost";
 	                $dbuser="root";
@@ -59,6 +57,7 @@
                     $boxOffice=$row["BoxOffice"];
                     $numLikes=$row["num_likes"];
                     $numRatings=$row["num_ratings"];
+                    $avgRating=$row["avgStars"];
                     //Add a space seperator between actor names
                     $actors=str_replace(",",", ",$row["Actors"]);
 
@@ -72,14 +71,57 @@
                     <div class='col-sm-8'>
                         
                         <img id='main' class='img-fluid detailsImg' src='$image' align='Left' />
-                        <h3>Synopsis</h3>
+                        <h4>Synopsis</h4>
                         <p>$description</p>
                     </div>
 
                     <div class='col-sm-4'>
                         <div id='rightColumn'>
-                            <h3>$title (<i class='fa fa-thumbs-o-up' aria-hidden='true'></i> <span id='NumLikes'>$numLikes</span>)</h3>
-                            <br />";
+                            <h6>$title (<i class='fa fa-thumbs-o-up' aria-hidden='true'></i> <span id='NumLikes'>$numLikes</span>)</h6>
+                            <div class='rating-set'>";
+                                if($avgRating < 1) {
+                                    echo "<i class='fa fa-star' aria-hidden='true' title='Movie not rated yet'></i>
+                                            <i class='fa fa-star' aria-hidden='true' title='Movie not rated yet'></i>
+                                            <i class='fa fa-star' aria-hidden='true' title='Movie not rated yet'></i>
+                                            <i class='fa fa-star' aria-hidden='true' title='Movie not rated yet'></i>
+                                            <i class='fa fa-star' aria-hidden='true' title='Movie not rated yet'></i>";
+                                } 
+                                else if ($avgRating < 2) {
+                                    echo "<i class='fa fa-star gold' aria-hidden='true' title='1/5 stars'></i>
+                                            <i class='fa fa-star' aria-hidden='true' title='1/5 stars'></i>
+                                            <i class='fa fa-star' aria-hidden='true' title='1/5 stars'></i>
+                                            <i class='fa fa-star' aria-hidden='true' title='1/5 stars'></i>
+                                            <i class='fa fa-star' aria-hidden='true' title='1/5 stars'></i>";
+                                } 
+                                else if ($avgRating < 3) {
+                                    echo "<i class='fa fa-star gold' aria-hidden='true' title='2/5 stars'></i>
+                                            <i class='fa fa-star gold' aria-hidden='true' title='2/5 stars'></i>
+                                            <i class='fa fa-star' aria-hidden='true' title='2/5 stars'></i>
+                                            <i class='fa fa-star' aria-hidden='true' title='2/5 stars'></i>
+                                            <i class='fa fa-star' aria-hidden='true' title='2/5 stars'></i>";
+                                } 
+                                else if ($avgRating < 4) {
+                                    echo "<i class='fa fa-star gold' aria-hidden='true' title='3/5 stars'></i>
+                                            <i class='fa fa-star gold' aria-hidden='true' title='3/5 stars'></i>
+                                            <i class='fa fa-star gold' aria-hidden='true' title='3/5 stars'></i>
+                                            <i class='fa fa-star' aria-hidden='true' title='3/5 stars'></i>
+                                            <i class='fa fa-star' aria-hidden='true' title='3/5 stars'></i>";
+                                } 
+                                else if ($avgRating < 5) {
+                                    echo "<i class='fa fa-star gold' aria-hidden='true' title='4/5 stars'></i>
+                                            <i class='fa fa-star gold' aria-hidden='true' title='4/5 stars'></i>
+                                            <i class='fa fa-star gold' aria-hidden='true' title='4/5 stars'></i>
+                                            <i class='fa fa-star gold' aria-hidden='true' title='4/5 stars'></i>
+                                            <i class='fa fa-star' aria-hidden='true' title='4/5 stars'></i>";
+                                } 
+                                else if ($avgRating < 6) {
+                                    echo "<i class='fa fa-star gold' aria-hidden='true' title='5/5 stars'></i>
+                                            <i class='fa fa-star gold' aria-hidden='true' title='5/5 stars'></i>
+                                            <i class='fa fa-star gold' aria-hidden='true' title='5/5 stars'></i>
+                                            <i class='fa fa-star gold' aria-hidden='true' title='5/5 stars'></i>
+                                            <i class='fa fa-star gold' aria-hidden='true' title='5/5 stars'></i>";
+                                } 
+                            echo "</div><br />";
                     
                     //*****************Like Button*****************
                     //If user is logged in, show rate and like buttons
@@ -103,12 +145,12 @@
                     //*****************END Rating Button*****************
                     
                     
-                    echo "<br /><br /><h4>Released: </h4>$releaseDate
+                    echo "<br /><br /><h7>Released: </h7>$releaseDate
                             <br /><br />
-                            <h4>Genre: </h4>$genre
+                            <h7>Genre: </h7>$genre
                             <br /><br />
-                            <h4>Starring</h4> $actors<br /><br />
-                            <h4>Box Office: </h4>$"; echo number_format($boxOffice);
+                            <h7>Starring</h7> $actors<br /><br />
+                            <h7>Box Office: </h7>$"; echo number_format($boxOffice);
                             
                     
                             
@@ -116,24 +158,115 @@
                             <br />
                             <div class='row'>
                                 <div class='col-sm-12'>
-                                    <h3>Trailer</h3>
+                                    <h7>Trailer</h7>
                                     $trailer
                                 </div>
                             </div>
                             <br /><br />";
 
                             mysqli_close($link);
-                        ?>
+                ?>
                         
                     </div>
                 </div>
             </div>
-            </form>
+
+        <hr />
+        <h2>All reviews</h2>
+        <!--Ratings-->
+        <table class="table" id="reviewsTable">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Stars</th>
+                    <th scope="col">Comments</th>
+                    <th scope="col">Date Added</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $server="localhost";
+                $dbuser="root";
+                $password="";
+                $link=mysqli_connect($server, $dbuser, $password);
+                mysqli_select_db($link, "moviereview");
+
+                $sql="call sp_GetRatings($movieId)";
+                $result=mysqli_query($link, $sql);
+
+                $rowID = 0;
+
+                if(mysqli_num_rows($result) > 0)
+                {
+                    while($row=mysqli_fetch_array($result)) {
+                        $title=$row["Title"];
+                        $ratingStars=$row["RatingStars"];
+                        $comments=$row["Comments"];
+                        $dateAdded=$row["DateAdded"];
+                        $releaseDate=$row["ReleaseDate"];
+                        $boxOffice=$row["BoxOffice"];
+                        $genre=$row["Genre"];
+                        $ratingId=$row["Rating_ID"];
+                        $rowID = $rowID + 1;
+                        //"; echo number_format($boxOffice);
+
+                        echo "<tr id='ratingRow$ratingId'><th scope='row'>$rowID</th>";
+                        echo "<td>$title</td>";
+                        echo "<td>";
+                        if($ratingStars == 1) {
+                            echo "<i class='fa fa-star gold' aria-hidden='true' title='1/5 stars'></i>
+                                <i class='fa fa-star' aria-hidden='true' title='1/5 stars'></i>
+                                <i class='fa fa-star' aria-hidden='true' title='1/5 stars'></i>
+                                <i class='fa fa-star' aria-hidden='true' title='1/5 stars'></i>
+                                <i class='fa fa-star' aria-hidden='true' title='1/5 stars'></i>";
+                        } 
+                        else if ($ratingStars == 2) {
+                            echo "<i class='fa fa-star gold' aria-hidden='true' title='2/5 stars'></i>
+                                <i class='fa fa-star gold' aria-hidden='true' title='2/5 stars'></i>
+                                <i class='fa fa-star' aria-hidden='true' title='2/5 stars'></i>
+                                <i class='fa fa-star' aria-hidden='true' title='2/5 stars'></i>
+                                <i class='fa fa-star' aria-hidden='true' title='2/5 stars'></i>";
+                        } 
+                        else if ($ratingStars == 3) {
+                            echo "<i class='fa fa-star gold' aria-hidden='true' title='3/5 stars'></i>
+                                <i class='fa fa-star gold' aria-hidden='true' title='3/5 stars'></i>
+                                <i class='fa fa-star gold' aria-hidden='true' title='3/5 stars'></i>
+                                <i class='fa fa-star' aria-hidden='true' title='3/5 stars'></i>
+                                <i class='fa fa-star' aria-hidden='true' title='3/5 stars'></i>";
+                        } 
+                        else if ($ratingStars == 4) {
+                            echo "<i class='fa fa-star gold' aria-hidden='true' title='4/5 stars'></i>
+                                <i class='fa fa-star gold' aria-hidden='true' title='4/5 stars'></i>
+                                <i class='fa fa-star gold' aria-hidden='true' title='4/5 stars'></i>
+                                <i class='fa fa-star gold' aria-hidden='true' title='4/5 stars'></i>
+                                <i class='fa fa-star' aria-hidden='true' title='4/5 stars'></i>";
+                        } 
+                        else if ($ratingStars == 5) {
+                            echo "<i class='fa fa-star gold' aria-hidden='true' title='5/5 stars'></i>
+                                <i class='fa fa-star gold' aria-hidden='true' title='5/5 stars'></i>
+                                <i class='fa fa-star gold' aria-hidden='true' title='5/5 stars'></i>
+                                <i class='fa fa-star gold' aria-hidden='true' title='5/5 stars'></i>
+                                <i class='fa fa-star gold' aria-hidden='true' title='5/5 stars'></i>";
+                        } 
+                        echo "</td>";
+                        echo "<td>$comments</td>";
+                        echo "<td>$dateAdded</td>";
+                        echo "</tr>";
+                    }
+                }
+                mysqli_close($link);
+                ?>
+
+            </tbody>
+        </table>
         </div>
         <br />
     </div>
     <?php include("includes/footer.html");?>
-    <?php include("includes/movieRating.html");?>
+    <div style="display:none;">
+        <?php include("includes/movieRating.html");?>
+    </div>
 </body>
 </html>
 

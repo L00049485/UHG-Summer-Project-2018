@@ -46,12 +46,14 @@ $(document).ready(function () {
         //Send the list of actors to a hidden text box to be picked up by the php
         $('#txtActors').val(actors);
     });
+
+    //Pagination for the review results (seen on the movie details page
+    reviewsPagination();
 });
 
 
 function displayLoginToast() {
     tutorial();
-
     // show when the button is clicked
     $.toast({
         heading: 'Success',
@@ -62,39 +64,78 @@ function displayLoginToast() {
     });
 }
 
-//Driver tutorial - kicks off the first time someone logs in
-function tutorial() {
-    //const driver = new Driver();
-    //// Define the steps for introduction
-    //driver.defineSteps([
-    //  {
-    //      element: '#movieCard1',
-    //      popover: {
-    //          title: 'Tutorial',
-    //          description: 'Each movie has its own card',
-    //          position: 'top'
-    //      }
-    //  },
-    //  {
-    //      element: '#movieBtnGroup1',
-    //      popover: {
-    //          title: 'Tutorial',
-    //          description: 'For each card, you have various options depending on whether or not you are logged in. <span class="greenText">Green</span> colored buttons indicate that you have previously liked or rated that movie.',
-    //          position: 'top', // can be `top`, `left`, `right`, `bottom`
-    //      }
-    //  },
-    //]);
-    //// Start the introduction
-    //driver.start();
+function displayLoginErrorToast(error) {
+    // show when the button is clicked
+    $.toast({
+        heading: 'Login Failed',
+        text: error,
+        showHideTransition: 'slide',
+        position: 'bottom-right',
+        icon: 'error',
+        hideAfter: false
+    });
 }
 
+//Driver tutorial - kicks off the first time someone logs in
+function tutorial() {
+    const driver = new Driver();
+    // Define the steps for introduction
+    driver.defineSteps([
+      {
+          element: '#movieCard1',
+          popover: {
+              title: 'Tutorial',
+              description: 'Each movie has its own card',
+              position: 'top'
+          }
+      },
+      {
+          element: '#movieBtnGroup1',
+          popover: {
+              title: 'Tutorial',
+              description: 'For each card, you have various options depending on whether or not you are logged in. <span class="greenText">Green</span> colored buttons indicate that you have previously liked or rated that movie.',
+              position: 'top', // can be `top`, `left`, `right`, `bottom`
+          }
+      },
+    ]);
+    // Start the introduction
+    driver.start();
+}
 
+//Go to the movie details page if the user is logged in (Determined by the presence of a movie id)
 function editMovie(movieId) {
     if (movieId == null) {
         $("#login-modal").modal();
     }
     else {
-        window.location.href = "http://localhost:8080/moviereviewRepo/MovieReview/AdminEditNew.php?movieid=" + movieId;
+        window.location.href = "http://localhost:8080/moviereviewRepo/MovieReview/adminedit.php?movieid=" + movieId;
     }
 }
 
+
+//Pagination for the reviews if more than 10
+//Courtasy of https://stackoverflow.com/questions/19605078/how-to-use-pagination-on-html-tables
+function reviewsPagination() {
+    $('#reviewsTable').after('<div id="nav"></div>');
+    var rowsShown = 10;
+    var rowsTotal = $('#reviewsTable tbody tr').length;
+    var numPages = rowsTotal / rowsShown;
+    $('#nav').append('Page ');
+    for (i = 0; i < numPages; i++) {
+        var pageNum = i + 1;
+        $('#nav').append('<a href="#" rel="' + i + '">' + pageNum + '</a> ');
+    }
+    $('#reviewsTable tbody tr').hide();
+    $('#reviewsTable tbody tr').slice(0, rowsShown).show();
+    $('#nav a:first').addClass('active');
+    $('#nav a').bind('click', function () {
+
+        $('#nav a').removeClass('active');
+        $(this).addClass('active');
+        var currPage = $(this).attr('rel');
+        var startItem = currPage * rowsShown;
+        var endItem = startItem + rowsShown;
+        $('#reviewsTable tbody tr').css('opacity', '0.0').hide().slice(startItem, endItem).
+                css('display', 'table-row').animate({ opacity: 1 }, 300);
+    });
+}

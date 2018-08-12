@@ -26,15 +26,16 @@
         <div class="container">
             <!--*****************Search Function*****************-->
             <div class="row">   
-                <div class='col-sm-8'>
+                <div class='col-sm-7'>
                     <input type="text" id="txtSearch" name="txtSearch" class="form-control-searchbar" placeholder="Search..">
                     
                 </div>
-                <div class='col-sm-4'>
-                    Sort By: 
+                <div class='col-sm-5'>
+                    <h4>Sort By: </h4>
                         <fieldset id="sortOptions">
                             <input type="radio" id="btnAlpha" name="sortOptions"> Alphabetical   </input>
                             <input type="radio" id="btnBoxOffice" name="sortOptions"> Box Office    </input>
+                            <input type="radio" id="btnRating" name="sortOptions"> Rating    </input>
                             <input type="radio" id="btnReleaseDate" name="sortOptions"> Release Date    </input>
                         </fieldset>
                 </div>
@@ -70,14 +71,15 @@
                     $RatingID=$row["Rating_ID"];
                     $isAdmin=$row["IsAdmin"];
                     $boxOffice=$row["BoxOffice"];
+                    $avgRating=$row["avgStars"];
                     $releaseDateYear=substr($releaseDate, 0,4);
                     $elementID = $elementID + 1;
 
-                    echo "<div class='col-md-3 movieCards' data-boxOffice=$boxOffice data-releaseDate='$releaseDate' data-title='$title'>
+                    echo "<div class='col-md-3 movieCards' data-boxOffice=$boxOffice data-releaseDate='$releaseDate' data-title='$title' data-rating='$$avgRating'>
                         <div class='card mb-3 box-shadow' id='movieCard$elementID'>
                         <a href='MovieDetails.php?movieId=$movieId'><img class='card-img-top' src='$image' alt='Card image cap'></a>
                         <div class='card-body'>
-                        <p class='card-text'>$title ($releaseDateYear $boxOffice)</p>
+                        <p class='card-text'>$title <span class='text-secondary'>($releaseDateYear)</span></p>
                         <div class='d-flex justify-content-between align-items-center'>
                         <div class='btn-group' id='movieBtnGroup$elementID'>";
 
@@ -118,11 +120,53 @@
                     if($isAdmin > 0) {
 						echo "<button type='button' class='btn btn-sm btn-outline-info' onclick='editMovie(this.value)' value='$movieId'>Edit</button>";
 					}
-                        echo "</div>
-                        </div>
-                        </div>
-                        </div>
-                        </div>";
+                        echo "</div>";
+                        if($avgRating < 1) {
+                            echo "<i class='fa fa-star' aria-hidden='true' title='Movie not rated yet'></i>
+                                <i class='fa fa-star' aria-hidden='true' title='Movie not rated yet'></i>
+                                <i class='fa fa-star' aria-hidden='true' title='Movie not rated yet'></i>
+                                <i class='fa fa-star' aria-hidden='true' title='Movie not rated yet'></i>
+                                <i class='fa fa-star' aria-hidden='true' title='Movie not rated yet'></i>";
+                        } 
+                        else if ($avgRating < 2) {
+                            echo "<i class='fa fa-star gold' aria-hidden='true' title='1/5 stars'></i>
+                                <i class='fa fa-star' aria-hidden='true' title='1/5 stars'></i>
+                                <i class='fa fa-star' aria-hidden='true' title='1/5 stars'></i>
+                                <i class='fa fa-star' aria-hidden='true' title='1/5 stars'></i>
+                                <i class='fa fa-star' aria-hidden='true' title='1/5 stars'></i>";
+                        } 
+                        else if ($avgRating < 3) {
+                            echo "<i class='fa fa-star gold' aria-hidden='true' title='2/5 stars'></i>
+                                <i class='fa fa-star gold' aria-hidden='true' title='2/5 stars'></i>
+                                <i class='fa fa-star' aria-hidden='true' title='2/5 stars'></i>
+                                <i class='fa fa-star' aria-hidden='true' title='2/5 stars'></i>
+                                <i class='fa fa-star' aria-hidden='true' title='2/5 stars'></i>";
+                        } 
+                        else if ($avgRating < 4) {
+                            echo "<i class='fa fa-star gold' aria-hidden='true' title='3/5 stars'></i>
+                                <i class='fa fa-star gold' aria-hidden='true' title='3/5 stars'></i>
+                                <i class='fa fa-star gold' aria-hidden='true' title='3/5 stars'></i>
+                                <i class='fa fa-star' aria-hidden='true' title='3/5 stars'></i>
+                                <i class='fa fa-star' aria-hidden='true' title='3/5 stars'></i>";
+                        } 
+                        else if ($avgRating < 5) {
+                            echo "<i class='fa fa-star gold' aria-hidden='true' title='4/5 stars'></i>
+                                <i class='fa fa-star gold' aria-hidden='true' title='4/5 stars'></i>
+                                <i class='fa fa-star gold' aria-hidden='true' title='4/5 stars'></i>
+                                <i class='fa fa-star gold' aria-hidden='true' title='4/5 stars'></i>
+                                <i class='fa fa-star' aria-hidden='true' title='4/5 stars'></i>";
+                        } 
+                        else if ($avgRating < 6) {
+                            echo "<i class='fa fa-star gold' aria-hidden='true' title='5/5 stars'></i>
+                                <i class='fa fa-star gold' aria-hidden='true' title='5/5 stars'></i>
+                                <i class='fa fa-star gold' aria-hidden='true' title='5/5 stars'></i>
+                                <i class='fa fa-star gold' aria-hidden='true' title='5/5 stars'></i>
+                                <i class='fa fa-star gold' aria-hidden='true' title='5/5 stars'></i>";
+                        } 
+                        echo "<br />";     
+                        
+                        echo "</div></div> </div></div>";
+                    
                 }
             }
             else
@@ -135,7 +179,9 @@
         </div>
     </div>
     <?php include("includes/footer.html");?>
-    <?php include("includes/movieRating.html");?>
+    <div style="display:none;">
+        <?php include("includes/movieRating.html");?>
+    </div>
     
 </body>
 </html>

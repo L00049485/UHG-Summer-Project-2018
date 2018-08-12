@@ -1,4 +1,4 @@
-﻿<!-- Check that the user came here from the login screen -->
+<!-- Check that the user came here from the login screen -->
 <?php
     session_start();
 

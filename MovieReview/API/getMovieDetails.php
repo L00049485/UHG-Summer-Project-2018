@@ -1,4 +1,12 @@
-﻿<?php
+<?php
+    //**********************************************************************************
+    //**********************************************************************************
+    //**********************************************************************************
+    //Author: Kieran Quinn
+    //Date: 06-Jul-2018
+    //Description: Returns the details of a movie ID.
+    //**********************************************************************************
+
     $server="localhost";
     $dbuser="root";
     $password="";
@@ -10,7 +18,7 @@
     $sql="call sp_GetMovieDetails($movieId, 0)";
 
     $result=mysqli_query($link, $sql);
-    if (!$result) 
+    if (!$result)
         die('Invalid query: ' . mysql_error());
 
     while ($row = mysqli_fetch_array($result)) {
