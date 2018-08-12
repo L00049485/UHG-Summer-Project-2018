@@ -20,23 +20,31 @@
 </head>
 <body>
     <?php include("includes/header.php");?>
+    <div id="content">
 
-    <div class="album py-5 bg-light">
-        
+        <!-- Breadcrumbs -->
+        <div id="header-bread">
+            <ul class="breadcrumbs">
+                <li><a href="default.php">Home</a></li>
+            </ul>
+        </div>
+        <div class="album py-5 bg-light">   
+
         <div class="container">
             <!--*****************Search Function*****************-->
             <div class="row">   
-                <div class='col-sm-7'>
+                <div class='col-sm-5'>
                     <input type="text" id="txtSearch" name="txtSearch" class="form-control-searchbar" placeholder="Search term...">
                     
                 </div>
-                <div class='col-sm-5'>
+                <div class='col-sm-7'>
                     <h4>Sort By: </h4>
                         <fieldset id="sortOptions">
-                            <input type="radio" id="btnAlpha" name="sortOptions"> Alphabetical   </input>
-                            <input type="radio" id="btnBoxOffice" name="sortOptions"> Box Office    </input>
-                            <input type="radio" id="btnRating" name="sortOptions"> Rating    </input>
-                            <input type="radio" id="btnReleaseDate" name="sortOptions"> Release Date    </input>
+                            <input type="radio" id="btnAlpha" name="sortOptions"> Alphabetical   |   </input>
+                            <input type="radio" id="btnBoxOffice" name="sortOptions"> Box Office   |   </input>
+                            <input type="radio" id="btnRating" name="sortOptions"> Rating   |   </input>
+                            <input type="radio" id="btnLikes" name="sortOptions"> Likes   |   </input>
+                            <input type="radio" id="btnReleaseDate" name="sortOptions"> Release Date </input>
                         </fieldset>
                 </div>
             </div>
@@ -73,33 +81,39 @@
                     $boxOffice=$row["BoxOffice"];
                     $avgRating=$row["avgStars"];
                     $actors=$row["MovieActors"];
+                    $genre=$row["Genre"];
+                    $numLikes=$row["num_likes"];
+                    $numRatings=$row["num_ratings"];
                     $releaseDateYear=substr($releaseDate, 0,4);
                     $elementID = $elementID + 1;
 
-                    echo "<div class='col-md-3 movieCards' data-boxOffice=$boxOffice data-releaseDate='$releaseDate' data-title='$title' data-rating='$$avgRating' data-actors='$actors'>
+                    echo "<div class='col-md-3 movieCards' data-boxOffice=$boxOffice data-releaseDate='$releaseDate' data-title='$title' data-rating='$avgRating' data-likes='$numLikes'>
                         <div class='card mb-3 box-shadow' id='movieCard$elementID'>
                         <a href='MovieDetails.php?movieId=$movieId'><img class='card-img-top' src='$image' alt='Card image cap'></a>
                         <div class='card-body'>
                         <p class='card-text'><strong>$title</strong> <span class='text-secondary'>($releaseDateYear)</span></p>
                         <div class='d-flex justify-content-between align-items-center'>
                         <div class='btn-group' id='movieBtnGroup$elementID'>";
+                    
+                    //Hidden field for the actors names and movie genre - used for searches
+                    echo "<p class='hiddenFields'>$actors - $genre</p>";
 
                     //***********************************************
                     //Check if the user is logged in or not. If they are, display like and rating buttons differently
                     //***********************************************
-
+        
                     //*****************Like Button*****************
                     //User is logged in and hasnt previously liked this movie
                     if($memberId > 0 && $LikeID == null) {
-                        echo "<button type='button' class='btn btn-sm btn-outline-secondary' id='$movieId' title='Click here to like this movie' onclick='trackLike(this.value)' value='$movieId'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i></button>";
+                        echo "<button type='button' class='btn btn-sm btn-outline-secondary' id='$movieId' title='Click here to like this movie' onclick='trackLike(this.value)' value='$movieId' data-likes='$numLikes'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i> $numLikes</button>";
                     }
                     //User has logged in and has already liked this movie
                     else if($memberId > 0 && $LikeID != null) {
-                        echo "<button type='button' class='btn btn-sm btn-outline-success' id='$movieId' title='You already like this movie' onclick='trackUnLike(this.value)' value='$movieId' ><i class='fa fa-thumbs-o-up' aria-hidden='true'></i></button>";
+                        echo "<button type='button' class='btn btn-sm btn-outline-success' id='$movieId' title='You already like this movie' onclick='trackUnLike(this.value)' value='$movieId'  data-likes='$numLikes'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i> $numLikes</button>";
                     }
                     //User has not logged in
                     else {
-                        echo "<button type='button' class='btn btn-sm btn-outline-secondary' title='You must login' onclick='trackLike()' id='$movieId'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i></button>
+                        echo "<button type='button' class='btn btn-sm btn-outline-secondary' title='You must login' onclick='trackLike()' id='$movieId' data-likes='$numLikes'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i> $numLikes</button>
                             <button type='button' class='btn btn-sm btn-outline-secondary rateBtn' onclick='rateMovie(1)' id='movieID$movieId' value='$movieId'>Rate</button> ";
                     }
                     //*****************END Like Button*****************
@@ -177,6 +191,7 @@
             mysqli_close($link);
 				?>
             </div>
+        </div>
         </div>
     </div>
     <?php include("includes/footer.html");?>

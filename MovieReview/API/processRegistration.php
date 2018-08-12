@@ -13,6 +13,7 @@
     $country=$_POST["txtCountry"];
     $password=$_POST["txtPassword"];
 
+    //Searches the database for the members email address. Returns true or false indicating whether it exists or not.
 	function checkExistingMember($email) {
         $server="localhost";
         $dbuser="root";

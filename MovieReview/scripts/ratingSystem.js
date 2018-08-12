@@ -49,7 +49,17 @@ $(document).ready(function () {
         //send the movieID and number of stars to a hidden text field
         $('#txtRatingStars').val(ratingStars);
         $('#txtMovieId').val(movieId);
-        submitRating(movieId);
+        if (ratingStars == 0) {
+            $.toast({
+                heading: 'Error',
+                text: "You must select a star rating to proceed.",
+                showHideTransition: 'slide',
+                position: 'bottom-right',
+                icon: 'error'
+            });
+        }
+        else
+            submitRating(movieId);
     });
 });
 
@@ -94,23 +104,34 @@ function submitRating(movieId) {
             data: datastring,
             dataType: "json",
             success: function (data) {
-                // show when the button is clicked
-                $.toast({
-                    heading: 'Movie rated',
-                    text: data,
-                    showHideTransition: 'slide',
-                    position: 'bottom-right',
-                    icon: 'success',
-                    hideAfter: 5000
-                });
-                var buttonId = "movieID" + movieId;
+                if (data.indexOf('Error') < 1) {
+                    $.toast({
+                        heading: 'Movie rated',
+                        text: data,
+                        showHideTransition: 'slide',
+                        position: 'bottom-right',
+                        icon: 'success',
+                        hideAfter: 5000
+                    });
+                    var buttonId = "movieID" + movieId;
 
-                $("#ratingDiv").dialog('close');
-                $("#" + buttonId).addClass('btn-outline-success').removeClass('btn-outline-secondary');
-                $("#" + buttonId).attr("Title", "You already rated this movie");
-                $("#" + buttonId).attr("onclick", "javascript: rateMovie();");
-                
-                $("#" + buttonId).fadeIn(1000).fadeOut(1000).fadeIn(1000);
+                    $("#ratingDiv").dialog('close');
+                    $("#" + buttonId).addClass('btn-outline-success').removeClass('btn-outline-secondary');
+                    $("#" + buttonId).attr("Title", "You already rated this movie");
+                    $("#" + buttonId).attr("onclick", "javascript: rateMovie();");
+
+                    $("#" + buttonId).fadeIn(1000).fadeOut(1000).fadeIn(1000);
+                }
+                else {
+                    $.toast({
+                        heading: 'Rating Failed',
+                        text: data,
+                        showHideTransition: 'slide',
+                        position: 'bottom-right',
+                        icon: 'error',
+                        hideAfter: false
+                    });
+                }
             },
             error: function (xhr, ajaxOptions, thrownError) {
                 $.toast({
@@ -169,4 +190,15 @@ function deleteRating(ratingId, buttonId) {
         });
     }
 }
+
+//This function handles the rating comments text field. The field is limited to 2000 characters
+function countChar(val) {
+    var maxChars = 201;
+    var len = val.value.length;
+    if (len >= 201) {
+        val.value = val.value.substring(0, 201);
+    } else {
+        $('#txtChars').text(len + " / 200 characters used");
+    }
+};
 //*************************************************************************************

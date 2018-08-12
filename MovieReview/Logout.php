@@ -14,18 +14,26 @@
 </head>
 <body>
     <?php include("includes/header.php");?>
-    
-    <div class="container">
-        <?php
-           unset($_SESSION["username"]);
-           unset($_SESSION["password"]);
-   
-           echo '<h2>You have successfully logged out.</h2><br /><br /><br />';
-           //Below not working.
-           //header('Refresh: 2; URL = Default.php');
-        ?>
-    </div>
+    <div id="content">
 
+        <!-- Breadcrumbs -->
+        <div id="header-bread">
+            <ul class="breadcrumbs">
+                <li><a href="default.php">Home</a></li>
+            </ul>
+        </div>
+        <div class="album py-5 bg-light">   
+        <div class="container">
+            <?php
+               unset($_SESSION["username"]);
+               unset($_SESSION["password"]);
+            
+               echo '<h2>You have successfully logged out.</h2><br /><br /><br />';
+               //Below not working.
+               //header('Refresh: 2; URL = Default.php');
+            ?>
+        </div>
+    </div>
     <?php include("includes/footer.html");?>
 </body>
 </html>

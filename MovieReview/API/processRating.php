@@ -23,7 +23,7 @@
             echo json_encode("$movieTitle Rated Successfully");
         }
         else {
-            echo json_encode("Movie not rated. Error: ".mysqli_error());
+            echo json_encode("Movie not rated. Error: ".mysqli_error($link));
         }
 
         mysqli_close($link);

@@ -3,11 +3,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-8 col-md-7 py-4">
-                    <h4 class="text-secondary">About</h4>
-                    <p class="text-muted">This website is designed to be minimalistic and display only vital information. No ads, no plugs, just movies and ratings. The top 100 grossing movies of all time are pre-loaded, and more will be added over time.</p>
+                    <h4 class="text-secondary">About Us</h4>
+                    <p class="text-muted">This website is designed to be minimalistic and display only vital information. No ads, no plugs, just movies and ratings. The top 100 grossing movies of all time are pre-loaded, more will be added over time.</p>
                 </div>
                 <div class="col-sm-4 offset-md-1 py-4">
-                    <h4 class="text-secondary">Contact</h4>
+                    <h4 class="text-secondary">Contact Us</h4>
                     <ul class="list-unstyled">
                         <li><a href="#" class="text-white">
                             <i class='fa fa-twitter' aria-hidden='true'></i> Follow on Twitter</a></li>

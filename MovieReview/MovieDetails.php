@@ -19,6 +19,8 @@
 <body>
     <?php include("includes/header.php");?>
     <div id="content">
+
+        <!-- Breadcrumbs -->
         <div id="header-bread">
             <ul class="breadcrumbs">
                 <li><a href="default.php">Home</a></li>
@@ -126,11 +128,11 @@
                     //*****************Like Button*****************
                     //If user is logged in, show rate and like buttons
                     if($memberId > 0 && $LikeID == null) {
-                        echo "<button type='button' class='btn btn-lg btn-outline-secondary' id='$movieId' title='Click here to like this movie' onclick='trackLike(this.value)' value='$movieId'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i></button>";
+                        echo "<button type='button' class='btn btn-lg btn-outline-secondary' id='$movieId' title='Click here to like this movie' onclick='trackLike(this.value)' value='$movieId' data-likes='$numLikes'><i class='fa fa-thumbs-o-up' aria-hidden='true'> $numLikes</i></button>";
                     }
                     //User has logged in and has already liked this movie
                     else if($memberId > 0 && $LikeID != null) {
-                        echo "<button type='button' class='btn btn-lg btn-outline-success' id='$movieId' title='You already like this movie' onclick='trackUnLike(this.value)' value='$movieId' ><i class='fa fa-thumbs-o-up' aria-hidden='true'></i></button>";
+                        echo "<button type='button' class='btn btn-lg btn-outline-success' id='$movieId' title='You already like this movie' onclick='trackUnLike(this.value)' value='$movieId'data-likes='$numLikes'><i class='fa fa-thumbs-o-up' aria-hidden='true'> $numLikes</i></button>";
                     }
                     //*****************END Like Button*****************
                     

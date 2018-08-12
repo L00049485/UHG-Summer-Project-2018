@@ -25,7 +25,7 @@
   display: none;
 }
 .containerHeader {
-    background-color: rgba(52,58,64, 0.8);
+    background-color: rgba(47,72,88, 0.8);
     width:800px;
     margin: auto;
     padding: 10px 40px;
@@ -44,7 +44,7 @@ hr {
     display: block;
     height: 1px;
     border: 0;
-    border-top: 1px solid #33658A;
+    border-top: 1px solid #2F4858;
     margin: 1em 0;
     padding: 0; 
 }
@@ -273,19 +273,19 @@ h3 {
     font-weight:bold;
 }
 h4 {
-    color: #33658A;
+    color: #2F4858;
 }
 h5 {
     margin-bottom:40px;
 }
 h6 {
     font-size: 25px;
-    color: #33658A;
+    color: #2F4858;
     font-weight:bold;
 }
 h7 {
     font-size: 18px;
-    color: #33658A;
+    color: #2F4858;
     font-weight:bold;
 }
 #txtImages {
@@ -321,7 +321,7 @@ h7 {
    content: "\2605";
    position: absolute;
    left: 0; 
-   color: gold;
+   color: #F6AE2D;
 }
 
 .rating > input {
@@ -337,7 +337,7 @@ h7 {
 .gold {
     content: "\2605";
     left: 0; 
-    color: gold;
+    color: #F6AE2D;
     font-size: 15px;
 }
 /****** END Star Ratings ******/
