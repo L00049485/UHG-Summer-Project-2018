@@ -181,14 +181,14 @@ function submitNewPassword(password, verificationCode) {
         success: function (data) {
             data = data.replace(/\n/ig, '');
             if (data == 1) {
-                //$('#submitEmail').hide();
-                //$('#submitNewPwd').show();
+                //Password updated successfully
                 $.toast({
                     heading: 'Success',
                     text: "Password updated successfully. Return to the <a href='default.php'>home</a> page and logon.",
                     showHideTransition: 'slide',
                     position: 'bottom-right',
-                    icon: 'success'
+                    icon: 'success',
+                    hideAfter: false
                 });
             }
             else {
@@ -212,18 +212,16 @@ function submitNewPassword(password, verificationCode) {
                 icon: 'error',
                 hideAfter: false
             });
-            //$('#submitEmail').show();
-            //$('#submitNewPwd').hide();
         }
     });
 
-    //Password updated successfully
+    
 }
 
 //*************************************************************************************
 
 
-//for picking up query string values - https://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
+//For picking up query string values - https://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
     name = name.replace(/[\[\]]/g, '\\$&');

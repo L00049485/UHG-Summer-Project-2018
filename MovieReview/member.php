@@ -18,6 +18,22 @@
     <?php include("includes/header.php");?>
     
     <div class="container">
+        <!-- If the member is an administrator, display additional menu items -->
+        <?php
+
+            $isAdmin=$_SESSION['isAdmin'];
+
+            if($isAdmin == 1)
+            {
+                echo "<h2>Admin functions</h2><br />";
+                echo "<a href='AdminEdit.php' class='btn btn-primary' id='btnAddMovie'>Add a new movie</a>  ";        
+                echo "<button type='submit' class='btn btn-primary' id='btnMakeUserAdmin'>Make user Admin</button>  ";
+                
+                echo "<br /><br /><hr />";
+            }
+        ?>
+
+
         <h2>Your details</h2>
 
         <br />
@@ -99,7 +115,7 @@
         <br />
         <h2>Your reviews</h2>
         <!--Ratings-->
-        <table class="table">
+        <table class="table" id="reviewsTable">
             <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -198,7 +214,6 @@
                 ?>
             </tbody>
         </table>
-
     </div>
 
     <?php include("includes/footer.html");?>

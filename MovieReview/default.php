@@ -27,7 +27,7 @@
             <!--*****************Search Function*****************-->
             <div class="row">   
                 <div class='col-sm-7'>
-                    <input type="text" id="txtSearch" name="txtSearch" class="form-control-searchbar" placeholder="Search..">
+                    <input type="text" id="txtSearch" name="txtSearch" class="form-control-searchbar" placeholder="Search term...">
                     
                 </div>
                 <div class='col-sm-5'>
@@ -72,14 +72,15 @@
                     $isAdmin=$row["IsAdmin"];
                     $boxOffice=$row["BoxOffice"];
                     $avgRating=$row["avgStars"];
+                    $actors=$row["MovieActors"];
                     $releaseDateYear=substr($releaseDate, 0,4);
                     $elementID = $elementID + 1;
 
-                    echo "<div class='col-md-3 movieCards' data-boxOffice=$boxOffice data-releaseDate='$releaseDate' data-title='$title' data-rating='$$avgRating'>
+                    echo "<div class='col-md-3 movieCards' data-boxOffice=$boxOffice data-releaseDate='$releaseDate' data-title='$title' data-rating='$$avgRating' data-actors='$actors'>
                         <div class='card mb-3 box-shadow' id='movieCard$elementID'>
                         <a href='MovieDetails.php?movieId=$movieId'><img class='card-img-top' src='$image' alt='Card image cap'></a>
                         <div class='card-body'>
-                        <p class='card-text'>$title <span class='text-secondary'>($releaseDateYear)</span></p>
+                        <p class='card-text'><strong>$title</strong> <span class='text-secondary'>($releaseDateYear)</span></p>
                         <div class='d-flex justify-content-between align-items-center'>
                         <div class='btn-group' id='movieBtnGroup$elementID'>";
 

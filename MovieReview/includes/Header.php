@@ -104,7 +104,7 @@
         <p>
             <?php
                 if(isset($_SESSION['username'])) {
-                    echo "<a href='member.php' class='btn btn-secondary my-2'>My Details</a>";
+                    echo "<a href='member.php' class='btn btn-secondary my-2'>My Details</a>   ";
                     echo "<a href='logout.php' class='btn btn-primary my-2'>Logout</a>";
                 }
                 else {

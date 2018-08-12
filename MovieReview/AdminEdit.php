@@ -3,7 +3,7 @@
     session_start();
 
     if(!isset($_SESSION['username']))
-        header("Location:login.php");
+        header("Location:default.php");
 ?>
 
 <!DOCTYPE html>
@@ -19,23 +19,7 @@
 
     <script>
         $(document).ready(function () {
-            $("#btnSubmitUpdateMovie").click(function () {
-                var files = $('#images').fileinput('getFileStack');
-                var actors = $('#Actors').val();
-                var imagesString = "";
-                for (i = 0; i < files.length; ++i) {
-                    imagesString += 'images/posters/' + files[i].name + ',';
-                }
-
-                //remove the last comma
-                imagesString = imagesString.substring(0, imagesString.length - 1);
-
-                //send the text to a hidden text box to be picked up by the php
-                $('#txtImages').val(imagesString);
-
-                //Send the list of actors to a hidden text box to be picked up by the php
-                $('#txtActors').val(actors);
-            });
+            
         });
     </script>
 </head>
@@ -47,28 +31,34 @@
             <form id="editForm">
                 <div class='col-lg-12'>
                     <br />
-                    <h2>Update Movie</h2>
+                    <h2 id="title">Update Movie</h2>
                     <h6>
                         Basic Information
                     </h6>
 
                     <div class="row">
                         <!-- Movie ID -->
-                        <div class='col-sm-4'>                            
-                            <label for="Movie Title" class="grey-text bold bold">Movie ID</label>
+                        <div class='col-sm-2'>                            
+                            <label for="txtMovieId" class="grey-text bold bold">Movie ID</label>
                             <input type="text" id="txtMovieId" name="txtMovieId" class="form-control">
                         </div>
 
                         <!-- Movie Title -->
                         <div class='col-sm-4'>                            
-                            <label for="Movie Title" class="grey-text bold">Movie Title</label>
+                            <label for="txtMovieTitle" class="grey-text bold">Movie Title</label>
                             <input type="text" id="txtMovieTitle" name="txtMovieTitle" class="form-control">
                         </div>
 
                         <!-- Release Date -->
-                        <div class='col-sm-4'>                            
+                        <div class='col-sm-3'>                            
                             <label for="Release Date" class="grey-text bold">Release Date:</label><br />
                             <input type="date" name="txtReleaseDate" id="txtReleaseDate" class="form-control">
+                        </div>
+
+                        <!-- Box Office -->
+                        <div class='col-sm-3'>                            
+                            <label for="Release Date" class="grey-text bold">Box Office:</label><br />
+                            <input type="text" name="txtBoxOffice" id="txtBoxOffice" class="form-control">
                         </div>
                     </div>
                     <br />
@@ -78,7 +68,7 @@
                     </h6>
                     <div class="row">
                         <!-- Genre -->
-                        <div class='col-sm-4'>                            
+                        <div class='col-sm-3'>                            
                             <label for="Type" class="grey-text bold">Genre</label><br />
                             <select data-placeholder="Genre" class="simple-select" name="genre" id="genre">
                                 <?php
@@ -105,7 +95,7 @@
                         </div>
 
                         <!-- Trailer -->
-                        <div class='col-sm-4'>                            
+                        <div class='col-sm-5'>                            
                             <label for="Trailer" class="grey-text bold">Trailer:</label><br />
                             <input type="text" name="txtTrailer" id="txtTrailer" class="form-control">
                         </div>

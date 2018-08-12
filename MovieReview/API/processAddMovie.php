@@ -1,91 +1,76 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <title>Movie Review</title>
-    <meta charset="utf-8" />
+﻿<?php
+    header('Content-type: application/json');
+    header('X-XSS-Protection:0');
+    session_start();
+    if(isset($_SESSION['username'])) {
+       
 
-    <!-- Scripts -->
-    <script src="scripts/jQuery_3.3.1.js"></script>
-    <script src="scripts/bootstrap.js"></script>
-</head>
-<body>
-    <?php include("http://localhost:8080/moviereviewRepo/MovieReview/includes/header.php");?>
+        $postForm = $_POST;
 
-    <div class="album py-5 bg-light">
-        <div class="container">
-            <?php
-                header('X-XSS-Protection:0');
-                $server="localhost";
-                $dbuser="root";
-                $password="";
-                $link=mysqli_connect($server,$dbuser,$password);
-                mysqli_select_db($link, "moviereview");
+        $movieTitle=$_POST["txtMovieTitle"];
+        $releaseDate=$_POST["txtReleaseDate"];
+        $genre=$_POST["genre"];
+        $desc=$_POST["txtDesc"];
+        $image=$_POST["txtImages"];
+        $trailer=$_POST["txtTrailer"];
+        $actors=$_POST["txtActors"];
+        $boxOffice=$_POST["txtBoxOffice"];
+        $movieId=0;
 
-                $movieTitle=$_POST["txtMovieTitle"];
-                $releaseDate=$_POST["txtReleaseDate"];
-                $genre=$_POST["genre"];
-                $desc=$_POST["txtDesc"];
-                $image=$_POST["txtImages"];
-                $trailer=$_POST["txtTrailer"];
-                $actors=$_POST["txtActors"];
 
-                insertMovie($link, $movieTitle, $releaseDate, $genre, $desc, $image, $trailer, $actors);
-
-                function insertMovie($link, $movieTitle, $releaseDate, $genre, $desc, $image, $trailer, $actors) {
-                    //$sql_insert="INSERT INTO movie(
-                    //Title, ReleaseDate, Genre_ID, Description, Image, Trailer) VALUES (
-                    //'$movieTitle', '$releaseDate', '$genre', '$desc', '$image', '$trailer')";
-
-                    $sql_insert="call sp_InsertMovie('$movieTitle', '$releaseDate', '$genre', '$desc', '$image', '$trailer')";
-
-                    //echo $sql_insert;
-
-                    if(mysqli_query($link, $sql_insert)) {
-                        $movieId = $link->insert_id;
-                        insertActors($link, $movieId, $actors);
-                        echo "<br /><h3>Movie Successfully Added</h3>";
-                        echo "Click <a href='AdminAdd.php'>here </a>to return to Admin page, or <a href='movieDetails.php?id=$movieId' target='_blank'>here </a>to preview the new movie.";
-                    }
-                    else {
-                        echo "<br /><h3>Something went wrong!</h3>";
-                        echo "<a href='adminadd.php'>Return to Admin page</a>";
-                    }
-                }
+        //Updates the movie and triggers the update of the actors
+        function addMovie($boxOffice, $movieTitle, $releaseDate, $genre, $desc, $image, $trailer, $actors) {
+            $server="localhost";
+            $dbuser="root";
+            $password="";
+            $link=mysqli_connect($server,$dbuser,$password);
+            mysqli_select_db($link, "moviereview");
+    
+            $sql_update="call sp_AddMovie($boxOffice, '$desc', $genre, '$image', '$releaseDate', '$movieTitle', '$trailer');";
+            $result=mysqli_query($link, $sql_update);
+            if(mysqli_num_rows($result) > 0)
+            {
+                while($row=mysqli_fetch_array($result)) {
+                    $movieId=$row["movieId"];
                 
+                    insertActors($link, $movieId, $actors);
 
-
-                //Splits the comma seperated list of actors and inserts each one into the actor_movie table
-                function insertActors($link, $movieId, $actors) {
-                    $actorsArray = explode(',', $actors);
-                    foreach($actorsArray as $actor){
-                        
-                        $sql_insert="call sp_InsertMovieActor($movieId, $actor)";
-                        echo $sql_insert;
-                        mysqli_query($link, $sql_insert);
-                    }
+                    echo json_encode("$movieTitle Successfully added.  ");
                 }
+            }
+            else {
+                echo json_encode("Movie not added $movieTitle. Error: ".mysqli_error($link));
+            }
+            
+        }
 
-                mysqli_close($link);
-            ?>
-                
-        </div>
-    </div>
-    <?php include("http://localhost:8080/moviereviewRepo/MovieReview/includes/footer.html");?>
-</body>
-</html>
+        //Splits the comma seperated list of actors and inserts each one into the actor_movie table
+        function insertActors($link, $movieId, $actors) {
+            $server="localhost";
+            $dbuser="root";
+            $password="";
+            $link=mysqli_connect($server,$dbuser,$password);
+            mysqli_select_db($link, "moviereview");
+            $actorsArray = explode(',', $actors);
+            
+            //Delete any existing movie_actor records for this movie before inserting the new records
+            $sql_insert="call sp_ResetMovieActor($movieId)";
 
-<!-- Styles -->
-<link href="styles/mdb.css" rel="stylesheet" />
-<link href="styles/bootstrap.css" rel="stylesheet" />
-<link href="styles/StyleSheet.css" rel="stylesheet" />
-<!-- Font Awesome -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link href="https://fonts.googleapis.com/css?family=Montserrat:100,500,600,700" rel="stylesheet">
-<script src="scripts/mdb.js"></script>
-<!--Chosen-->
-<link href="scripts/Chosen/chosen.css" rel="stylesheet" />
-<script src="scripts/Chosen/chosen.jquery.js"></script>
-<script src="scripts/Chosen/chosen.proto.js"></script>
+            foreach($actorsArray as $actor){
+                $sql_insert="call sp_InsertMovieActor($movieId, $actor)";
+                if(!mysqli_query($link, $sql_insert))
+                {
+                    echo json_encode("Actor insert errors: ".mysqli_error($link));
+                }
+            }
 
-<!--Custom JS functions-->
-<script src="scripts/Custom.js"></script>
+            mysqli_close($link);
+        }
+
+        addMovie($boxOffice, $movieTitle, $releaseDate, $genre, $desc, $image, $trailer, $actors);
+    }
+    else {
+        echo "You must login to add a movie";
+    }
+
+  

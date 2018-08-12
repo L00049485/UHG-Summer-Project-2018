@@ -81,22 +81,30 @@ function tutorial() {
     const driver = new Driver();
     // Define the steps for introduction
     driver.defineSteps([
-      {
-          element: '#movieCard1',
-          popover: {
-              title: 'Tutorial',
-              description: 'Each movie has its own card',
-              position: 'top'
-          }
-      },
-      {
-          element: '#movieBtnGroup1',
-          popover: {
-              title: 'Tutorial',
-              description: 'For each card, you have various options depending on whether or not you are logged in. <span class="greenText">Green</span> colored buttons indicate that you have previously liked or rated that movie.',
-              position: 'top', // can be `top`, `left`, `right`, `bottom`
-          }
-      },
+        {
+            element: '#txtSearch',
+            popover: {
+                title: 'Tutorial',
+                description: 'Search for any text related to a movie. Eg. Title, Release year, actor.',
+                position: 'top'
+            }
+        },
+        {
+            element: '#movieCard1',
+            popover: {
+                title: 'Tutorial',
+                description: 'Each movie has its own card',
+                position: 'top'
+            }
+        },
+        {
+            element: '#movieBtnGroup1',
+            popover: {
+                title: 'Tutorial',
+                description: 'For each card, you have various options depending on whether or not you are logged in. <span class="greenText">Green</span> colored buttons indicate that you have previously liked or rated that movie.',
+                position: 'top', // can be `top`, `left`, `right`, `bottom`
+            }
+        },
     ]);
     // Start the introduction
     driver.start();

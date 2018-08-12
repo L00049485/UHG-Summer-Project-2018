@@ -51,7 +51,7 @@
         mysqli_close($link);
     }
     else {
-        echo "You must login to rate a movie";
+        echo "You must login to update a movie";
     }
 
   

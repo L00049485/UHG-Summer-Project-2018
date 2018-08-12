@@ -203,7 +203,7 @@
                         $title=$row["Title"];
                         $ratingStars=$row["RatingStars"];
                         $comments=$row["Comments"];
-                        $dateAdded=$row["DateAdded"];
+                        $dateAdded=date('Y-m-d', strtotime($row["DateAdded"]));
                         $releaseDate=$row["ReleaseDate"];
                         $boxOffice=$row["BoxOffice"];
                         $genre=$row["Genre"];

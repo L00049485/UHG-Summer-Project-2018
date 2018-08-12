@@ -16,11 +16,6 @@
     <script src="scripts/jQuery_3.3.1.js"></script>
     <script src="scripts/bootstrap.js"></script>
 
-    <script>
-        $(document).ready(function () {
-            
-        });
-    </script>
 </head>
 <body>
     <?php include("includes/header.php");?>
