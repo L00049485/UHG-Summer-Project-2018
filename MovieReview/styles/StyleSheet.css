@@ -309,6 +309,7 @@ h7 {
   display: inline-block;
   position: relative;
   width: 1.1em;
+  font-size: 30px;
 }
 .rating > *:hover,
 .rating > *:hover ~ span,
@@ -322,6 +323,7 @@ h7 {
    position: absolute;
    left: 0; 
    color: #F6AE2D;
+   font-size: 30px;
 }
 
 .rating > input {
@@ -338,7 +340,7 @@ h7 {
     content: "\2605";
     left: 0; 
     color: #F6AE2D;
-    font-size: 15px;
+    font-size: 30px;
 }
 /****** END Star Ratings ******/
 
@@ -390,6 +392,15 @@ h7 {
     text-decoration: none;
     color: #666;
     font-weight: 400;
+    text-align: center;
+    display: inline-block;
+    opacity: 0.6;
+    transition: opacity ease 0.5s;
+} 
+.loginmodal-container a:hover {
+    text-decoration: underline;
+    color: #357ae8;
+    font-weight: bold;
     text-align: center;
     display: inline-block;
     opacity: 0.6;
