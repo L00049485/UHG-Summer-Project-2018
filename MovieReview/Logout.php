@@ -13,6 +13,11 @@
     <script src="scripts/bootstrap.js"></script>
 </head>
 <body>
+
+    <?php
+        unset($_SESSION["username"]);
+        unset($_SESSION["password"]);
+    ?>
     <?php include("includes/header.php");?>
     <div id="content">
 
@@ -23,15 +28,10 @@
             </ul>
         </div>
         <div class="album py-5 bg-light">   
-        <div class="container">
-            <?php
-               unset($_SESSION["username"]);
-               unset($_SESSION["password"]);
+            <div class="container">
+                <h2>You have successfully logged out.</h2><br /><br /><br />
             
-               echo '<h2>You have successfully logged out.</h2><br /><br /><br />';
-               //Below not working.
-               //header('Refresh: 2; URL = Default.php');
-            ?>
+            </div>
         </div>
     </div>
     <?php include("includes/footer.html");?>

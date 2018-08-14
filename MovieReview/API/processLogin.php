@@ -33,9 +33,10 @@
 			$_SESSION['username']=$username;
             $_SESSION['memberID']=$memberId;
             $_SESSION['isAdmin']=$isAdmin;    
+
             //Only show the logged in popup once
             $_SESSION['loginMessage']='Not Shown';
-
+            
             $memberIdNew=$_SESSION['memberID'];
 
 			echo "Successful Login";

@@ -44,7 +44,7 @@
                             <!-- Movie ID -->
                             <div class='col-sm-2'>                            
                                 <label for="txtMovieId" class="grey-text bold bold">Movie ID</label>
-                                <input type="text" id="txtMovieId" name="txtMovieId" class="form-control">
+                                <input type="text" id="txtMovieId" name="txtMovieId" class="form-control" disabled="true">
                             </div>
 
                             <!-- Movie Title -->
