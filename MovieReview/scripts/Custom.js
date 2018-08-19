@@ -1,8 +1,9 @@
-﻿
-
+﻿//*************************************************************************************
+//********************************Various functions************************************
+//*************************************************************************************
 $(document).ready(function () {
     var tinymceExists = document.getElementById("txtDesc");
-    //Text editor for the forms
+    //Rich Text editor for the forms
     if (tinymceExists) {
         tinymce.init({
             selector: 'textarea',
@@ -50,22 +51,36 @@ $(document).ready(function () {
     });
 
     //Pagination for the review results (seen on the movie details page
-    reviewsPagination();
+    ReviewsPagination();
 });
 
-function displayLoginToast() {
-    tutorial();
+/*************************************************************************************************
+**********Name:             DisplayLoginToast()
+**********Author:           Kieran Quinn
+**********Date Modified:    2018-08-18
+**********Summary:          Triggered by PHP script. Shows a notification to the user that they
+                            have successfully logged in.
+*************************************************************************************************/
+function DisplayLoginToast() {
+    Tutorial();
     // show when the button is clicked
     $.toast({
         heading: 'Success',
         text: 'You have been logged in.',
         showHideTransition: 'slide',
         position: 'bottom-right',
-        icon: 'success'
+        icon: 'success',
     });
 }
 
-function displayLoginErrorToast(error) {
+/*************************************************************************************************
+**********Name:             DisplayLoginToast()
+**********Author:           Kieran Quinn
+**********Date Modified:    2018-08-18
+**********Summary:          Triggered by PHP script. If the user tried to log in but failed, show
+                            error message.
+*************************************************************************************************/
+function DisplayLoginErrorToast(error) {
     // show when the button is clicked
     $.toast({
         heading: 'Login Failed',
@@ -77,8 +92,14 @@ function displayLoginErrorToast(error) {
     });
 }
 
-//Driver tutorial - kicks off the first time someone logs in
-function tutorial() {
+/*************************************************************************************************
+**********Name:             Tutorial()
+**********Author:           Kieran Quinn
+**********Date Modified:    2018-08-18
+**********Summary:          Triggered by PHP script. If the user has navigated to the Default.php 
+                            page after logging in, it displays a tutorial of the site features.
+*************************************************************************************************/
+function Tutorial() {
     const driver = new Driver();
     // Define the steps for introduction
     driver.defineSteps([
@@ -111,8 +132,14 @@ function tutorial() {
     driver.start();
 }
 
-//Go to the movie details page if the user is logged in (Determined by the presence of a movie id)
-function editMovie(movieId) {
+/*************************************************************************************************
+**********Name:             EditMovie()
+**********Author:           Kieran Quinn
+**********Date Modified:    2018-08-18
+**********Summary:          Go to the movie details page if the user is logged in (Determined by 
+                            the presence of a movie id)
+*************************************************************************************************/
+function EditMovie(movieId) {
     if (movieId == null) {
         $("#login-modal").modal();
     }
@@ -121,10 +148,14 @@ function editMovie(movieId) {
     }
 }
 
-
-//Pagination for the reviews if more than 10
-//Courtasy of https://stackoverflow.com/questions/19605078/how-to-use-pagination-on-html-tables
-function reviewsPagination() {
+/*************************************************************************************************
+**********Name:             ReviewsPagination()
+**********Author:           Kieran Quinn
+**********Date Modified:    2018-08-18
+**********Summary:          Pagination for the reviews if more than 10
+                            Courtasy of https://stackoverflow.com/questions/19605078/how-to-use-pagination-on-html-tables
+*************************************************************************************************/
+function ReviewsPagination() {
     $('#reviewsTable').after('<div id="nav"></div>');
     var rowsShown = 10;
     var rowsTotal = $('#reviewsTable tbody tr').length;

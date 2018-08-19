@@ -33,25 +33,25 @@
                                 <!-- First Name -->
                                 <div class='col-sm-2'>                            
                                     <label for="firstName" class="grey-text bold">First Name:</label>
-                                    <input type="text" id="txtFirstName" name="txtFirstName" class="form-control">
+                                    <input type="text" id="txtFirstName" name="txtFirstName" class="form-control" required>
                                 </div>
 
                                 <!-- Last Name -->
                                 <div class='col-sm-2'>                            
                                     <label for="lastName" class="grey-text bold">Last Name:</label>
-                                    <input type="text" id="txtLastName" name="txtLastName" class="form-control">
+                                    <input type="text" id="txtLastName" name="txtLastName" class="form-control" required>
                                 </div>
 
                                 <!-- Email -->
                                 <div class='col-sm-4'>                            
                                     <label for="email" class="grey-text bold">Email Address:</label>
-                                    <input type="text" id="txtemailAddress" name="txtemailAddress" class="form-control">
+                                    <input type="text" id="txtemailAddress" name="txtemailAddress" class="form-control" required>
                                 </div>
 
                                 <!-- DOB -->
                                 <div class='col-sm-4'>                            
                                     <label for="dob" class="grey-text bold">Date of Birth:</label><br />
-                                    <input type="date" name="txtDOB" class="form-control">
+                                    <input type="date" name="txtDOB" class="form-control" required>
                                 </div>
                             </div>
                             <br />
@@ -61,13 +61,13 @@
                                 <!-- Phone No -->
                                 <div class='col-sm-4'>                            
                                     <label for="phoneNo" class="grey-text bold">Phone No:</label>
-                                    <input type="text" id="txtPhoneNo" name="txtPhoneNo" class="form-control">
+                                    <input type="text" id="txtPhoneNo" name="txtPhoneNo" class="form-control" required>
                                 </div>
 
                                 <!-- Address 1 -->
                                 <div class='col-sm-4'>                            
                                     <label for="Address1" class="grey-text bold">Address 1:</label><br />
-                                    <input type="text" name="txtAddress1" class="form-control">
+                                    <input type="text" name="txtAddress1" class="form-control" >
                                 </div>
 
                                 <!-- Address 1 -->
@@ -105,13 +105,13 @@
                                 <!-- Password -->
                                 <div class='col-sm-4'>                            
                                     <label for="password" class="grey-text bold">Password:</label>
-                                    <input type="password" id="txtPassword" name="txtPassword" class="form-control">
+                                    <input type="password" id="txtPassword" name="txtPassword" class="form-control" required>
                                 </div>
 
                                 <!-- Password Confirm -->
                                 <div class='col-sm-4'>                            
                                     <label for="passwordCheck" class="grey-text bold">Confirm Password:</label><br />
-                                    <input type="password" name="txtPasswordCheck" class="form-control">
+                                    <input type="password" name="txtPasswordCheck" class="form-control" required>
                                 </div>
                             </div>
                             <br />

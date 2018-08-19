@@ -21,7 +21,7 @@
         $actors=$_POST["txtActors"];
 
         //Updates the movie and triggers the update of the actors
-        function updateMovie($link, $movieId, $movieTitle, $releaseDate, $genre, $desc, $image, $trailer, $actors) {
+        function UpdateMovie($link, $movieId, $movieTitle, $releaseDate, $genre, $desc, $image, $trailer, $actors) {
             $sql_update="call sp_UpdateMovie('$movieTitle', '$releaseDate', '$genre', '$desc', '$image', '$trailer', $movieId)";
 
             if(mysqli_query($link, $sql_update)) {
@@ -46,7 +46,7 @@
             }
         }
 
-        updateMovie($link, $movieId, $movieTitle, $releaseDate, $genre, $desc, $image, $trailer, $actors);
+        UpdateMovie($link, $movieId, $movieTitle, $releaseDate, $genre, $desc, $image, $trailer, $actors);
 
         mysqli_close($link);
     }

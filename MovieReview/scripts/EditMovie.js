@@ -2,7 +2,9 @@
 //********************************Movie Editing****************************************
 //This script is for both adding new movies and updating existing movies. If a 
 //*************************************************************************************
+
 $(document).ready(function () {
+    //If there is a query string 'movieid' then that indicates that the user is updating an existing movie.
     var movieId = getParameterByName('movieid');
 
     //No movieId indicates that a new movie should be created
@@ -12,7 +14,7 @@ $(document).ready(function () {
         $('#editForm').attr('id', 'addForm');
         $("#addForm").submit(function (e) {
             e.preventDefault();
-            addMovie();
+            AddMovie();
         });
     }
     else {
@@ -21,13 +23,13 @@ $(document).ready(function () {
             type: 'GET',
             url: 'http://localhost:8080/moviereviewRepo/MovieReview/api/getMovieDetails.php?movieId=' + movieId,
             success: function (data) {
-                populateFields(JSON.parse(data));
+                PopulateFields(JSON.parse(data));
             }
         });
 
         $("#editForm").submit(function (e) {
             e.preventDefault();
-            updateMovie();            
+            UpdateMovie();            
         });
     }
 
@@ -51,8 +53,14 @@ $(document).ready(function () {
     });
 });
 
-function populateFields(movieDetails) {
-
+/*************************************************************************************************
+**********Name:             PopulateFields(movieDetails)
+**********Author:           Kieran Quinn
+**********Date Modified:    2018-08-18
+**********Summary:          Takes a movie object which has all the properties of a particular movie.
+                            Sends the values of each parameter to the correct text field on screen.
+*************************************************************************************************/
+function PopulateFields(movieDetails) {
     var title = movieDetails[0].Title;
     var id = movieDetails[0].id;
     var releaseDate = movieDetails[0].ReleaseDate;
@@ -76,7 +84,15 @@ function populateFields(movieDetails) {
 
 }
 
-function updateMovie() {
+/*************************************************************************************************
+**********Name:             UpdateMovie()
+**********Author:           Kieran Quinn
+**********Date Modified:    2018-08-18
+**********Summary:          Performs various data collections then serializes the form and sends
+                            to the PHP script handler for updating in the database. Displays
+                            success or fail notification to user.
+*************************************************************************************************/
+function UpdateMovie() {
     var files = $('#images').fileinput('getFileStack');
     var imagesString = "";
     for (i = 0; i < files.length; ++i) {
@@ -124,7 +140,15 @@ function updateMovie() {
     });    
 }
 
-function addMovie() {
+/*************************************************************************************************
+**********Name:             AddMovie()
+**********Author:           Kieran Quinn
+**********Date Modified:    2018-08-18
+**********Summary:          Performs various data collections then serializes the form and sends
+                            to the PHP script handler for inserting in the database. Displays
+                            success or fail notification to user.
+*************************************************************************************************/
+function AddMovie() {
     var files = $('#images').fileinput('getFileStack');
     var imagesString = "";
     for (i = 0; i < files.length; ++i) {

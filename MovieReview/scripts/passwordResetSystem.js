@@ -20,7 +20,7 @@ $(document).ready(function () {
         //Pick up the user email address
         var emailAddress = $('#txtEmailAddress').val();
         
-        checkUserExists(emailAddress);
+        CheckUserExists(emailAddress);
     });
 
     //Listener for when the user enters their new email address and hits submit
@@ -46,14 +46,20 @@ $(document).ready(function () {
     });   
 });
 
-//Verify that the email address submitted actually exists
-function checkUserExists(emailAddress) {
+//
+/*************************************************************************************************
+**********Name:             UpdateMovie()
+**********Author:           Kieran Quinn
+**********Date Modified:    2018-08-18
+**********Summary:          Verify that the email address submitted actually exists
+*************************************************************************************************/
+function CheckUserExists(emailAddress) {
     var data;
 
     $.ajax({
         async: false,
         type: 'GET',
-        url: 'http://localhost:8080/moviereviewRepo/MovieReview/api/checkUserExists.php?emailAddress=' + emailAddress,
+        url: 'http://localhost:8080/moviereviewRepo/MovieReview/api/CheckUserExists.php?emailAddress=' + emailAddress,
         success: function (data) {
             data = data.replace(/\n/ig, '');
             if (data == 1) {
@@ -114,7 +120,6 @@ function sendResetUrl(emailAddress) {
             });
         }
     });
-
 }
 
 //If the page has a verification code as a query string, check that its a valid query string. If so, show the reset password page
@@ -165,13 +170,10 @@ function checkVerificationCode(verificationCode) {
             $('#submitNewPwd').hide();
         }
     });
-
-    
 }
 
 //send the new password and verification code to the php script
 function submitNewPassword(password, verificationCode) {
-
     var url = 'http://localhost:8080/moviereviewRepo/MovieReview/api/updateUserPassword.php?code=' + verificationCode + '&password=' + password;
 
     $.ajax({
@@ -214,12 +216,9 @@ function submitNewPassword(password, verificationCode) {
             });
         }
     });
-
-    
 }
 
 //*************************************************************************************
-
 
 //For picking up query string values - https://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
 function getParameterByName(name, url) {

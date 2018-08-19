@@ -4,7 +4,7 @@
     //**********************************************************************************
     //Author: Kieran Quinn
     //Date: 14-Jul-2018
-    //Description: Runs the users email and password against the database. 
+    //Description: Runs the users email and password against the database.
     //If the combination is correct, a session is created.
     //**********************************************************************************
 
@@ -19,7 +19,7 @@
 		$username=$_POST['admin_name'];
 		$password=$_POST['password'];
         $isAdmin='';
-		$query = "select * from member where EmailAddress='$username' and Password = '$password'";
+		$query = "call sp_MemberLogin('$username', '$password')";
 
         $result=mysqli_query($link,$query) or die(mysqli_error($connection));
 		$count=mysqli_num_rows($result);
@@ -28,15 +28,15 @@
             $isAdmin=$row["IsAdmin"];
         }
 
-
+        //Username and password combination exists in the database
 		if($count == 1) {
 			$_SESSION['username']=$username;
             $_SESSION['memberID']=$memberId;
-            $_SESSION['isAdmin']=$isAdmin;    
+            $_SESSION['isAdmin']=$isAdmin;
 
             //Only show the logged in popup once
             $_SESSION['loginMessage']='Not Shown';
-            
+
             $memberIdNew=$_SESSION['memberID'];
 
 			echo "Successful Login";

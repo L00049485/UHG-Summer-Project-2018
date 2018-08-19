@@ -45,5 +45,5 @@
         // send email
         mail($emailAddress,"Movie Review - Password Reset",$msg);
 
-        echo "Email Sent to: http://localhost:8080/moviereviewRepo/MovieReview/PasswordReset.php?code=$string";
+        echo "Email Sent. Click <a href='http://localhost:8080/moviereviewRepo/MovieReview/PasswordReset.php?code=$string' target='_blank'>here </a> to reset your password.";
     }

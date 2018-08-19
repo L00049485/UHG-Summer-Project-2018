@@ -42,8 +42,8 @@
                         <fieldset id="sortOptions">
                             <input type="radio" id="btnAlpha" name="sortOptions"> Alphabetical   |   </input>
                             <input type="radio" id="btnBoxOffice" name="sortOptions"> Box Office   |   </input>
-                            <input type="radio" id="btnRating" name="sortOptions"> Rating   |   </input>
-                            <input type="radio" id="btnLikes" name="sortOptions"> Likes   |   </input>
+							<input type="radio" id="btnLikes" name="sortOptions"> Likes   |   </input>
+                            <input type="radio" id="btnRating" name="sortOptions"> Rating   |   </input>                           
                             <input type="radio" id="btnReleaseDate" name="sortOptions"> Release Date </input>
                         </fieldset>
                 </div>
@@ -105,15 +105,15 @@
                     //*****************Like Button*****************
                     //User is logged in and hasnt previously liked this movie
                     if($memberId > 0 && $LikeID == null) {
-                        echo "<button type='button' class='btn btn-sm btn-outline-secondary' id='$movieId' title='Click here to like this movie' onclick='trackLike(this.value)' value='$movieId' data-likes='$numLikes'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i> $numLikes</button>";
+                        echo "<button type='button' class='btn btn-sm btn-outline-secondary' id='$movieId' title='Click here to like this movie' onclick='TrackLike(this.value)' value='$movieId' data-likes='$numLikes'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i> $numLikes</button>";
                     }
                     //User has logged in and has already liked this movie
                     else if($memberId > 0 && $LikeID != null) {
-                        echo "<button type='button' class='btn btn-sm btn-outline-success' id='$movieId' title='You already like this movie' onclick='trackUnLike(this.value)' value='$movieId'  data-likes='$numLikes'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i> $numLikes</button>";
+                        echo "<button type='button' class='btn btn-sm btn-outline-success' id='$movieId' title='You already like this movie' onclick='TrackUnLike(this.value)' value='$movieId'  data-likes='$numLikes'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i> $numLikes</button>";
                     }
                     //User has not logged in
                     else {
-                        echo "<button type='button' class='btn btn-sm btn-outline-secondary' title='You must login' onclick='trackLike()' id='$movieId' data-likes='$numLikes'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i> $numLikes</button>
+                        echo "<button type='button' class='btn btn-sm btn-outline-secondary' title='You must login' onclick='TrackLike()' id='$movieId' data-likes='$numLikes'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i> $numLikes</button>
                             <button type='button' class='btn btn-sm btn-outline-secondary rateBtn' onclick='rateMovie(1)' id='movieID$movieId' value='$movieId'>Rate</button> ";
                     }
                     //*****************END Like Button*****************
@@ -133,7 +133,7 @@
 					//*****************Edit Button*****************
                     //User is logged in and is admin
                     if($isAdmin > 0) {
-						echo "<button type='button' class='btn btn-sm btn-outline-info' onclick='editMovie(this.value)' value='$movieId'>Edit</button>";
+						echo "<button type='button' class='btn btn-sm btn-outline-info' onclick='EditMovie(this.value)' value='$movieId'>Edit</button>";
 					}
                         echo "</div>";
                         if($avgRating < 1) {

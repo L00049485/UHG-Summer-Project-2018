@@ -19,7 +19,7 @@
 
 
         //Updates the movie and triggers the update of the actors
-        function addMovie($boxOffice, $movieTitle, $releaseDate, $genre, $desc, $image, $trailer, $actors) {
+        function AddMovie($boxOffice, $movieTitle, $releaseDate, $genre, $desc, $image, $trailer, $actors) {
             $server="localhost";
             $dbuser="root";
             $password="";
@@ -67,7 +67,7 @@
             mysqli_close($link);
         }
 
-        addMovie($boxOffice, $movieTitle, $releaseDate, $genre, $desc, $image, $trailer, $actors);
+        AddMovie($boxOffice, $movieTitle, $releaseDate, $genre, $desc, $image, $trailer, $actors);
     }
     else {
         echo "You must login to add a movie";

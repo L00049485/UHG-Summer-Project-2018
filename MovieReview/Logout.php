@@ -1,7 +1,3 @@
-<?php
-   session_start();
-?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,10 +10,11 @@
 </head>
 <body>
 
-    <?php
-        unset($_SESSION["username"]);
-        unset($_SESSION["password"]);
-    ?>
+<?php
+	session_start();
+    unset($_SESSION["username"]);
+    unset($_SESSION["password"]);
+?>
     <?php include("includes/header.php");?>
     <div id="content">
 

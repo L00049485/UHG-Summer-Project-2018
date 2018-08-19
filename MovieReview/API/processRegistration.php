@@ -13,8 +13,14 @@
     $country=$_POST["txtCountry"];
     $password=$_POST["txtPassword"];
 
-    //Searches the database for the members email address. Returns true or false indicating whether it exists or not.
-	function checkExistingMember($email) {
+    //*************************************************************************************************
+    //**********Name:             CheckExistingMember()
+    //**********Author:           Kieran Quinn
+    //**********Date Modified:    2018-08-18
+    //**********Summary:          Searches the database for the members email address. Returns true or
+    //                            false indicating whether it exists or not.
+    //*************************************************************************************************/
+	function CheckExistingMember($email) {
         $server="localhost";
         $dbuser="root";
         $dbpassword="";
@@ -35,7 +41,14 @@
 		}
     }
 
-    function createMember($firstName, $lastName, $dob, $email, $phoneNo, $address1, $address2, $city, $state, $country, $password) {
+    //*************************************************************************************************
+    //**********Name:             CreateMember()
+    //**********Author:           Kieran Quinn
+    //**********Date Modified:    2018-08-18
+    //**********Summary:          Creates a link to the database and triggers the sp_CreateNewMember
+    //                            stored procedure. Returns success message or fail and error message
+    //*************************************************************************************************/
+    function CreateMember($firstName, $lastName, $dob, $email, $phoneNo, $address1, $address2, $city, $state, $country, $password) {
         $server="localhost";
         $dbuser="root";
         $dbpassword="";
@@ -52,10 +65,11 @@
         mysqli_close($link);
     }
 
-    $existingMember = checkExistingMember($email);
 
+
+    $existingMember = CheckExistingMember($email);
     if(!$existingMember)
-        createMember($firstName, $lastName, $dob, $email, $phoneNo, $address1, $address2, $city, $state, $country, $password);
+        CreateMember($firstName, $lastName, $dob, $email, $phoneNo, $address1, $address2, $city, $state, $country, $password);
     else
         echo "$email is already registered as a user.";
 

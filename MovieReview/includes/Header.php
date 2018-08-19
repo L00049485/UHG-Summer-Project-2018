@@ -60,7 +60,7 @@
                             $lastName=$row["LastName"];
                         }
 
-                        echo "<p class='text-white'>Welcome back $firstName!</p>";
+                        echo "<p class='text-white' id='welcomeLabel'>Welcome back $firstName!</p>";
                     }
                     mysqli_close($link);
 
@@ -68,7 +68,7 @@
                     if($_SESSION['loginMessage']=='Not Shown') {
                         echo "<script type='text/javascript'>
                               $(document).ready(function () {
-                                  displayLoginToast();
+                                  DisplayLoginToast();
                               });
                          </script>";
 
@@ -82,7 +82,7 @@
                         $error = $_SESSION['errors'];
                         echo "<script type='text/javascript'>
                               $(document).ready(function () {
-                                  displayLoginErrorToast('$error');
+                                  DisplayLoginErrorToast('$error');
                               });
                          </script>";
                         unset($_SESSION["errors"]);
@@ -104,12 +104,12 @@
         <p>
             <?php
                 if(isset($_SESSION['username'])) {
-                    echo "<a href='member.php' class='btn btn-secondary my-2'>My Details</a>   ";
-                    echo "<a href='logout.php' class='btn btn-primary my-2'>Logout</a>";
+                    echo "<a href='member.php' class='btn btn-secondary my-2' id='btnMyDetails'>My Details</a>   ";
+                    echo "<a href='logout.php' class='btn btn-primary my-2' id='btnLogout'>Logout</a>";
                 }
                 else {
-                    echo "<a href='Register.php' class='btn btn-primary my-2'>Register</a>";
-                    echo "  <a href='#' class='btn btn-secondary my-2' data-toggle='modal' data-target='#login-modal'>Login</a>";
+                    echo "<a href='Register.php' class='btn btn-primary my-2' id='btnRegister'>Register</a>";
+                    echo "  <a href='#' class='btn btn-secondary my-2' data-toggle='modal' data-target='#login-modal' id='btnLogin'>Login</a>";
                 }
             ?>
         </p>

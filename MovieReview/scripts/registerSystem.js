@@ -2,14 +2,22 @@
 //********************************Member Registration**********************************
 //*************************************************************************************
 
-$("#btnSubmitRegister").click(function (e) {
+$("#registrationForm").submit(function (e) {
     e.preventDefault();
-    registerMember();
+    if ($('#registrationForm')[0].checkValidity())
+        RegisterMember();
 });
 
-function registerMember() {
 
-    //TODO: Add code to check password validation
+
+/*************************************************************************************************
+**********Name:             RegisterMember()
+**********Author:           Kieran Quinn
+**********Date Modified:    2018-08-18
+**********Summary:          Serializes the registration form and POST it to the PHP 
+                            script handler for registering a new member
+*************************************************************************************************/
+function RegisterMember() {
     var datastring = $("#registrationForm").serialize();
     $.ajax({
         type: "POST",
@@ -26,10 +34,12 @@ function registerMember() {
                 icon: 'success'
             });
 
+            //Display the user notification for 3 seconds, then redirects the page back to home
             var delay = 3000;
             $('#registrationForm').hide(1000);
             setTimeout(function () { window.location = "./default.php"; }, delay);
         },
+        //Error handling
         error: function (xhr, ajaxOptions, thrownError) {
             $.toast({
                 heading: 'Registration Failed',
