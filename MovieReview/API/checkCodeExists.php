@@ -10,7 +10,7 @@
     //**********************************************************************************
     $code=$_GET["code"];
 
-    function checkValidCode($code) {
+    function CheckValidCode($code) {
         $server="localhost";
         $dbuser="root";
         $dbpassword="";
@@ -31,7 +31,7 @@
         }
     }
 
-    $existingCode = checkValidCode($code);
+    $existingCode = CheckValidCode($code);
 
     if($existingCode)
         echo 1;

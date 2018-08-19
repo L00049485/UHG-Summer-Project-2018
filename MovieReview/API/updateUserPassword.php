@@ -5,7 +5,7 @@
 
     //Checks the code that has been submitted to make sure it exists in the database,
     //but also that it has been created less than 15 minutes ago.
-    function checkValidCode($code) {
+    function CheckValidCode($code) {
         $server="localhost";
         $dbuser="root";
         $dbpassword="";
@@ -27,7 +27,7 @@
         }
     }
 
-    function uploadNewPassword($password, $emailAddress) {
+    function UploadNewPassword($password, $emailAddress) {
         $server="localhost";
         $dbuser="root";
         $dbpassword="";
@@ -47,11 +47,11 @@
         }
     }
 
-    $emailAddress = checkValidCode($code);
+    $emailAddress = CheckValidCode($code);
     $result=false;
 
     if($emailAddress != '')
-        $result=uploadNewPassword($password, $emailAddress);
+        $result=UploadNewPassword($password, $emailAddress);
     else
         echo 'This verification code is not valid.';
 

@@ -9,7 +9,7 @@
     //**********************************************************************************
     $email=$_GET["emailAddress"];
 
-    function checkExistingMember($email) {
+    function CheckExistingMember($email) {
         $server="localhost";
         $dbuser="root";
         $dbpassword="";
@@ -30,7 +30,7 @@
         }
     }
 
-    $existingMember = checkExistingMember($email);
+    $existingMember = CheckExistingMember($email);
 
     if($existingMember)
         echo 1;

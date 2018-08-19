@@ -11,10 +11,16 @@
     //This is a list of all allowable characters
     $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     $string = '';
-    $max = strlen($characters) - 1;
-    for ($i = 0; $i < 25; $i++) {
-        $string .= $characters[mt_rand(0, $max)];
-    }
+
+	function GenerateValidationCode($characters, $string) {}
+		$max = strlen($characters) - 1;
+		for ($i = 0; $i < 25; $i++) {
+			$string .= $characters[mt_rand(0, $max)];
+		}
+		return $string;
+	}
+
+	$string = GenerateValidationCode($characters);
     //****************************************************
     //****************************************************
 
@@ -30,12 +36,12 @@
 
     if(mysqli_query($link, $sql_insert)) {
         //echo "Code Successfully Added";
-        sendEmail($string, $email);
+        SendEmail($string, $email);
     }
 
     mysqli_close($link);
 
-    function sendEmail($string, $emailAddress) {
+    function SendEmail($string, $emailAddress) {
         // the message
         $msg = "You have requested to reset your password.\nClick the link below to proceed: \n\n http://localhost:8080/moviereviewRepo/MovieReview/PasswordReset.php?code=" + $string;
 

@@ -12,7 +12,7 @@ $(document).ready(function () {
         $('#submitNewPwd').hide();
     }
     else {
-        checkVerificationCode(verificationCode);
+        CheckVerificationCode(verificationCode);
     }
 
     //Listener for when the user clicks the button to submit their email address
@@ -41,17 +41,16 @@ $(document).ready(function () {
             });
         }
         else {
-            submitNewPassword(password, verificationCode);
+            SubmitNewPassword(password, verificationCode);
         }
     });   
 });
 
-//
 /*************************************************************************************************
-**********Name:             UpdateMovie()
+**********Name:             CheckUserExists(emailAddress)
 **********Author:           Kieran Quinn
-**********Date Modified:    2018-08-18
-**********Summary:          Verify that the email address submitted actually exists
+**********Date Modified:    2018-08-19
+**********Summary:          Verify that the email address submitted actually exists.
 *************************************************************************************************/
 function CheckUserExists(emailAddress) {
     var data;
@@ -63,7 +62,7 @@ function CheckUserExists(emailAddress) {
         success: function (data) {
             data = data.replace(/\n/ig, '');
             if (data == 1) {
-                sendResetUrl(emailAddress);
+                SendResetUrl(emailAddress);
             }
             else {
                 $.toast({
@@ -91,8 +90,14 @@ function CheckUserExists(emailAddress) {
     });
 }
 
-//Send the command to PHP to generate a random 25 alphanumeric code for this email address and add it to the database
-function sendResetUrl(emailAddress) {
+/*************************************************************************************************
+**********Name:             SendResetUrl(emailAddress)
+**********Author:           Kieran Quinn
+**********Date Modified:    2018-08-19
+**********Summary:          Send the command to PHP to generate a random 25 alphanumeric code for 
+                            this email address and add it to the database.
+************************************************************************************************/
+function SendResetUrl(emailAddress) {
 
     $.ajax({
         async: false,
@@ -122,8 +127,14 @@ function sendResetUrl(emailAddress) {
     });
 }
 
-//If the page has a verification code as a query string, check that its a valid query string. If so, show the reset password page
-function checkVerificationCode(verificationCode) {
+/*************************************************************************************************
+**********Name:             CheckVerificationCode(verificationCode)
+**********Author:           Kieran Quinn
+**********Date Modified:    2018-08-19
+**********Summary:          If the page has a verification code as a query string, check that its 
+                            a valid query string. If so, show the reset password page.
+************************************************************************************************/
+function CheckVerificationCode(verificationCode) {
     var data;
 
     $.ajax({
@@ -172,8 +183,13 @@ function checkVerificationCode(verificationCode) {
     });
 }
 
-//send the new password and verification code to the php script
-function submitNewPassword(password, verificationCode) {
+/*************************************************************************************************
+**********Name:             SubmitNewPassword(password, verificationCode)
+**********Author:           Kieran Quinn
+**********Date Modified:    2018-08-19
+**********Summary:          Send the new password and verification code to the php script.
+************************************************************************************************/
+function SubmitNewPassword(password, verificationCode) {
     var url = 'http://localhost:8080/moviereviewRepo/MovieReview/api/updateUserPassword.php?code=' + verificationCode + '&password=' + password;
 
     $.ajax({
