@@ -3,9 +3,9 @@
     header('X-XSS-Protection:0');
     session_start();
     if(isset($_SESSION['username'])) {
-        $server="localhost";
-        $dbuser="root";
-        $password="";
+        $server="hostingmysql304.webapps.net";
+        $dbuser="kqAdmin";
+        $password="cl37kxQ1";
         $link=mysqli_connect($server,$dbuser,$password);
         mysqli_select_db($link, "moviereview");
 

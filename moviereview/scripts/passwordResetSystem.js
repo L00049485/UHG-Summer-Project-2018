@@ -58,7 +58,7 @@ function CheckUserExists(emailAddress) {
     $.ajax({
         async: false,
         type: 'GET',
-        url: 'http://localhost:8080/moviereviewRepo/MovieReview/api/CheckUserExists.php?emailAddress=' + emailAddress,
+        url: 'api/CheckUserExists.php?emailAddress=' + emailAddress,
         success: function (data) {
             data = data.replace(/\n/ig, '');
             if (data == 1) {
@@ -102,7 +102,7 @@ function SendResetUrl(emailAddress) {
     $.ajax({
         async: false,
         type: 'GET',
-        url: 'http://localhost:8080/moviereviewRepo/MovieReview/api/sendPwdResetCode.php?emailAddress=' + emailAddress,
+        url: 'api/sendPwdResetCode.php?emailAddress=' + emailAddress,
         success: function (data) {
             $.toast({
                 heading: 'Success',
@@ -140,7 +140,7 @@ function CheckVerificationCode(verificationCode) {
     $.ajax({
         async: false,
         type: 'GET',
-        url: 'http://localhost:8080/moviereviewRepo/MovieReview/api/checkCodeExists.php?code=' + verificationCode,
+        url: 'api/checkCodeExists.php?code=' + verificationCode,
         success: function (data) {
             data = data.replace(/\n/ig, '');
             if (data == 1) {
@@ -190,7 +190,7 @@ function CheckVerificationCode(verificationCode) {
 **********Summary:          Send the new password and verification code to the php script.
 ************************************************************************************************/
 function SubmitNewPassword(password, verificationCode) {
-    var url = 'http://localhost:8080/moviereviewRepo/MovieReview/api/updateUserPassword.php?code=' + verificationCode + '&password=' + password;
+    var url = 'api/updateUserPassword.php?code=' + verificationCode + '&password=' + password;
 
     $.ajax({
         async: false,

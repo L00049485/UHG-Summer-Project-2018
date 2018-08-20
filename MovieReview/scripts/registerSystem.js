@@ -21,7 +21,7 @@ function RegisterMember() {
     var datastring = $("#registrationForm").serialize();
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/moviereviewRepo/MovieReview/api/processRegistration.php",
+        url: "api/processRegistration.php",
         data: datastring,
         dataType: "json",
         success: function (data) {

@@ -11,8 +11,8 @@
     $code=$_GET["code"];
 
     function CheckValidCode($code) {
-        $server="localhost";
-        $dbuser="root";
+        $server="hostingmysql304.webapps.net";
+        $dbuser="kqAdmin";
         $dbpassword="";
         $link=mysqli_connect($server,$dbuser,$dbpassword);
         mysqli_select_db($link, "moviereview");

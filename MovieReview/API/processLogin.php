@@ -9,9 +9,9 @@
     //**********************************************************************************
 
     session_start();
-	$server="localhost";
-	$dbuser="root";
-	$password="";
+	$server="hostingmysql304.webapps.net";
+	$dbuser="kqAdmin";
+	$password="cl37kxQ1";
 	$link=mysqli_connect($server,$dbuser,$password);
 	mysqli_select_db($link, "moviereview");
 
@@ -40,7 +40,7 @@
             $memberIdNew=$_SESSION['memberID'];
 
 			echo "Successful Login";
-            header("Location:http://localhost:8080/moviereviewRepo/MovieReview/default.php");
+            header("Location:../default.php");
 			exit;
 		}
 		else {
@@ -48,7 +48,7 @@
             unset($_SESSION["username"]);
             unset($_SESSION["password"]);
 			echo "Failed Login";
-            header("Location:http://localhost:8080/moviereviewRepo/MovieReview/default.php");
+            header("Location:../default.php");
 		}
 	}
 ?>

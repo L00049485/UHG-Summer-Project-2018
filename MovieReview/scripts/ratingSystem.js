@@ -32,7 +32,7 @@ function rateMovie(movieId) {
         $.ajax({
             async: false,
             type: 'GET',
-            url: 'http://localhost:8080/moviereviewRepo/MovieReview/api/getMovieDetails.php?movieId=' + movieId,
+            url: 'api/getMovieDetails.php?movieId=' + movieId,
             success: function (data) {
                 openRateModal(JSON.parse(data));
             }
@@ -100,7 +100,7 @@ function submitRating(movieId) {
         var datastring = $("#ratingForm").serialize();
         $.ajax({
             type: "POST",
-            url: "http://localhost:8080/moviereviewRepo/MovieReview/api/processRating.php",
+            url: "api/processRating.php",
             data: datastring,
             dataType: "json",
             success: function (data) {
@@ -153,7 +153,7 @@ function deleteRating(ratingId, buttonId) {
         $.ajax({
             async: false,
             type: 'GET',
-            url: "http://localhost:8080/moviereviewRepo/MovieReview/api/deleteRating.php?ratingId=" + ratingId,
+            url: "api/deleteRating.php?ratingId=" + ratingId,
             success: function (data) {
                 if (data == 1) {
                     $.toast({

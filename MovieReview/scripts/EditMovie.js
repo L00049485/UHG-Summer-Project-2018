@@ -21,7 +21,7 @@ $(document).ready(function () {
         $.ajax({
             async: false,
             type: 'GET',
-            url: 'http://localhost:8080/moviereviewRepo/MovieReview/api/getMovieDetails.php?movieId=' + movieId,
+            url: 'api/getMovieDetails.php?movieId=' + movieId,
             success: function (data) {
                 PopulateFields(JSON.parse(data));
             }
@@ -108,7 +108,7 @@ function UpdateMovie() {
 
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/moviereviewRepo/MovieReview/api/processUpdateMovie.php",
+        url: "api/processUpdateMovie.php",
         data: datastring,
         dataType: "json",
         async: false,
@@ -164,7 +164,7 @@ function AddMovie() {
 
     $.ajax({
         type: "POST",
-        url: "http://localhost:8080/moviereviewRepo/MovieReview/api/processAddMovie.php",
+        url: "api/processAddMovie.php",
         data: datastring,
         dataType: "json",
         async: false,

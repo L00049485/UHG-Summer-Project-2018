@@ -16,7 +16,7 @@ function TrackLike(movieId) {
         $.ajax({
             async: false,
             type: 'GET',
-            url: 'http://localhost:8080/moviereviewRepo/MovieReview/api/processLike.php?movieId=' + movieId,
+            url: 'api/processLike.php?movieId=' + movieId,
             success: function (data) {
                 if (data = "Like Successfully Added") {
                     var buttonId = "#" + movieId;
@@ -67,7 +67,7 @@ function TrackUnLike(movieId) {
         $.ajax({
             async: false,
             type: 'GET',
-            url: 'http://localhost:8080/moviereviewRepo/MovieReview/api/processUnLike.php?movieId=' + movieId,
+            url: 'api/processUnLike.php?movieId=' + movieId,
             success: function (data) {
                 if (data = "Like Successfully Removed") {
                     var buttonId = "#" + movieId;

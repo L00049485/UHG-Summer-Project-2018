@@ -76,9 +76,9 @@
                                 <label for="Type" class="grey-text bold">Genre</label><br />
                                 <select data-placeholder="Genre" class="simple-select" name="genre" id="genre">
                                     <?php
-                                        $server="localhost";
-	                                    $dbuser="root";
-	                                    $password="";
+                                        $server="hostingmysql304.webapps.net";
+	                                    $dbuser="kqAdmin";
+	                                    $password="cl37kxQ1";
 	                                    $link=mysqli_connect($server, $dbuser, $password);
 	                                    mysqli_select_db($link, "moviereview");
 
@@ -109,9 +109,9 @@
                                 <label for="Type" class="grey-text bold">Actors</label><br />
                                 <select data-placeholder="Select actors" class="chosen-container chosen-container-multi" name="Actors" id="Actors" multiple="multiple">
                                     <?php
-                                        $server="localhost";
-	                                    $dbuser="root";
-	                                    $password="";
+                                        $server="hostingmysql304.webapps.net";
+	                                    $dbuser="kqAdmin";
+	                                    $password="cl37kxQ1";
 	                                    $link=mysqli_connect($server, $dbuser, $password);
 	                                    mysqli_select_db($link, "moviereview");
 

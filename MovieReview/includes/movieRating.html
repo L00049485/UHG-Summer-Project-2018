@@ -1,12 +1,13 @@
 <div id="ratingDiv" title="Enter your rating/comments below">
-    <div class='col-sm-4'>
-        <img class='img-fluid detailsImg' src='' align='Left' id="ratingImage" />
-    </div>    
-    <div class='col-sm-12'>
-        <form id="ratingForm">
-            <h3 id="movieTitle"></h3>
-            Your overall rating:
-            <div class="rating">
+    <div class="row">
+        <div class='col-sm-4'>
+            <img class='img-fluid detailsImg' src='' align='Left' id="ratingImage" />
+        </div>
+        <div class='col-sm-8'>
+            <form id="ratingForm">
+                <h3 id="movieTitle"></h3>
+                Your overall rating:
+                <div class="rating">
                     <input name="myrating" type="radio" value="5" class="ratingBtns" onclick='starRatings(this.value)' />
                     <span>☆</span>
                     <input name="myrating" type="radio" value="4" class="ratingBtns" onclick='starRatings(this.value)' />
@@ -17,18 +18,19 @@
                     <span>☆</span>
                     <input name="myrating" type="radio" value="1" class="ratingBtns" onclick='starRatings(this.value)' />
                     <span>☆</span>
-            </div>
-            Your comments:
-            <br />
-            <textarea rows="5" cols="45" name="txtComments" id="txtComments" onkeyup="countChar(this)"></textarea>
-            <div id="txtChars"></div>
+                </div>
+                Your comments:
+                <br />
+                <textarea rows="5" cols="30" name="txtComments" id="txtComments" onkeyup="countChar(this)"></textarea>
+                <div id="txtChars"></div>
 
-            <!--Hidden text fields to be picked up by the form-->
-            <input type="text" id="txtMovieId" name="txtMovieId" style="display:none" />
-            <input type="text" id="txtMovieTitle" name="txtMovieTitle" style="display:none" />
-            <input type="text" id="txtRatingStars" name="txtRatingStars" style="display:none" />
+                <!--Hidden text fields to be picked up by the form-->
+                <input type="text" id="txtMovieId" name="txtMovieId" style="display:none" />
+                <input type="text" id="txtMovieTitle" name="txtMovieTitle" style="display:none" />
+                <input type="text" id="txtRatingStars" name="txtRatingStars" style="display:none" />
 
-            <button type='button' class='btn btn-primary' id="btnRatingSubmit">Submit</button>
-        </form>  
+                <button type='button' class='btn btn-primary' id="btnRatingSubmit">Submit</button>
+            </form>
+        </div>
     </div>
 </div>

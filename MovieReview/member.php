@@ -47,9 +47,9 @@
 
                 <br />
                 <?php
-                    $server="localhost";
-	                $dbuser="root";
-	                $password="";
+                    $server="hostingmysql304.webapps.net";
+	                $dbuser="kqAdmin";
+	                $password="cl37kxQ1";
 	                $link=mysqli_connect($server, $dbuser, $password);
 	                mysqli_select_db($link, "moviereview");
 
@@ -140,9 +140,9 @@
                     </thead>
                     <tbody>
                         <?php
-                            $server="localhost";
-                            $dbuser="root";
-                            $password="";
+                            $server="hostingmysql304.webapps.net";
+                            $dbuser="kqAdmin";
+                            $password="cl37kxQ1";
                             $link=mysqli_connect($server, $dbuser, $password);
                             mysqli_select_db($link, "moviereview");
 

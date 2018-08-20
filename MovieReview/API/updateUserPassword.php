@@ -6,8 +6,8 @@
     //Checks the code that has been submitted to make sure it exists in the database,
     //but also that it has been created less than 15 minutes ago.
     function CheckValidCode($code) {
-        $server="localhost";
-        $dbuser="root";
+        $server="hostingmysql304.webapps.net";
+        $dbuser="kqAdmin";
         $dbpassword="";
         $link=mysqli_connect($server,$dbuser,$dbpassword);
         mysqli_select_db($link, "moviereview");
@@ -28,8 +28,8 @@
     }
 
     function UploadNewPassword($password, $emailAddress) {
-        $server="localhost";
-        $dbuser="root";
+        $server="hostingmysql304.webapps.net";
+        $dbuser="kqAdmin";
         $dbpassword="";
         $link=mysqli_connect($server,$dbuser,$dbpassword);
         mysqli_select_db($link, "moviereview");
