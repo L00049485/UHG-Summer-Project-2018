@@ -23,7 +23,7 @@
 	function CheckExistingMember($email) {
         $server="hostingmysql304.webapps.net";
         $dbuser="kqAdmin";
-        $dbpassword="";
+        $dbpassword="cl37kxQ1";
         $link=mysqli_connect($server,$dbuser,$dbpassword);
         mysqli_select_db($link, "moviereview");
 
@@ -51,7 +51,7 @@
     function CreateMember($firstName, $lastName, $dob, $email, $phoneNo, $address1, $address2, $city, $state, $country, $password) {
         $server="hostingmysql304.webapps.net";
         $dbuser="kqAdmin";
-        $dbpassword="";
+        $dbpassword="cl37kxQ1";
         $link=mysqli_connect($server,$dbuser,$dbpassword);
         mysqli_select_db($link, "moviereview");
         $sql_insert="call sp_CreateNewMember('$address1', '$address2', '$city', '$country', '$dob', '$email', '$firstName', '$lastName', '$password', '$phoneNo', '$state')";

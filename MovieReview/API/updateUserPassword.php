@@ -8,7 +8,7 @@
     function CheckValidCode($code) {
         $server="hostingmysql304.webapps.net";
         $dbuser="kqAdmin";
-        $dbpassword="";
+        $dbpassword="cl37kxQ1";
         $link=mysqli_connect($server,$dbuser,$dbpassword);
         mysqli_select_db($link, "moviereview");
 
@@ -30,7 +30,7 @@
     function UploadNewPassword($password, $emailAddress) {
         $server="hostingmysql304.webapps.net";
         $dbuser="kqAdmin";
-        $dbpassword="";
+        $dbpassword="cl37kxQ1";
         $link=mysqli_connect($server,$dbuser,$dbpassword);
         mysqli_select_db($link, "moviereview");
 

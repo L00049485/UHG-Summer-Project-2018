@@ -12,15 +12,13 @@
     function CheckExistingMember($email) {
         $server="hostingmysql304.webapps.net";
         $dbuser="kqAdmin";
-        $dbpassword="";
+        $dbpassword="cl37kxQ1";
         $link=mysqli_connect($server,$dbuser,$dbpassword);
         mysqli_select_db($link, "moviereview");
 
         $sql_insert="call sp_ExistingMemberCheck('$email')";
         $result=mysqli_query($link, $sql_insert);
         if(mysqli_num_rows($result) > 0) {
-            while($row=mysqli_fetch_array($result)) {
-            }
             mysqli_close($link);
             return true;
         }
