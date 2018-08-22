@@ -21,8 +21,8 @@
     //                            false indicating whether it exists or not.
     //*************************************************************************************************/
 	function CheckExistingMember($email) {
-        $server="hostingmysql304.webapps.net";
-        $dbuser="kqAdmin";
+        $server="localhost";
+        $dbuser="root";
         $dbpassword="";
         $link=mysqli_connect($server,$dbuser,$dbpassword);
         mysqli_select_db($link, "moviereview");
@@ -49,8 +49,8 @@
     //                            stored procedure. Returns success message or fail and error message
     //*************************************************************************************************/
     function CreateMember($firstName, $lastName, $dob, $email, $phoneNo, $address1, $address2, $city, $state, $country, $password) {
-        $server="hostingmysql304.webapps.net";
-        $dbuser="kqAdmin";
+        $server="localhost";
+        $dbuser="root";
         $dbpassword="";
         $link=mysqli_connect($server,$dbuser,$dbpassword);
         mysqli_select_db($link, "moviereview");

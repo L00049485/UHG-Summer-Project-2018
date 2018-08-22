@@ -20,9 +20,9 @@
 
         //Updates the movie and triggers the update of the actors
         function AddMovie($boxOffice, $movieTitle, $releaseDate, $genre, $desc, $image, $trailer, $actors) {
-            $server="hostingmysql304.webapps.net";
-            $dbuser="kqAdmin";
-            $password="cl37kxQ1";
+            $server="localhost";
+            $dbuser="root";
+            $password="";
             $link=mysqli_connect($server,$dbuser,$password);
             mysqli_select_db($link, "moviereview");
     
@@ -46,9 +46,9 @@
 
         //Splits the comma seperated list of actors and inserts each one into the actor_movie table
         function insertActors($link, $movieId, $actors) {
-            $server="hostingmysql304.webapps.net";
-            $dbuser="kqAdmin";
-            $password="cl37kxQ1";
+            $server="localhost";
+            $dbuser="root";
+            $password="";
             $link=mysqli_connect($server,$dbuser,$password);
             mysqli_select_db($link, "moviereview");
             $actorsArray = explode(',', $actors);

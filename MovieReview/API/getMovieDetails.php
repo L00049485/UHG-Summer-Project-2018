@@ -7,9 +7,9 @@
     //Description: Returns the details of a movie ID.
     //**********************************************************************************
 
-    $server="hostingmysql304.webapps.net";
-    $dbuser="kqAdmin";
-    $password="cl37kxQ1";
+    $server="localhost";
+    $dbuser="root";
+    $password="";
     $link=mysqli_connect($server, $dbuser, $password);
     mysqli_select_db($link, "moviereview");
     $return_arr = array();
