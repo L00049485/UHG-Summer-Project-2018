@@ -24,7 +24,7 @@ function TrackLike(movieId) {
                     var numLikesNew = numLikes + 1;
 
                     $(buttonId).addClass('btn-outline-success').removeClass('btn-outline-secondary');
-                    document.getElementById(movieId).setAttribute("onclick", "javascript: trackUnLike(this.value);");
+                    document.getElementById(movieId).setAttribute("onclick", "javascript: TrackUnLike(this.value);");
                     document.getElementById(movieId).setAttribute("Title", "You already like this movie");
                     $(buttonId).html("<i class='fa fa-thumbs-o-up' aria-hidden='true'></i> " + numLikesNew);
                     $(buttonId).attr("data-likes", numLikesNew);
@@ -36,7 +36,8 @@ function TrackLike(movieId) {
                         text: 'Movie Liked!',
                         showHideTransition: 'slide',
                         position: 'bottom-right',
-                        icon: 'success'
+                        icon: 'success',
+                        hideAfter: 7000
                     });
                 }
                 else {

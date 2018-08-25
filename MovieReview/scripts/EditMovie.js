@@ -104,7 +104,12 @@ function UpdateMovie() {
     //Make the tinyMCE plugin save the content of the text field
     tinyMCE.triggerSave();
 
+    //Enable the movieId field so that the value can be picked up
+    $("#txtMovieId").prop('disabled', false);
+
     var datastring = $("#editForm").serialize();
+
+    $("#txtMovieId").prop('disabled', true);
 
     $.ajax({
         type: "POST",
