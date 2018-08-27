@@ -140,10 +140,10 @@
                     //*****************Rating Button*****************
                     //User is logged in and hasnt previously rated this movie
                     if($memberId > 0 && $RatingID == null) {
-                        echo "<button type='button' class='btn btn-lg btn-outline-secondary rateBtn' onclick='rateMovie(this.value)' id='movieID$movieId' title='Click here to rate this movie' value='$movieId'>Rate</button>";
+                        echo "<button type='button' class='btn btn-lg btn-outline-secondary rateBtn' onclick='RateMovie(this.value)' id='movieID$movieId' title='Click here to rate this movie' value='$movieId'>Rate</button>";
                     }
                     else if($memberId > 0 && $RatingID != null) {
-                        echo "<button type='button' class='btn btn-lg btn-outline-success rateBtn' onclick='rateMovie()' id='movieID$movieId' value='$movieId' title='You already rated this movie'>Rate</button>";
+                        echo "<button type='button' class='btn btn-lg btn-outline-success rateBtn' onclick='RateMovie()' id='movieID$movieId' value='$movieId' title='You already rated this movie'>Rate</button>";
                     }
                     //*****************END Rating Button*****************
                     

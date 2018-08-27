@@ -14,7 +14,6 @@
 
     <!--2 links to the jquery-ui, the first is for offline situations-->
     <link href="styles/jquery-ui.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
 
     <script src="scripts/bootstrap.js"></script>
 
@@ -115,7 +114,7 @@
                     //User has not logged in
                     else {
                         echo "<button type='button' class='btn btn-sm btn-outline-secondary' title='You must login' onclick='TrackLike()' id='$movieId' data-likes='$numLikes'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i> $numLikes</button>
-                            <button type='button' class='btn btn-sm btn-outline-secondary rateBtn' onclick='rateMovie(1)' id='movieID$movieId' value='$movieId'>Rate</button> ";
+                            <button type='button' class='btn btn-sm btn-outline-secondary rateBtn' onclick='RateMovie(1)' id='movieID$movieId' value='$movieId'>Rate</button> ";
                     }
                     //*****************END Like Button*****************
 
@@ -123,10 +122,10 @@
                     //*****************Rating Button*****************
                     //User is logged in and hasnt previously rated this movie
                     if($memberId > 0 && $RatingID == null) {
-                        echo "<button type='button' class='btn btn-sm btn-outline-secondary rateBtn' onclick='rateMovie(this.value)' id='movieID$movieId' value='$movieId'>Rate</button>";
+                        echo "<button type='button' class='btn btn-sm btn-outline-secondary rateBtn' onclick='RateMovie(this.value)' id='movieID$movieId' value='$movieId'>Rate</button>";
                     }
                     else if($memberId > 0 && $RatingID != null) {
-                        echo "<button type='button' class='btn btn-sm btn-outline-success rateBtn' onclick='rateMovie()' id='movieID$movieId' value='$movieId' title='You already rated this movie'>Rate</button>";
+                        echo "<button type='button' class='btn btn-sm btn-outline-success rateBtn' onclick='RateMovie()' id='movieID$movieId' value='$movieId' title='You already rated this movie'>Rate</button>";
                     }
 
                     //*****************END Rating Button*****************

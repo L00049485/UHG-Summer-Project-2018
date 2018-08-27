@@ -12,7 +12,7 @@
     $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     $string = '';
 
-	function GenerateValidationCode($characters, $string) {}
+	function GenerateValidationCode($characters, $string) {
 		$max = strlen($characters) - 1;
 		for ($i = 0; $i < 25; $i++) {
 			$string .= $characters[mt_rand(0, $max)];

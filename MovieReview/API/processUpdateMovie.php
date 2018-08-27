@@ -25,7 +25,7 @@
             $sql_update="call sp_UpdateMovie('$movieTitle', '$releaseDate', '$genre', '$desc', '$image', '$trailer', $movieId)";
 
             if(mysqli_query($link, $sql_update)) {
-                insertActors($link, $movieId, $actors);
+                InsertActors($link, $movieId, $actors);
                 echo json_encode("$movieTitle Successfully updated");
             }
             else {
@@ -34,7 +34,7 @@
         }
 
         //Splits the comma seperated list of actors and inserts each one into the actor_movie table
-        function insertActors($link, $movieId, $actors) {
+        function InsertActors($link, $movieId, $actors) {
             $actorsArray = explode(',', $actors);
 
             //Delete any existing movie_actor records for this movie before inserting the new records

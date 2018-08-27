@@ -10,7 +10,7 @@ function starRatings(rating) {
 }
 
 //Triggers when the "Rate" button is click for a particular movie
-function rateMovie(movieId) {
+function RateMovie(movieId) {
     if (movieId == 1) {
         $("#login-modal").modal();
     }
@@ -59,7 +59,7 @@ $(document).ready(function () {
             });
         }
         else
-            submitRating(movieId);
+            SubmitRating(movieId);
     });
 });
 
@@ -92,7 +92,14 @@ function openRateModal(movieDetails) {
     });
 }
 
-function submitRating(movieId) {
+/*************************************************************************************************
+**********Name:             SubmitRating(movieId)
+**********Author:           Kieran Quinn
+**********Date Modified:    2018-08-16
+**********Summary:          Takes a movie ID and sends it to the PHP script for adding to the db.
+                            Also changes the css class of the rate button and onclick event.
+*************************************************************************************************/
+function SubmitRating(movieId) {
     if (movieId == null) {
         $("#login-modal").modal();
     }
@@ -118,7 +125,7 @@ function submitRating(movieId) {
                     $("#ratingDiv").dialog('close');
                     $("#" + buttonId).addClass('btn-outline-success').removeClass('btn-outline-secondary');
                     $("#" + buttonId).attr("Title", "You already rated this movie");
-                    $("#" + buttonId).attr("onclick", "javascript: rateMovie();");
+                    $("#" + buttonId).attr("onclick", "javascript: RateMovie();");
 
                     $("#" + buttonId).fadeIn(1000).fadeOut(1000).fadeIn(1000);
                 }

@@ -27,20 +27,20 @@
         </div>
         <div class="album py-5 bg-light">
             <div class="container">
-                <!-- If the member is an administrator, display additional menu items -->
-                <?php
+<!-- If the member is an administrator, display additional menu items -->
+<?php
 
-                    $isAdmin=$_SESSION['isAdmin'];
+    $isAdmin=$_SESSION['isAdmin'];
 
-                    if($isAdmin == 1)
-                    {
-                        echo "<h2>Admin functions</h2><br />";
-                        echo "<a href='AdminEdit.php' class='btn btn-primary' id='btnAddMovie'>Add a new movie</a>  ";        
-                        echo "<button type='submit' class='btn btn-primary' id='btnMakeUserAdmin'>Make user Admin</button>  ";
+    if($isAdmin == 1)
+    {
+        echo "<h2>Admin functions</h2><br />";
+        echo "<a href='AdminEdit.php' class='btn btn-primary' id='btnAddMovie'>Add a new movie</a>  ";        
+        echo "<button type='submit' class='btn btn-primary' id='btnMakeUserAdmin'>Make user Admin</button>  ";
                 
-                        echo "<br /><br /><hr />";
-                    }
-                ?>
+        echo "<br /><br /><hr />";
+    }
+?>
 
 
                 <h2>Your details</h2>
@@ -72,6 +72,8 @@
                     $city=$row["City"];
                     $state=$row["State"];
                     $country=$row["Country"];
+                    $likes=$row["NumberLikes"];
+                    $ratings=$row["NumberRatings"];
 
                     echo "<div class='row'> ";
 
@@ -113,6 +115,14 @@
 
                     echo "<div class='col-sm-4'>";
                     echo "<span class='bold'>Country: </span>$country <br /><br />";
+                    echo "</div>";
+
+                    echo "<div class='col-sm-4'>";
+                    echo "<span class='bold'>Number of Likes: </span>$likes <br /><br />";
+                    echo "</div>";
+
+                    echo "<div class='col-sm-4'>";
+                    echo "<span class='bold'>Number of Ratings: </span>$ratings <br /><br />";
                     echo "</div>";
 
                     echo "</div>";
