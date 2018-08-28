@@ -1,14 +1,23 @@
 //*************************************************************************************
 //**********************Handlers for searching and sorting*****************************
 //*************************************************************************************
-$(document).ready(function(){
+$(document).ready(function () {
+    //Event listener for the search box. Once the user starts typing, this function filters
+    //the movie cards based on various attributes.
     $("#txtSearch").on("keyup", function() {
         var value = $(this).val().toLowerCase();
-        $(".container .col-md-3").filter(function() {
-            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+        $(".container .col-md-3").filter(function () {
+            $(this).toggle(
+                $(this).attr('data-actors').toLowerCase().indexOf(value) > -1 ||
+                $(this).attr('data-title').toLowerCase().indexOf(value) > -1 ||
+                $(this).attr('data-releaseDate').toLowerCase().indexOf(value) > -1 ||
+                $(this).attr('data-genre').toLowerCase().indexOf(value) > -1
+            );
         });
-  });
-  $('#btnReleaseDate').attr('checked', 'checked');
+    });
+
+    //Default state for the sort buttons
+    $('#btnReleaseDate').attr('checked', 'checked');
 });
 
 

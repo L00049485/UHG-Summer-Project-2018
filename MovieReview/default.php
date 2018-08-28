@@ -87,7 +87,14 @@
                     $releaseDateYear=substr($releaseDate, 0,4);
                     $elementID = $elementID + 1;
 
-                    echo "<div class='col-md-3 movieCards' data-boxOffice=$boxOffice data-releaseDate='$releaseDate' data-title='$title' data-rating='$avgRating' data-likes='$numLikes'>
+                    echo "<div class='col-md-3 movieCards' 
+							data-genre='$genre' 
+							data-boxOffice=$boxOffice 
+							data-releaseDate='$releaseDate' 
+							data-title='$title' 
+							data-rating='$avgRating' 
+							data-likes='$numLikes' 
+							data-actors='$actors'>
                         <div class='card mb-3 box-shadow' id='movieCard$elementID'>
                         <a href='MovieDetails.php?movieId=$movieId'><img class='card-img-top' src='$image' alt='Card image cap'></a>
                         <div class='card-body'>
@@ -96,7 +103,7 @@
                         <div class='btn-group' id='movieBtnGroup$elementID'>";
                     
                     //Hidden field for the actors names and movie genre - used for searches
-                    echo "<p class='hiddenFields'>$actors - $genre</p>";
+                    //echo "<p class='hiddenFields'> - $genre</p>";
 
                     //***********************************************
                     //Check if the user is logged in or not. If they are, display like and rating buttons differently
@@ -207,6 +214,7 @@
 <link href="styles/bootstrap.css" rel="stylesheet" />
 <link href="styles/StyleSheet.css" rel="stylesheet" />
 <script src="scripts/jQuery-UI.js"></script>
+
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="https://fonts.googleapis.com/css?family=Montserrat:100,500,600,700" rel="stylesheet">

@@ -105,7 +105,7 @@ function Tutorial() {
             element: '#txtSearch',
             popover: {
                 title: 'Tutorial',
-                description: 'Search for any text related to a movie. Eg. Title, Release year, actor.',
+                description: 'Search for any text related to a movie. Eg. Title, genre, release year, actor.',
                 position: 'top'
             }
         },
