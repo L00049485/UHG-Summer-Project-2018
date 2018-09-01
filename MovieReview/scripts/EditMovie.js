@@ -1,15 +1,4 @@
-﻿$(document).ready(function () {
-    $.toast({
-        heading: 'Popup Title',
-        text: 'This text is displayed in the popup',
-        showHideTransition: 'slide',
-        position: 'bottom-right',
-        icon: 'success',
-        hideAfter: false
-    });
-});
-
-//*************************************************************************************
+﻿//*************************************************************************************
 //********************************Movie Editing****************************************
 //This script is for both adding new movies and updating existing movies. If a 
 //*************************************************************************************
